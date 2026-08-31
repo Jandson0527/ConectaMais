@@ -1,0 +1,360 @@
+/* ==========================================================================
+   Conecta Mais - Gestão da Rede de Telas (Pontos de Exibição & Endereços)
+   ========================================================================== */
+
+.screens-hero-banner {
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.1) 0%, rgba(2, 62, 138, 0.18) 50%, rgba(251, 191, 36, 0.08) 100%);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.screens-hero-text h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+}
+
+.screens-hero-text p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  max-width: 620px;
+}
+
+.screens-quick-stats {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.screen-stat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.15rem;
+  text-align: center;
+  min-width: 110px;
+}
+
+.screen-stat-number {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--primary-bright);
+  font-family: var(--font-sans);
+}
+
+.screen-stat-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Toolbar & Filters */
+.screens-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.screens-search-input {
+  max-width: 320px;
+}
+
+/* Screen Cards Grid */
+.screens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.screen-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.screen-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.screen-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.screen-title-area {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.screen-icon-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 210, 255, 0.12);
+  color: var(--primary-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 210, 255, 0.25);
+}
+
+.screen-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.screen-segment-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin-top: 0.15rem;
+}
+
+.screen-status-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.screen-status-badge.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.screen-status-badge.maintenance {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.screen-status-badge.planned {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.screen-address-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.85rem;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.screen-address-box i {
+  color: var(--primary-bright);
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 15px;
+  height: 15px;
+}
+
+.screen-metrics-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-top: 1px dashed var(--border-subtle);
+  border-bottom: 1px dashed var(--border-subtle);
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.screen-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-muted);
+}
+
+.screen-metric-item strong {
+  color: var(--text-primary);
+}
+
+.screen-advertisers-section {
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.screen-advertisers-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.screen-advertisers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  min-height: 28px;
+}
+
+.screen-client-pill {
+  font-size: 0.72rem;
+  background: rgba(0, 210, 255, 0.1);
+  color: var(--primary-bright);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  font-weight: 600;
+}
+
+.screen-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.85rem;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Interactive Screen Selector in Lead / Client Form Modal
+   ========================================================================== */
+
+.lead-screens-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.lead-screens-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.screens-quota-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.screens-quota-badge.exact {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.screens-quota-badge.exceeded {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.screen-select-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.65rem;
+}
+
+.screen-checkbox-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.screen-checkbox-card:hover {
+  border-color: var(--primary);
+  background: var(--bg-card-hover);
+}
+
+.screen-checkbox-card.selected {
+  border-color: var(--primary-bright);
+  background: rgba(0, 210, 255, 0.08);
+  box-shadow: 0 0 0 1px var(--primary-bright);
+}
+
+.screen-checkbox-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.screen-cb-input {
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.screen-cb-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-cb-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.screen-cb-segment {
+  font-size: 0.7rem;
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.screen-cb-address {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.2;
+}

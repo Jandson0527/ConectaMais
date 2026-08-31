@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Dashboard & Analytics Styles
+   KPI Cards, Funnel Visualization, Chart Containers & Activity Feeds
+   ========================================================================== */
+
+/* KPI Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--accent-color, var(--primary));
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--accent-color, var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kpi-icon-box i {
+  width: 24px;
+  height: 24px;
+}
+
+.kpi-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kpi-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.kpi-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0.25rem 0;
+}
+
+.kpi-value {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.kpi-trend {
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-xs);
+}
+
+.kpi-trend.positive {
+  color: var(--success);
+  background: var(--success-light);
+}
+
+.kpi-trend.neutral {
+  color: var(--info);
+  background: var(--info-light);
+}
+
+.kpi-trend i {
+  width: 13px;
+  height: 13px;
+}
+
+.kpi-subtext {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Dashboard Grid Rows */
+.dashboard-grid-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card-title-group i {
+  width: 20px;
+  height: 20px;
+}
+
+.card-title-group h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.card-badge-info {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+}
+
+/* Visual Conversion Funnel */
+.funnel-visualizer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.funnel-step-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  transition: background-color var(--transition-fast);
+}
+
+.funnel-step-bar:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.funnel-step-name {
+  width: 140px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.funnel-bar-track {
+  flex: 1;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.funnel-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.funnel-step-stats {
+  width: 100px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.funnel-count {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.funnel-val {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Chart Canvas Wrapper */
+.chart-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 240px;
+  max-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dashboard Meetings List */
+.dashboard-meetings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overflow-y: auto;
+  max-height: 270px;
+}
+
+.dash-meeting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast);
+}
+
+.dash-meeting-item:hover {
+  transform: translateX(3px);
+  border-color: var(--border-medium);
+}
+
+.meeting-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.meeting-date-box {
+  width: 44px;
+  height: 44px;
+  background: var(--primary-light);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.meeting-date-box .day {
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.meeting-date-box .time {
+  font-size: 0.65rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.meeting-item-info h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.meeting-item-info span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Activity Feed */
+.dashboard-activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-y: auto;
+  max-height: 270px;
+}
+
+.dash-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dash-activity-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.activity-icon-bullet {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.activity-icon-bullet i {
+  width: 14px;
+  height: 14px;
+}
+
+.activity-feed-text {
+  flex: 1;
+  font-size: 0.825rem;
+}
+
+.activity-feed-text strong {
+  color: var(--text-primary);
+}
+
+.activity-feed-meta {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* Reports Grid */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 1.25rem;
+}

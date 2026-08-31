@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Conecta Mais - Módulo Financeiro & Fluxo de Caixa
+   Painel de Faturamento, Entradas, Saídas, Saldo Líquido e MRR
+   ========================================================================== */
+
+.finance-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.finance-kpi-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.finance-kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+}
+
+.finance-kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.finance-kpi-card.income::after { background: linear-gradient(90deg, #00d2ff, #10b981); }
+.finance-kpi-card.expense::after { background: linear-gradient(90deg, #ef4444, #f43f5e); }
+.finance-kpi-card.balance::after { background: linear-gradient(90deg, #00d2ff, #0077b6, #fbbf24); }
+.finance-kpi-card.mrr::after { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+
+.finance-kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.finance-kpi-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.finance-kpi-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.finance-kpi-card.income .finance-kpi-icon { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.finance-kpi-card.expense .finance-kpi-icon { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+.finance-kpi-card.balance .finance-kpi-icon { background: rgba(0, 210, 255, 0.15); color: #00d2ff; }
+.finance-kpi-card.mrr .finance-kpi-icon { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+
+.finance-kpi-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.finance-kpi-card.income .finance-kpi-value { color: #10b981; }
+.finance-kpi-card.expense .finance-kpi-value { color: #ef4444; }
+.finance-kpi-card.balance .finance-kpi-value {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.finance-kpi-card.mrr .finance-kpi-value {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.finance-kpi-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Charts & Partners Breakdown */
+.finance-charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+@media (max-width: 1024px) {
+  .finance-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.finance-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.finance-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.partner-income-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.partner-income-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.partner-info-box {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.partner-info-box img {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 2px solid var(--border-medium);
+}
+
+.partner-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.partner-role-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.partner-amount {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #10b981;
+  font-family: var(--font-sans);
+}
+
+/* Transactions Table & Filters */
+.finance-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.finance-filters-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.filter-btn.active.income {
+  background-color: #10b981;
+  border-color: #10b981;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.filter-btn.active.expense {
+  background-color: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Badges */
+.badge-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+}
+
+.badge-type.income {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-type.expense {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.badge-status:hover {
+  opacity: 0.8;
+}
+
+.badge-status.paid {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.badge-status.pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.amount-display {
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+.amount-display.income { color: #10b981; }
+.amount-display.expense { color: #ef4444; }
+
+.category-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-subtle);
+}

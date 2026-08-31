@@ -1,0 +1,303 @@
+/* ==========================================================================
+   CONECTA MAIS - AUTHENTICATION & LOGIN SCREEN STYLES
+   ========================================================================== */
+
+.login-screen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 210, 255, 0.15), transparent 45%),
+              radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.12), transparent 45%),
+              #090d16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.login-screen-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.login-card-container {
+  width: 100%;
+  max-width: 460px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  border-radius: 16px;
+  padding: 2.25rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+              0 0 30px rgba(0, 210, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00e5ff, #0077b6, #ea580c, #fbbf24);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0.75rem;
+}
+
+.login-brand-logo svg {
+  width: 46px;
+  height: 46px;
+  filter: drop-shadow(0 4px 10px rgba(0, 210, 255, 0.4));
+}
+
+.login-brand-name {
+  font-size: 1.85rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.login-brand-highlight {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #00d2ff;
+}
+
+.login-brand-plus {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #fbbf24;
+}
+
+.login-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #94a3b8);
+  margin-top: 0.25rem;
+}
+
+.login-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.login-form .form-label {
+  display: block;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 0.4rem;
+}
+
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrapper i.input-icon-left {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  color: #64748b;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.input-icon-wrapper input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.input-icon-wrapper input:focus {
+  outline: none;
+  border-color: #00d2ff;
+  background: rgba(30, 41, 59, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
+}
+
+.input-icon-wrapper input:focus + i.input-icon-left,
+.input-icon-wrapper:focus-within i.input-icon-left {
+  color: #00d2ff;
+}
+
+.btn-toggle-pwd {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-toggle-pwd:hover {
+  color: #ffffff;
+}
+
+.login-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+  color: #94a3b8;
+}
+
+.login-options-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.login-error-alert {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1rem;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 8px;
+  color: #f87171;
+  font-size: 0.825rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  animation: shakeAlert 0.3s ease;
+}
+
+.login-error-alert.active {
+  display: flex;
+}
+
+@keyframes shakeAlert {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.btn-login-submit {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #00d2ff, #0077b6);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 210, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-login-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 210, 255, 0.45);
+  filter: brightness(1.08);
+}
+
+.btn-login-submit:active {
+  transform: translateY(0);
+}
+
+/* Quick Partner Switcher on Login Screen */
+.login-quick-partners {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(51, 65, 85, 0.7);
+}
+
+.quick-partners-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.quick-partners-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.quick-partner-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(51, 65, 85, 0.7);
+  border-radius: 8px;
+  cursor: pointer;
+  color: #cbd5e1;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.quick-partner-btn:hover {
+  background: rgba(0, 210, 255, 0.12);
+  border-color: rgba(0, 210, 255, 0.4);
+  color: #ffffff;
+}
+
+.quick-partner-btn img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.quick-partner-info {
+  line-height: 1.2;
+  overflow: hidden;
+}
+
+.quick-partner-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.quick-partner-role {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

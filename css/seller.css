@@ -1,0 +1,319 @@
+/* ==========================================================================
+   Conecta Mais - Módulo do Vendedor & Gestão de Comissões
+   Painel do Vendedor, Clientes Quentes, Fila de Aprovação & Dossiê
+   ========================================================================== */
+
+/* Seller Badges & Approval Status */
+.badge-approval {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge-approval.pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.badge-approval.approved {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.badge-approval.denied {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* Seller Commission Highlights */
+.commission-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: rgba(251, 191, 36, 0.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+/* Approval Queue Banner for Partners */
+.approval-queue-banner {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.approval-queue-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #fbbf24, #ea580c);
+}
+
+.approval-queue-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.approval-queue-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.approval-queue-title h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #fff;
+}
+
+.approval-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.approval-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.approval-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.approval-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.approval-seller-chip {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00d2ff;
+  background: rgba(0, 210, 255, 0.12);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 210, 255, 0.25);
+}
+
+.approval-card-body {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.approval-card-body strong {
+  color: var(--text-primary);
+}
+
+.approval-financial-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.approval-actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+/* Clientes em Potencial (Hot Leads) Styles */
+.hotleads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+
+.hotlead-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.hotlead-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.hotlead-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hotlead-title-box h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.hotlead-title-box span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.hotlead-reason-box {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px dashed rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+}
+
+.hotlead-reason-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hotlead-reason-text {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.hotlead-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.hotlead-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hotlead-info-item i {
+  width: 14px;
+  height: 14px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.hotlead-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+  gap: 8px;
+  margin-top: auto;
+}
+
+/* Seller Dossier Modal for Partners */
+.seller-dossier-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: rgba(0, 210, 255, 0.06);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+}
+
+.seller-dossier-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 2px solid var(--primary-bright);
+}
+
+.seller-dossier-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.seller-stat-mini-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.seller-stat-mini-val {
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  color: var(--primary-bright);
+  margin-bottom: 2px;
+}
+
+.seller-stat-mini-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Commission Ledger Table */
+.commission-ledger-table th,
+.commission-ledger-table td {
+  padding: 0.85rem 1rem;
+}
+
+.commission-val-highlight {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  font-family: var(--font-sans);
+}
