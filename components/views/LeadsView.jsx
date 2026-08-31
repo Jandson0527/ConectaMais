@@ -21,6 +21,7 @@ import {
 
 export default function LeadsView() {
   const {
+    currentUser,
     leads,
     plans,
     screens,
@@ -44,7 +45,9 @@ export default function LeadsView() {
   const [sortAsc, setSortAsc] = useState(false);
 
   // Filter
-  const filtered = leads.filter(lead => {
+  const baseLeads = currentUser?.role === 'vendedor' ? leads.filter(l => l.sellerId === currentUser.id || l.assignedTo === currentUser.id) : leads;
+
+  const filtered = baseLeads.filter(lead => {
     if (stageFilter !== 'all' && lead.stage !== stageFilter) return false;
     if (originFilter !== 'all' && lead.origin !== originFilter) return false;
     if (userFilter !== 'all' && lead.assignedTo !== userFilter && lead.sellerId !== userFilter) return false;

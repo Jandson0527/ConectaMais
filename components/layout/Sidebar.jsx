@@ -49,6 +49,13 @@ export default function Sidebar() {
     .filter(l => l.stage !== 'ganho' && l.stage !== 'perdido')
     .reduce((sum, l) => sum + (Number(l.value) || 0), 0);
 
+  const handleNavClick = (viewName) => {
+    setCurrentView(viewName);
+    if (window.innerWidth <= 900) {
+      setIsSidebarCollapsed(true);
+    }
+  };
+
   return (
     <aside className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`} id="sidebar">
       
@@ -132,28 +139,28 @@ export default function Sidebar() {
             <div className="nav-section-title">PAINEL DO VENDEDOR</div>
             <button
               className={`nav-item ${currentView === 'seller-dashboard' ? 'active' : ''}`}
-              onClick={() => setCurrentView('seller-dashboard')}
+              onClick={() => handleNavClick('seller-dashboard')}
             >
               <LayoutDashboard style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Meu Painel</span>
             </button>
             <button
               className={`nav-item ${currentView === 'seller-sales' ? 'active' : ''}`}
-              onClick={() => setCurrentView('seller-sales')}
+              onClick={() => handleNavClick('seller-sales')}
             >
               <ShoppingBag style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Minhas Vendas</span>
             </button>
             <button
               className={`nav-item ${currentView === 'seller-hotleads' ? 'active' : ''}`}
-              onClick={() => setCurrentView('seller-hotleads')}
+              onClick={() => handleNavClick('seller-hotleads')}
             >
               <Flame style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Clientes Quentes</span>
             </button>
             <button
               className={`nav-item ${currentView === 'seller-commissions' ? 'active' : ''}`}
-              onClick={() => setCurrentView('seller-commissions')}
+              onClick={() => handleNavClick('seller-commissions')}
             >
               <Percent style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Minhas Comissões</span>
@@ -161,7 +168,7 @@ export default function Sidebar() {
             </button>
             <button
               className={`nav-item ${currentView === 'calendar' ? 'active' : ''}`}
-              onClick={() => setCurrentView('calendar')}
+              onClick={() => handleNavClick('calendar')}
             >
               <Calendar style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Meu Calendário</span>
@@ -173,14 +180,14 @@ export default function Sidebar() {
             <div className="nav-section-title">PAINEL DOS SÓCIOS</div>
             <button
               className={`nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
-              onClick={() => setCurrentView('dashboard')}
+              onClick={() => handleNavClick('dashboard')}
             >
               <LayoutDashboard style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Dashboard Geral</span>
             </button>
             <button
               className={`nav-item ${currentView === 'kanban' ? 'active' : ''}`}
-              onClick={() => setCurrentView('kanban')}
+              onClick={() => handleNavClick('kanban')}
             >
               <Kanban style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Funil de Vendas (CRM)</span>
@@ -188,7 +195,7 @@ export default function Sidebar() {
             </button>
             <button
               className={`nav-item ${currentView === 'leads' ? 'active' : ''}`}
-              onClick={() => setCurrentView('leads')}
+              onClick={() => handleNavClick('leads')}
             >
               <Users style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Lista de Clientes</span>
@@ -196,7 +203,7 @@ export default function Sidebar() {
             </button>
             <button
               className={`nav-item ${currentView === 'screens' ? 'active' : ''}`}
-              onClick={() => setCurrentView('screens')}
+              onClick={() => handleNavClick('screens')}
             >
               <MapPin style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Rede de Telas (Pontos)</span>
@@ -206,7 +213,7 @@ export default function Sidebar() {
             </button>
             <button
               className={`nav-item ${currentView === 'plans' ? 'active' : ''}`}
-              onClick={() => setCurrentView('plans')}
+              onClick={() => handleNavClick('plans')}
             >
               <Tv style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Planos de TVs</span>
@@ -216,14 +223,14 @@ export default function Sidebar() {
             </button>
             <button
               className={`nav-item ${currentView === 'finance' ? 'active' : ''}`}
-              onClick={() => setCurrentView('finance')}
+              onClick={() => handleNavClick('finance')}
             >
               <Wallet style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Financeiro & Caixa</span>
             </button>
             <button
               className={`nav-item ${currentView === 'partner-sellers' ? 'active' : ''}`}
-              onClick={() => setCurrentView('partner-sellers')}
+              onClick={() => handleNavClick('partner-sellers')}
             >
               <UserCheck style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Vendedores & Equipe</span>
@@ -233,7 +240,7 @@ export default function Sidebar() {
             </button>
             <button
               className={`nav-item ${currentView === 'calendar' ? 'active' : ''}`}
-              onClick={() => setCurrentView('calendar')}
+              onClick={() => handleNavClick('calendar')}
             >
               <Calendar style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Reuniões & Agenda</span>
@@ -245,14 +252,14 @@ export default function Sidebar() {
             <div className="nav-section-title">SÓCIOS & GESTÃO</div>
             <button
               className={`nav-item ${currentView === 'access' ? 'active' : ''}`}
-              onClick={() => setCurrentView('access')}
+              onClick={() => handleNavClick('access')}
             >
               <ShieldCheck style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Sócios & Acessos</span>
             </button>
             <button
               className={`nav-item ${currentView === 'reports' ? 'active' : ''}`}
-              onClick={() => setCurrentView('reports')}
+              onClick={() => handleNavClick('reports')}
             >
               <BarChart3 style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Relatórios & Métricas</span>

@@ -25,8 +25,11 @@ import SellerSalesView from '../components/views/seller/SellerSalesView';
 import SellerHotLeadsView from '../components/views/seller/SellerHotLeadsView';
 import SellerCommissionsView from '../components/views/seller/SellerCommissionsView';
 
+// Auth View
+import LoginView from '../components/views/LoginView';
+
 export default function Home() {
-  const { currentView, isLoaded } = useCRM();
+  const { currentView, isLoaded, currentUser } = useCRM();
 
   if (!isLoaded) {
     return (
@@ -43,6 +46,10 @@ export default function Home() {
         Iniciando Conecta Mais...
       </div>
     );
+  }
+
+  if (!currentUser) {
+    return <LoginView />;
   }
 
   const renderView = () => {
