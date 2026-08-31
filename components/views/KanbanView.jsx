@@ -34,7 +34,8 @@ export default function KanbanView() {
     openModal,
     updateLeadStage,
     formatCurrency,
-    searchQuery
+    searchQuery,
+    currentUser
   } = useCRM();
 
   const [filterUser, setFilterUser] = useState('all');

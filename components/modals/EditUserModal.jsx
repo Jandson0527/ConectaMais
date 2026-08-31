@@ -95,8 +95,8 @@ export default function EditUserModal() {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="modal-body" style={{ padding: '1.5rem', display: 'flex', gap: '2rem' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxHeight: 'calc(100vh - 60px)' }}>
+          <div className="modal-body" style={{ padding: '1.5rem', display: 'flex', gap: '2rem', overflowY: 'auto', flex: 1, minHeight: 0 }}>
             
             {/* Coluna 1: Dados do Usuário */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
