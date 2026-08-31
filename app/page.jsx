@@ -53,6 +53,15 @@ export default function Home() {
   }
 
   const renderView = () => {
+    if (currentUser?.permissions && !currentUser.permissions.includes(currentView)) {
+      return (
+        <div style={{ textAlign: 'center', marginTop: '10vh', color: 'var(--text-secondary)' }}>
+          <h2>Acesso Negado</h2>
+          <p>Você não tem permissão para visualizar esta tela.</p>
+        </div>
+      );
+    }
+
     switch (currentView) {
       case 'dashboard': return <DashboardView />;
       case 'kanban': return <KanbanView />;

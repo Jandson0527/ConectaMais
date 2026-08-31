@@ -185,7 +185,8 @@ export const INITIAL_SEED_DATA = {
       roleName: 'Sócio Diretor (Acesso Total)',
       phone: '(11) 98111-2233',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
-      active: true
+      active: true,
+      permissions: ['dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar', 'access', 'reports', 'seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions']
     }
   ],
   screens: [],
@@ -240,7 +241,13 @@ export function CRMProvider({ children }) {
           const u = (parsed.users || INITIAL_SEED_DATA.users).find(x => x.id === parsed.currentUserId);
           if (u) {
             setCurrentUser(u);
-            if (u.role === 'vendedor') setCurrentView('seller-dashboard');
+            if (u.permissions && u.permissions.length > 0) {
+              if (!u.permissions.includes(parsed.currentView)) {
+                setCurrentView(u.permissions[0]);
+              }
+            } else {
+              setCurrentView('dashboard'); // fallback
+            }
           }
         }
       }
@@ -313,14 +320,19 @@ export function CRMProvider({ children }) {
     return currentUser?.role === 'admin' || currentUser?.role === 'manager' || currentUser?.role === 'closer';
   }, [currentUser]);
 
+  const updateUserPermissions = useCallback((userId, newPermissions) => {
+    setUsers(prev => prev.map(u => u.id === userId ? { ...u, permissions: newPermissions } : u));
+    showToast('Permissões atualizadas com sucesso!', 'success');
+  }, [showToast]);
+
   const switchUser = useCallback((userId) => {
     const u = users.find(x => x.id === userId);
     if (u) {
       setCurrentUser(u);
-      if (u.role === 'vendedor') {
-        setCurrentView('seller-dashboard');
-      } else {
-        if (currentView.startsWith('seller-')) setCurrentView('dashboard');
+      if (u.permissions && u.permissions.length > 0) {
+        if (!u.permissions.includes(currentView)) {
+          setCurrentView(u.permissions[0]);
+        }
       }
       showToast(`Conectado como ${u.name} (${u.roleName || u.role})`, 'success');
       closeModal();
@@ -331,8 +343,11 @@ export function CRMProvider({ children }) {
     const u = users.find(x => x.email.toLowerCase() === email.toLowerCase() && x.password === password);
     if (u) {
       setCurrentUser(u);
-      if (u.role === 'vendedor') setCurrentView('seller-dashboard');
-      else setCurrentView('dashboard');
+      if (u.permissions && u.permissions.length > 0) {
+        setCurrentView(u.permissions[0]);
+      } else {
+        setCurrentView(u.role === 'vendedor' ? 'seller-dashboard' : 'dashboard');
+      }
       showToast(`Bem-vindo, ${u.name}!`, 'success');
       return true;
     }
@@ -971,12 +986,11 @@ export function CRMProvider({ children }) {
       id: `usr-${Date.now()}`,
       name: userData.name?.trim(),
       email: userData.email?.trim(),
-      password: userData.password || 'conecta123',
-      role: userData.role || 'admin',
-      roleName: userData.role === 'admin' ? 'Sócio Diretor (Acesso Total)' : (userData.role === 'manager' ? 'Sócio & Gestor Comercial' : 'Sócia & Executiva de Vendas'),
-      phone: userData.phone?.trim() || '',
-      avatar: userData.avatar || `https://api.dicebear.com/7.x/initials/svg?seed=${userData.name}`,
-      active: userData.active !== undefined ? userData.active : true
+      ...userData,
+      active: true,
+      permissions: userData.role === 'admin' || userData.role === 'manager' || userData.role === 'closer'
+        ? ['dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar', 'access', 'reports']
+        : ['seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions', 'calendar']
     };
     setUsers(prev => [...prev, newUser]);
     showToast(`Sócio ${newUser.name} cadastrado com sucesso!`, 'success');
@@ -984,15 +998,10 @@ export function CRMProvider({ children }) {
   }, [showToast, closeModal]);
 
   const addSeller = useCallback((sellerData) => {
-    const newSeller = {
+    const newUser = {
       id: `usr-${Date.now()}`,
-      name: sellerData.name?.trim(),
-      email: sellerData.email?.trim(),
-      password: sellerData.password || 'conecta123',
+      ...sellerData,
       role: 'vendedor',
-      roleName: 'Vendedor Comercial (Comissão 10% Recorrente)',
-      phone: sellerData.phone?.trim() || '',
-      avatar: sellerData.avatar || `https://api.dicebear.com/7.x/initials/svg?seed=${sellerData.name}`,
       active: sellerData.active !== undefined ? sellerData.active : true,
       commissionRate: 0.10
     };
@@ -1293,6 +1302,7 @@ export function CRMProvider({ children }) {
     updateMeeting,
     deleteMeeting,
     addUser,
+    updateUserPermissions,
     addSeller,
     addActivity,
     markNotificationsAsRead,

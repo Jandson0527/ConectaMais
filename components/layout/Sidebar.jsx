@@ -131,142 +131,179 @@ export default function Sidebar() {
       </div>
 
       {/* Navegação Principal */}
+      {/* Navegação Principal */}
       <nav className="sidebar-nav">
         
         {/* ==================== VENDEDOR ==================== */}
-        {isSeller() ? (
+        {['seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions', 'calendar'].some(p => currentUser?.permissions?.includes(p)) && (
           <>
             <div className="nav-section-title">PAINEL DO VENDEDOR</div>
-            <button
-              className={`nav-item ${currentView === 'seller-dashboard' ? 'active' : ''}`}
-              onClick={() => handleNavClick('seller-dashboard')}
-            >
-              <LayoutDashboard style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Meu Painel</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'seller-sales' ? 'active' : ''}`}
-              onClick={() => handleNavClick('seller-sales')}
-            >
-              <ShoppingBag style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Minhas Vendas</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'seller-hotleads' ? 'active' : ''}`}
-              onClick={() => handleNavClick('seller-hotleads')}
-            >
-              <Flame style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Clientes Quentes</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'seller-commissions' ? 'active' : ''}`}
-              onClick={() => handleNavClick('seller-commissions')}
-            >
-              <Percent style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Minhas Comissões</span>
-              <span className="nav-counter" style={{ background: 'rgba(251, 191, 36, 0.15)', color: 'var(--accent-gold)' }}>10%</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'calendar' ? 'active' : ''}`}
-              onClick={() => handleNavClick('calendar')}
-            >
-              <Calendar style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Meu Calendário</span>
-            </button>
-          </>
-        ) : (
-          /* ==================== SÓCIOS ==================== */
-          <>
-            <div className="nav-section-title">PAINEL DOS SÓCIOS</div>
-            <button
-              className={`nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
-              onClick={() => handleNavClick('dashboard')}
-            >
-              <LayoutDashboard style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Dashboard Geral</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'kanban' ? 'active' : ''}`}
-              onClick={() => handleNavClick('kanban')}
-            >
-              <Kanban style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Funil de Vendas (CRM)</span>
-              <span className="nav-counter">{kanbanOpenCount}</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'leads' ? 'active' : ''}`}
-              onClick={() => handleNavClick('leads')}
-            >
-              <Users style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Lista de Clientes</span>
-              <span className="nav-counter">{leadsCount}</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'screens' ? 'active' : ''}`}
-              onClick={() => handleNavClick('screens')}
-            >
-              <MapPin style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Rede de Telas (Pontos)</span>
-              <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: '#00d2ff' }}>
-                {screens.length} Pontos
-              </span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'plans' ? 'active' : ''}`}
-              onClick={() => handleNavClick('plans')}
-            >
-              <Tv style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Planos de TVs</span>
-              <span className="nav-counter" style={{ background: 'rgba(251, 191, 36, 0.15)', color: 'var(--accent-gold)' }}>
-                Planos
-              </span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'finance' ? 'active' : ''}`}
-              onClick={() => handleNavClick('finance')}
-            >
-              <Wallet style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Financeiro & Caixa</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'partner-sellers' ? 'active' : ''}`}
-              onClick={() => handleNavClick('partner-sellers')}
-            >
-              <UserCheck style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Vendedores & Equipe</span>
-              <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: '#00d2ff' }}>
-                Comissões
-              </span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'calendar' ? 'active' : ''}`}
-              onClick={() => handleNavClick('calendar')}
-            >
-              <Calendar style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Reuniões & Agenda</span>
-              {meetingsTodayCount > 0 && (
-                <span className="nav-counter alert">{meetingsTodayCount}</span>
-              )}
-            </button>
-
-            <div className="nav-section-title">SÓCIOS & GESTÃO</div>
-            <button
-              className={`nav-item ${currentView === 'access' ? 'active' : ''}`}
-              onClick={() => handleNavClick('access')}
-            >
-              <ShieldCheck style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Sócios & Acessos</span>
-            </button>
-            <button
-              className={`nav-item ${currentView === 'reports' ? 'active' : ''}`}
-              onClick={() => handleNavClick('reports')}
-            >
-              <BarChart3 style={{ width: '18px', height: '18px' }} />
-              <span className="nav-label">Relatórios & Métricas</span>
-            </button>
+            {currentUser?.permissions?.includes('seller-dashboard') && (
+              <button
+                className={`nav-item ${currentView === 'seller-dashboard' ? 'active' : ''}`}
+                onClick={() => handleNavClick('seller-dashboard')}
+              >
+                <LayoutDashboard style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Meu Painel</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('seller-sales') && (
+              <button
+                className={`nav-item ${currentView === 'seller-sales' ? 'active' : ''}`}
+                onClick={() => handleNavClick('seller-sales')}
+              >
+                <ShoppingBag style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Minhas Vendas</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('seller-hotleads') && (
+              <button
+                className={`nav-item ${currentView === 'seller-hotleads' ? 'active' : ''}`}
+                onClick={() => handleNavClick('seller-hotleads')}
+              >
+                <Flame style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Clientes Quentes</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('seller-commissions') && (
+              <button
+                className={`nav-item ${currentView === 'seller-commissions' ? 'active' : ''}`}
+                onClick={() => handleNavClick('seller-commissions')}
+              >
+                <Percent style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Minhas Comissões</span>
+                <span className="nav-counter" style={{ background: 'rgba(251, 191, 36, 0.15)', color: 'var(--accent-gold)' }}>10%</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('calendar') && currentUser?.role === 'vendedor' && (
+              <button
+                className={`nav-item ${currentView === 'calendar' ? 'active' : ''}`}
+                onClick={() => handleNavClick('calendar')}
+              >
+                <Calendar style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Meu Calendário</span>
+              </button>
+            )}
           </>
         )}
 
+        {/* ==================== SÓCIOS ==================== */}
+        {['dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar'].some(p => currentUser?.permissions?.includes(p)) && currentUser?.role !== 'vendedor' && (
+          <>
+            <div className="nav-section-title">PAINEL DOS SÓCIOS</div>
+            {currentUser?.permissions?.includes('dashboard') && (
+              <button
+                className={`nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
+                onClick={() => handleNavClick('dashboard')}
+              >
+                <LayoutDashboard style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Dashboard Geral</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('kanban') && (
+              <button
+                className={`nav-item ${currentView === 'kanban' ? 'active' : ''}`}
+                onClick={() => handleNavClick('kanban')}
+              >
+                <Kanban style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Funil de Vendas (CRM)</span>
+                <span className="nav-counter">{kanbanOpenCount}</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('leads') && (
+              <button
+                className={`nav-item ${currentView === 'leads' ? 'active' : ''}`}
+                onClick={() => handleNavClick('leads')}
+              >
+                <Users style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Lista de Clientes</span>
+                <span className="nav-counter">{leadsCount}</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('screens') && (
+              <button
+                className={`nav-item ${currentView === 'screens' ? 'active' : ''}`}
+                onClick={() => handleNavClick('screens')}
+              >
+                <MapPin style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Rede de Telas (Pontos)</span>
+                <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: '#00d2ff' }}>
+                  {screens.length} Pontos
+                </span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('plans') && (
+              <button
+                className={`nav-item ${currentView === 'plans' ? 'active' : ''}`}
+                onClick={() => handleNavClick('plans')}
+              >
+                <Tv style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Planos de TVs</span>
+                <span className="nav-counter" style={{ background: 'rgba(251, 191, 36, 0.15)', color: 'var(--accent-gold)' }}>
+                  Planos
+                </span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('finance') && (
+              <button
+                className={`nav-item ${currentView === 'finance' ? 'active' : ''}`}
+                onClick={() => handleNavClick('finance')}
+              >
+                <Wallet style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Financeiro & Caixa</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('partner-sellers') && (
+              <button
+                className={`nav-item ${currentView === 'partner-sellers' ? 'active' : ''}`}
+                onClick={() => handleNavClick('partner-sellers')}
+              >
+                <UserCheck style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Vendedores & Equipe</span>
+                <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: '#00d2ff' }}>
+                  Comissões
+                </span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('calendar') && (
+              <button
+                className={`nav-item ${currentView === 'calendar' ? 'active' : ''}`}
+                onClick={() => handleNavClick('calendar')}
+              >
+                <Calendar style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Reuniões & Agenda</span>
+                {meetingsTodayCount > 0 && (
+                  <span className="nav-counter alert">{meetingsTodayCount}</span>
+                )}
+              </button>
+            )}
+          </>
+        )}
+
+        {/* ==================== SÓCIOS & GESTÃO ==================== */}
+        {['access', 'reports'].some(p => currentUser?.permissions?.includes(p)) && (
+          <>
+            <div className="nav-section-title">SÓCIOS & GESTÃO</div>
+            {currentUser?.permissions?.includes('access') && (
+              <button
+                className={`nav-item ${currentView === 'access' ? 'active' : ''}`}
+                onClick={() => handleNavClick('access')}
+              >
+                <ShieldCheck style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Sócios & Acessos</span>
+              </button>
+            )}
+            {currentUser?.permissions?.includes('reports') && (
+              <button
+                className={`nav-item ${currentView === 'reports' ? 'active' : ''}`}
+                onClick={() => handleNavClick('reports')}
+              >
+                <BarChart3 style={{ width: '18px', height: '18px' }} />
+                <span className="nav-label">Relatórios & Métricas</span>
+              </button>
+            )}
+          </>
+        )}
       </nav>
 
       {/* Sidebar Footer */}
