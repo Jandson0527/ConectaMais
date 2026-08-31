@@ -186,7 +186,13 @@ export const INITIAL_SEED_DATA = {
       phone: '(11) 98111-2233',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
       active: true,
-      permissions: ['dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar', 'access', 'reports', 'seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions']
+      permissions: [
+        'dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar', 'access', 'reports',
+        'seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions',
+        'create-leads', 'edit-leads', 'delete-leads',
+        'create-finance', 'edit-finance', 'delete-finance',
+        'create-users', 'edit-users', 'delete-users'
+      ]
     }
   ],
   screens: [],
@@ -320,6 +326,16 @@ export function CRMProvider({ children }) {
     return currentUser?.role === 'admin' || currentUser?.role === 'manager' || currentUser?.role === 'closer';
   }, [currentUser]);
 
+  const updateUser = useCallback((userId, data) => {
+    setUsers(prev => prev.map(u => u.id === userId ? { ...u, ...data } : u));
+    showToast('Usuário atualizado com sucesso!', 'success');
+  }, [showToast]);
+
+  const deleteUser = useCallback((userId) => {
+    setUsers(prev => prev.filter(u => u.id !== userId));
+    showToast('Usuário removido com sucesso.', 'info');
+  }, [showToast]);
+
   const updateUserPermissions = useCallback((userId, newPermissions) => {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, permissions: newPermissions } : u));
     showToast('Permissões atualizadas com sucesso!', 'success');
@@ -328,6 +344,10 @@ export function CRMProvider({ children }) {
   const switchUser = useCallback((userId) => {
     const u = users.find(x => x.id === userId);
     if (u) {
+      if (u.active === false) {
+        showToast('Usuário inativo. Acesso negado.', 'error');
+        return;
+      }
       setCurrentUser(u);
       if (u.permissions && u.permissions.length > 0) {
         if (!u.permissions.includes(currentView)) {
@@ -342,6 +362,10 @@ export function CRMProvider({ children }) {
   const login = useCallback((email, password) => {
     const u = users.find(x => x.email.toLowerCase() === email.toLowerCase() && x.password === password);
     if (u) {
+      if (u.active === false) {
+        showToast('Conta inativada. Entre em contato com o administrador.', 'error');
+        return false;
+      }
       setCurrentUser(u);
       if (u.permissions && u.permissions.length > 0) {
         setCurrentView(u.permissions[0]);
@@ -989,8 +1013,8 @@ export function CRMProvider({ children }) {
       ...userData,
       active: true,
       permissions: userData.role === 'admin' || userData.role === 'manager' || userData.role === 'closer'
-        ? ['dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar', 'access', 'reports']
-        : ['seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions', 'calendar']
+        ? ['dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar', 'access', 'reports', 'create-leads', 'edit-leads', 'delete-leads', 'create-finance', 'edit-finance', 'delete-finance']
+        : ['seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions', 'calendar', 'create-leads']
     };
     setUsers(prev => [...prev, newUser]);
     showToast(`Sócio ${newUser.name} cadastrado com sucesso!`, 'success');
@@ -1003,7 +1027,8 @@ export function CRMProvider({ children }) {
       ...sellerData,
       role: 'vendedor',
       active: sellerData.active !== undefined ? sellerData.active : true,
-      commissionRate: 0.10
+      commissionRate: 0.10,
+      permissions: ['seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions', 'calendar', 'create-leads']
     };
     setUsers(prev => [...prev, newSeller]);
     showToast(`Vendedor ${newSeller.name} cadastrado com sucesso!`, 'success');
@@ -1264,15 +1289,15 @@ export function CRMProvider({ children }) {
     closeModal,
     toasts,
     showToast,
-    // Data collections
+    // Data collections (Isolamento de Dados para Vendedores)
     users,
     screens,
-    leads,
-    hotLeads,
+    leads: currentUser?.role === 'vendedor' ? leads.filter(l => l.sellerId === currentUser.id) : leads,
+    hotLeads: currentUser?.role === 'vendedor' ? hotLeads.filter(l => l.sellerId === currentUser.id) : hotLeads,
     plans,
     transactions,
-    sellerPayouts,
-    meetings,
+    sellerPayouts: currentUser?.role === 'vendedor' ? sellerPayouts.filter(p => p.sellerId === currentUser.id) : sellerPayouts,
+    meetings: currentUser?.role === 'vendedor' ? meetings.filter(m => m.hostId === currentUser.id || m.sellerId === currentUser.id) : meetings,
     activities,
     notifications,
     // Auth & roles
@@ -1302,6 +1327,8 @@ export function CRMProvider({ children }) {
     updateMeeting,
     deleteMeeting,
     addUser,
+    updateUser,
+    deleteUser,
     updateUserPermissions,
     addSeller,
     addActivity,

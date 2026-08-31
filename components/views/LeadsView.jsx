@@ -108,10 +108,12 @@ export default function LeadsView() {
             <FileSpreadsheet style={{ width: '16px', height: '16px', marginRight: '6px' }} />
             <span>Exportar CSV</span>
           </button>
-          <button className="btn btn-primary" onClick={() => openModal('client')}>
-            <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
-            <span>+ Novo Cliente</span>
-          </button>
+          {(!currentUser || currentUser?.permissions?.includes('create-leads')) && (
+            <button className="btn btn-primary" onClick={() => openModal('client')}>
+              <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
+              <span>+ Novo Cliente</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -406,24 +408,28 @@ export default function LeadsView() {
                           >
                             <ExternalLink style={{ width: '14px', height: '14px' }} />
                           </button>
-                          <button
-                            className="btn-icon"
-                            style={{ width: '30px', height: '30px' }}
-                            onClick={() => openModal('edit-client', lead)}
-                            title="Editar Cliente"
-                          >
-                            <Edit3 style={{ width: '14px', height: '14px' }} />
-                          </button>
-                          <button
-                            className="btn-icon"
-                            style={{ width: '30px', height: '30px', color: '#f87171' }}
-                            onClick={() => {
-                              if (confirm(`Deseja realmente excluir ${lead.company}?`)) deleteLead(lead.id);
-                            }}
-                            title="Excluir"
-                          >
-                            <Trash2 style={{ width: '14px', height: '14px' }} />
-                          </button>
+                          {(!currentUser || currentUser?.permissions?.includes('edit-leads')) && (
+                            <button
+                              className="btn-icon"
+                              style={{ width: '30px', height: '30px' }}
+                              onClick={() => openModal('edit-client', lead)}
+                              title="Editar Cliente"
+                            >
+                              <Edit3 style={{ width: '14px', height: '14px' }} />
+                            </button>
+                          )}
+                          {(!currentUser || currentUser?.permissions?.includes('delete-leads')) && (
+                            <button
+                              className="btn-icon"
+                              style={{ width: '30px', height: '30px', color: '#f87171' }}
+                              onClick={() => {
+                                if (confirm(`Deseja realmente excluir ${lead.company}?`)) deleteLead(lead.id);
+                              }}
+                              title="Excluir"
+                            >
+                              <Trash2 style={{ width: '14px', height: '14px' }} />
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>

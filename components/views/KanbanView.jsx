@@ -102,10 +102,12 @@ export default function KanbanView() {
             ))}
           </select>
 
-          <button className="btn btn-primary" onClick={() => openModal('client')}>
-            <Plus style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-            <span>+ Novo Cliente</span>
-          </button>
+          {(!currentUser || currentUser?.permissions?.includes('create-leads')) && (
+            <button className="btn primary sm" onClick={() => openModal('client')}>
+              <Plus style={{ width: '16px', height: '16px', marginRight: '4px' }} />
+              <span>+ Novo Cliente</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -230,33 +232,35 @@ export default function KanbanView() {
                         </div>
 
                         {/* Quick Advance / Move Buttons */}
-                        <div
-                          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px solid var(--border-subtle)' }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {prevStg ? (
-                            <button
-                              className="btn-icon"
-                              style={{ width: '24px', height: '24px' }}
-                              onClick={() => updateLeadStage(lead.id, prevStg)}
-                              title="Recuar etapa"
-                            >
-                              <ChevronLeft style={{ width: '14px', height: '14px' }} />
-                            </button>
-                          ) : <div />}
+                        {(!currentUser || currentUser?.permissions?.includes('edit-leads')) && (
+                          <div
+                            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px solid var(--border-subtle)' }}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {prevStg ? (
+                              <button
+                                className="btn-icon"
+                                style={{ width: '24px', height: '24px' }}
+                                onClick={() => updateLeadStage(lead.id, prevStg)}
+                                title="Recuar etapa"
+                              >
+                                <ChevronLeft style={{ width: '14px', height: '14px' }} />
+                              </button>
+                            ) : <div />}
 
-                          {nextStg && (
-                            <button
-                              className="btn btn-secondary sm"
-                              style={{ fontSize: '0.72rem', padding: '3px 8px' }}
-                              onClick={() => updateLeadStage(lead.id, nextStg)}
-                              title="Avançar etapa"
-                            >
-                              <span>Avançar</span>
-                              <ChevronRight style={{ width: '12px', height: '12px', marginLeft: '2px' }} />
-                            </button>
-                          )}
-                        </div>
+                            {nextStg && (
+                              <button
+                                className="btn btn-secondary sm"
+                                style={{ fontSize: '0.72rem', padding: '3px 8px' }}
+                                onClick={() => updateLeadStage(lead.id, nextStg)}
+                                title="Avançar etapa"
+                              >
+                                <span>Avançar</span>
+                                <ChevronRight style={{ width: '12px', height: '12px', marginLeft: '2px' }} />
+                              </button>
+                            )}
+                          </div>
+                        )}
                       </div>
                     );
                   })

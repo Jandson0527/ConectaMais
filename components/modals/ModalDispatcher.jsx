@@ -16,7 +16,7 @@ import SwitchUserModal from './SwitchUserModal';
 import RenewalModal from './RenewalModal';
 import WhatsAppBillingModal from './WhatsAppBillingModal';
 import LoginScreen from '../auth/LoginScreen';
-import PermissionModal from './PermissionModal';
+import EditUserModal from './EditUserModal';
 
 export default function ModalDispatcher() {
   const { activeModal } = useCRM();
@@ -67,8 +67,8 @@ export default function ModalDispatcher() {
   if (type === 'login') {
     return <LoginScreen />;
   }
-  if (type === 'permissions') {
-    return <PermissionModal />;
+  if (type === 'permissions' || type === 'edit-user') {
+    return <EditUserModal />;
   }
 
   return null;
