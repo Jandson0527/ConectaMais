@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { supabase } from '../lib/supabase';
 import confetti from 'canvas-confetti';
 
 const CRMContext = createContext(null);
@@ -328,13 +329,15 @@ export function CRMProvider({ children }) {
 
   const updateUser = useCallback((userId, data) => {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, ...data } : u));
+    syncToSupabase('users', 'update', { id: userId, ...data });
     showToast('Usuário atualizado com sucesso!', 'success');
-  }, [showToast]);
+  }, [showToast, syncToSupabase]);
 
   const deleteUser = useCallback((userId) => {
     setUsers(prev => prev.filter(u => u.id !== userId));
+    syncToSupabase('users', 'delete', userId);
     showToast('Usuário removido com sucesso.', 'info');
-  }, [showToast]);
+  }, [showToast, syncToSupabase]);
 
   const updateUserPermissions = useCallback((userId, newPermissions) => {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, permissions: newPermissions } : u));
@@ -358,6 +361,16 @@ export function CRMProvider({ children }) {
       closeModal();
     }
   }, [users, currentView, showToast, closeModal]);
+
+  const syncToSupabase = useCallback(async (table, action, data) => {
+    try {
+      if (action === 'insert') await supabase.from(table).insert(data);
+      if (action === 'update') await supabase.from(table).update(data).eq('id', data.id);
+      if (action === 'delete') await supabase.from(table).delete().eq('id', data);
+    } catch (e) {
+      console.error('Supabase Sync Error:', e);
+    }
+  }, []);
 
   const login = useCallback((email, password) => {
     const u = users.find(x => x.email.toLowerCase() === email.toLowerCase() && x.password === password);
@@ -606,9 +619,10 @@ export function CRMProvider({ children }) {
 
   const deleteLead = useCallback((leadId) => {
     setLeads(prev => prev.filter(l => l.id !== leadId));
+    syncToSupabase('leads', 'delete', leadId);
     showToast('Cliente excluído com sucesso.', 'info');
     closeModal();
-  }, [showToast, closeModal]);
+  }, [showToast, closeModal, syncToSupabase]);
 
   const updateLeadStage = useCallback((leadId, newStage) => {
     setLeads(prev => prev.map(l => {
@@ -1017,23 +1031,26 @@ export function CRMProvider({ children }) {
         : ['seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions', 'calendar', 'create-leads']
     };
     setUsers(prev => [...prev, newUser]);
+    syncToSupabase('users', 'insert', newUser);
     showToast(`Sócio ${newUser.name} cadastrado com sucesso!`, 'success');
     closeModal();
-  }, [showToast, closeModal]);
+  }, [showToast, closeModal, syncToSupabase]);
 
   const addSeller = useCallback((sellerData) => {
-    const newUser = {
+    const newSeller = {
       id: `usr-${Date.now()}`,
       ...sellerData,
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
       role: 'vendedor',
       active: sellerData.active !== undefined ? sellerData.active : true,
       commissionRate: 0.10,
       permissions: ['seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions', 'calendar', 'create-leads']
     };
     setUsers(prev => [...prev, newSeller]);
+    syncToSupabase('users', 'insert', newSeller);
     showToast(`Vendedor ${newSeller.name} cadastrado com sucesso!`, 'success');
     closeModal();
-  }, [showToast, closeModal]);
+  }, [showToast, closeModal, syncToSupabase]);
 
   // ==================== CRUD: ATIVIDADES & TIMELINE ====================
   const addActivity = useCallback((leadId, actData) => {
@@ -1047,8 +1064,9 @@ export function CRMProvider({ children }) {
       createdAt: new Date().toISOString()
     };
     setActivities(prev => [newAct, ...prev]);
+    syncToSupabase('activities', 'insert', newAct);
     showToast('Atividade registrada na linha do tempo!', 'success');
-  }, [currentUser, showToast]);
+  }, [currentUser, showToast, syncToSupabase]);
 
   // Notifications
   const markNotificationsAsRead = useCallback(() => {

@@ -333,17 +333,13 @@ export default function PartnerSellersView() {
                     Dossiê
                   </button>
                   <button
-                    className="btn btn-danger sm"
-                    style={{ flex: hasPendingPayout ? 'initial' : 1, justifyContent: 'center', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)' }}
-                    onClick={() => {
-                      if (window.confirm(`Tem certeza que deseja remover o vendedor ${seller.name}? Esta ação não pode ser desfeita.`)) {
-                        deleteUser(seller.id);
-                      }
-                    }}
-                    title="Remover Vendedor"
+                    className="btn btn-secondary sm"
+                    style={{ flex: hasPendingPayout ? 'initial' : 1, justifyContent: 'center' }}
+                    onClick={() => openModal('edit-user', seller)}
+                    title="Editar, Inativar ou Remover Vendedor"
                   >
-                    <XCircle style={{ width: '14px', height: '14px', marginRight: '4px' }} />
-                    Remover
+                    <UserCheck style={{ width: '14px', height: '14px', marginRight: '4px' }} />
+                    Editar / Inativar
                   </button>
                 </div>
               </div>
