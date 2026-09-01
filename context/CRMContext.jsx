@@ -229,6 +229,16 @@ export function CRMProvider({ children }) {
   const [activities, setActivities] = useState(INITIAL_SEED_DATA.activities);
   const [notifications, setNotifications] = useState(INITIAL_SEED_DATA.notifications);
 
+  const syncToSupabase = useCallback(async (table, action, data) => {
+    try {
+      if (action === 'insert') await supabase.from(table).insert(data);
+      if (action === 'update') await supabase.from(table).update(data).eq('id', data.id);
+      if (action === 'delete') await supabase.from(table).delete().eq('id', data);
+    } catch (e) {
+      console.error('Supabase Sync Error:', e);
+    }
+  }, []);
+
   // Load from LocalStorage
   useEffect(() => {
     try {
@@ -361,16 +371,6 @@ export function CRMProvider({ children }) {
       closeModal();
     }
   }, [users, currentView, showToast, closeModal]);
-
-  const syncToSupabase = useCallback(async (table, action, data) => {
-    try {
-      if (action === 'insert') await supabase.from(table).insert(data);
-      if (action === 'update') await supabase.from(table).update(data).eq('id', data.id);
-      if (action === 'delete') await supabase.from(table).delete().eq('id', data);
-    } catch (e) {
-      console.error('Supabase Sync Error:', e);
-    }
-  }, []);
 
   const login = useCallback((email, password) => {
     const u = users.find(x => x.email.toLowerCase() === email.toLowerCase() && x.password === password);
