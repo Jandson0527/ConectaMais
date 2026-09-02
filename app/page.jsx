@@ -59,7 +59,25 @@ export default function Home() {
     return <LoginView />;
   }
 
+  const hasAccess = !currentUser.permissions || currentUser.permissions.includes(currentView);
+
   const renderView = () => {
+    if (!hasAccess) {
+      return (
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          padding: '4rem 1.5rem',
+          color: 'var(--text-secondary)'
+        }}>
+          <h2 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Acesso Restrito</h2>
+          <p>Você não tem permissão para acessar esta tela. Fale com um sócio para liberar o acesso.</p>
+        </div>
+      );
+    }
     switch (currentView) {
       case 'dashboard': return <DashboardView />;
       case 'kanban': return <KanbanView />;

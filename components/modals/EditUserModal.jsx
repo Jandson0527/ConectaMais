@@ -14,9 +14,10 @@ import {
 } from 'lucide-react';
 
 export default function EditUserModal() {
-  const { closeModal, activeModal, updateUser, deleteUser } = useCRM();
-  
+  const { closeModal, activeModal, updateUser, deleteUser, currentUser } = useCRM();
+
   const user = activeModal?.data;
+  const canDeleteUsers = !currentUser?.permissions || currentUser.permissions.includes('delete-users');
   
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
@@ -77,7 +78,9 @@ export default function EditUserModal() {
     { id: 'create-finance', label: 'Cadastrar Transações (Caixa)' },
     { id: 'edit-finance', label: 'Editar Transações' },
     { id: 'delete-finance', label: 'Excluir Transações' },
-    { id: 'create-users', label: 'Gerenciar Usuários (Add)' },
+    { id: 'create-users', label: 'Cadastrar Sócios/Usuários' },
+    { id: 'edit-users', label: 'Editar Sócios/Usuários' },
+    { id: 'delete-users', label: 'Excluir Sócios/Usuários' },
   ];
 
   return (
@@ -138,7 +141,7 @@ export default function EditUserModal() {
                 </label>
               </div>
 
-              {user.id !== 'usr-1' && (
+              {user.id !== 'usr-1' && canDeleteUsers && (
                 <button type="button" className="btn sm" style={{ background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', border: '1px solid rgba(239, 68, 68, 0.3)', marginTop: 'auto' }} onClick={handleDelete}>
                   <Trash2 style={{ width: 14, height: 14, marginRight: 6 }} /> Excluir Usuário Permanentemente
                 </button>

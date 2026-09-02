@@ -34,6 +34,7 @@ export default function SellerDashboardView() {
   const payoutInfo = commData.nextPayoutInfo || { formattedDate: '10 de cada mês', daysRemainingText: '' };
   const sellerHotLeads = (hotLeads || []).filter(h => h.sellerId === currentUser?.id);
   const sellerMeetings = (meetings || []).filter(m => m.scheduledBy === currentUser?.id || m.assignedPartnerId === currentUser?.id);
+  const canCreateLeads = !currentUser?.permissions || currentUser.permissions.includes('create-leads');
 
   return (
     <section className="view-panel active" id="view-seller-dashboard">
@@ -49,10 +50,12 @@ export default function SellerDashboardView() {
             <Flame style={{ width: '16px', height: '16px', marginRight: '4px' }} />
             <span>+ Cliente Quente</span>
           </button>
-          <button className="btn btn-primary" onClick={() => openModal('client')}>
-            <PlusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-            <span>+ Cadastrar Nova Venda</span>
-          </button>
+          {canCreateLeads && (
+            <button className="btn btn-primary" onClick={() => openModal('client')}>
+              <PlusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
+              <span>+ Cadastrar Nova Venda</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -97,12 +100,14 @@ export default function SellerDashboardView() {
             Toda vez que seus clientes renovarem a mensalidade, você ganha <strong>10% de comissão novamente</strong>, pago pontualmente no <strong>dia 10 de cada mês</strong>!
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button className="btn btn-primary" onClick={() => openModal('client')} style={{ fontWeight: 700 }}>
-            <PlusCircle style={{ width: '16px', height: '16px', marginRight: '6px' }} />
-            <span>+ Cadastrar Venda</span>
-          </button>
-        </div>
+        {canCreateLeads && (
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button className="btn btn-primary" onClick={() => openModal('client')} style={{ fontWeight: 700 }}>
+              <PlusCircle style={{ width: '16px', height: '16px', marginRight: '6px' }} />
+              <span>+ Cadastrar Venda</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* KPI Cards do Vendedor */}

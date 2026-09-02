@@ -23,10 +23,13 @@ export default function FinanceView() {
   const {
     transactions,
     users,
+    currentUser,
     openModal,
     deleteTransaction,
     formatCurrency
   } = useCRM();
+
+  const can = (action) => !currentUser?.permissions || currentUser.permissions.includes(action);
 
   const [typeFilter, setTypeFilter] = useState('all');
   const [partnerFilter, setPartnerFilter] = useState('all');
@@ -100,29 +103,31 @@ export default function FinanceView() {
           <h1 className="view-title">Financeiro & Fluxo de Caixa</h1>
           <p className="view-subtitle">Controle em tempo real de entradas de clientes anunciantes, custos operacionais e pagamento de comissões de vendedores.</p>
         </div>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          <button
-            className="btn btn-gold"
-            onClick={() => openModal('transaction', { type: 'expense', category: 'Comissões de Vendedores' })}
-            style={{ fontWeight: 800 }}
-          >
-            <Zap style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-            <span>Pagar Comissão de Vendedor</span>
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => openModal('transaction', { type: 'expense', category: 'Custo Fixo por TV' })}
-            style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.3)' }}
-          >
-            - Lançar Gasto / Despesa
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => openModal('transaction', { type: 'income', category: 'Planos Recorrentes' })}
-          >
-            + Lançar Receita
-          </button>
-        </div>
+        {can('create-finance') && (
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <button
+              className="btn btn-gold"
+              onClick={() => openModal('transaction', { type: 'expense', category: 'Comissões de Vendedores' })}
+              style={{ fontWeight: 800 }}
+            >
+              <Zap style={{ width: '16px', height: '16px', marginRight: '4px' }} />
+              <span>Pagar Comissão de Vendedor</span>
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => openModal('transaction', { type: 'expense', category: 'Custo Fixo por TV' })}
+              style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.3)' }}
+            >
+              - Lançar Gasto / Despesa
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => openModal('transaction', { type: 'income', category: 'Planos Recorrentes' })}
+            >
+              + Lançar Receita
+            </button>
+          </div>
+        )}
       </div>
 
       {/* KPI Cards Financeiros */}
@@ -422,14 +427,16 @@ export default function FinanceView() {
                         </span>
                       </td>
                       <td style={{ padding: '12px 14px', textAlign: 'center' }}>
-                        <button
-                          className="btn-icon"
-                          onClick={() => deleteTransaction(tx.id)}
-                          title="Excluir Lançamento"
-                          style={{ color: 'var(--danger)' }}
-                        >
-                          <Trash2 style={{ width: '15px', height: '15px' }} />
-                        </button>
+                        {can('delete-finance') && (
+                          <button
+                            className="btn-icon"
+                            onClick={() => deleteTransaction(tx.id)}
+                            title="Excluir Lançamento"
+                            style={{ color: 'var(--danger)' }}
+                          >
+                            <Trash2 style={{ width: '15px', height: '15px' }} />
+                          </button>
+                        )}
                       </td>
                     </tr>
                   );

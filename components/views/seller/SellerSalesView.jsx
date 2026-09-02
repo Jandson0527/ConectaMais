@@ -27,6 +27,7 @@ export default function SellerSalesView() {
 
   const commData = getSellerCommissions(currentUser?.id);
   const [statusFilter, setStatusFilter] = useState('all');
+  const canCreateLeads = !currentUser?.permissions || currentUser.permissions.includes('create-leads');
 
   const filteredSales = commData.salesList.filter(s => {
     if (statusFilter === 'approved') return s.approvalStatus === 'approved' || s.stage === 'ganho';
@@ -43,10 +44,12 @@ export default function SellerSalesView() {
           <h1 className="view-title">Minhas Vendas Realizadas</h1>
           <p className="view-subtitle">Consulte o status de aprovação de cada contrato cadastrado, vencimentos e os valores da sua comissão de 10%.</p>
         </div>
-        <button className="btn btn-primary" onClick={() => openModal('client')}>
-          <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
-          <span>+ Cadastrar Nova Venda</span>
-        </button>
+        {canCreateLeads && (
+          <button className="btn btn-primary" onClick={() => openModal('client')}>
+            <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
+            <span>+ Cadastrar Nova Venda</span>
+          </button>
+        )}
       </div>
 
       {/* Filtro de Status */}

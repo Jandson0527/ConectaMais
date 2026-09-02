@@ -30,6 +30,7 @@ export default function DashboardView() {
     transactions,
     meetings,
     plans,
+    currentUser,
     openModal,
     setCurrentView,
     formatCurrency,
@@ -37,6 +38,9 @@ export default function DashboardView() {
     getLeadDueStatus,
     renewLeadContract
   } = useCRM();
+
+  const canCreateFinance = !currentUser?.permissions || currentUser.permissions.includes('create-finance');
+  const canCreateLeads = !currentUser?.permissions || currentUser.permissions.includes('create-leads');
 
   // Metrics
   const activeScreensCount = screens.filter(s => s.status === 'active').reduce((acc, s) => acc + (s.tvsCount || 1), 0);
@@ -66,14 +70,18 @@ export default function DashboardView() {
           <p className="view-subtitle">Acompanhe métricas em tempo real de vendas, conversão de anunciantes, vencimentos e faturamento da Conecta Mais.</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button className="btn btn-primary" onClick={() => openModal('client')}>
-            <PlusCircle style={{ width: '16px', height: '16px', marginRight: '6px' }} />
-            <span>+ Novo Cliente</span>
-          </button>
-          <button className="btn btn-secondary" onClick={() => openModal('transaction', 'expense')}>
-            <Wallet style={{ width: '16px', height: '16px', marginRight: '6px' }} />
-            <span>+ Cadastrar Gasto</span>
-          </button>
+          {canCreateLeads && (
+            <button className="btn btn-primary" onClick={() => openModal('client')}>
+              <PlusCircle style={{ width: '16px', height: '16px', marginRight: '6px' }} />
+              <span>+ Novo Cliente</span>
+            </button>
+          )}
+          {canCreateFinance && (
+            <button className="btn btn-secondary" onClick={() => openModal('transaction', 'expense')}>
+              <Wallet style={{ width: '16px', height: '16px', marginRight: '6px' }} />
+              <span>+ Cadastrar Gasto</span>
+            </button>
+          )}
         </div>
       </div>
 

@@ -24,6 +24,7 @@ export default function Topbar() {
     searchQuery,
     setSearchQuery,
     isSeller,
+    currentUser,
     notifications,
     markNotificationsAsRead,
     exportCSV,
@@ -33,6 +34,9 @@ export default function Topbar() {
     isSidebarCollapsed,
     setIsSidebarCollapsed
   } = useCRM();
+
+  const canCreateFinance = !currentUser?.permissions || currentUser.permissions.includes('create-finance');
+  const canCreateLeads = !currentUser?.permissions || currentUser.permissions.includes('create-leads');
 
   const [isDataDropdownOpen, setIsDataDropdownOpen] = useState(false);
   const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
@@ -82,7 +86,7 @@ export default function Topbar() {
       <div className="topbar-right">
         
         {/* Ações Rápidas */}
-        {!isSeller() && (
+        {!isSeller() && canCreateFinance && (
           <button
             className="btn btn-secondary"
             onClick={() => openModal('transaction', 'expense')}
@@ -94,14 +98,16 @@ export default function Topbar() {
           </button>
         )}
 
-        <button
-          className="btn btn-primary"
-          onClick={() => openModal('client')}
-          title="Cadastrar Novo Cliente / Anunciante"
-        >
-          <PlusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-          <span>{isSeller() ? '+ Nova Venda' : '+ Novo Cliente'}</span>
-        </button>
+        {canCreateLeads && (
+          <button
+            className="btn btn-primary"
+            onClick={() => openModal('client')}
+            title="Cadastrar Novo Cliente / Anunciante"
+          >
+            <PlusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
+            <span>{isSeller() ? '+ Nova Venda' : '+ Novo Cliente'}</span>
+          </button>
+        )}
 
         {/* Exportar / Importar Dados */}
         <div className="dropdown-container" style={{ position: 'relative' }}>

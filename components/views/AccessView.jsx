@@ -15,19 +15,22 @@ import {
 export default function AccessView() {
   const { users, openModal, currentUser } = useCRM();
   const partners = users.filter(u => u.role !== 'vendedor');
+  const can = (action) => !currentUser?.permissions || currentUser.permissions.includes(action);
 
   return (
     <section className="view-panel active" id="view-access">
-      
+
       <div className="view-header">
         <div>
           <h1 className="view-title">Sócios & Gestão de Acessos</h1>
           <p className="view-subtitle">Controle de sócios diretores, níveis de permissão comercial e faturamento.</p>
         </div>
-        <button className="btn btn-primary" onClick={() => openModal('user')}>
-          <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
-          <span>+ Cadastrar Sócio</span>
-        </button>
+        {can('create-users') && (
+          <button className="btn btn-primary" onClick={() => openModal('user')}>
+            <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
+            <span>+ Cadastrar Sócio</span>
+          </button>
+        )}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
@@ -86,9 +89,9 @@ export default function AccessView() {
               </div>
             </div>
 
-            {currentUser?.role === 'admin' && (
-              <button 
-                className="btn btn-secondary sm" 
+            {can('edit-users') && (
+              <button
+                className="btn btn-secondary sm"
                 style={{ marginTop: 'auto', alignSelf: 'flex-start' }}
                 onClick={() => openModal('edit-user', user)}
               >

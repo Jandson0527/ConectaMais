@@ -247,10 +247,23 @@ export function CRMProvider({ children }) {
   const [activities, setActivities] = useState(INITIAL_SEED_DATA.activities);
   const [notifications, setNotifications] = useState(INITIAL_SEED_DATA.notifications);
 
+  // O estado local do app usa camelCase; o schema do Supabase usa snake_case.
+  // Essas duas funções fazem a ponte só no momento de sincronizar, sem afetar o resto do app.
+  const SUPABASE_FIELD_OVERRIDES = { user: 'user_name' };
+
+  const toSupabasePayload = (obj) => {
+    const out = {};
+    for (const [key, value] of Object.entries(obj)) {
+      const snakeKey = SUPABASE_FIELD_OVERRIDES[key] || key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+      out[snakeKey] = value;
+    }
+    return out;
+  };
+
   const syncToSupabase = useCallback(async (table, action, data) => {
     try {
-      if (action === 'insert') await supabase.from(table).insert(data);
-      if (action === 'update') await supabase.from(table).update(data).eq('id', data.id);
+      if (action === 'insert') await supabase.from(table).insert(toSupabasePayload(data));
+      if (action === 'update') await supabase.from(table).update(toSupabasePayload(data)).eq('id', data.id);
       if (action === 'delete') await supabase.from(table).delete().eq('id', data);
     } catch (e) {
       console.error('Supabase Sync Error:', e);

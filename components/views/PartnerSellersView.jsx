@@ -25,6 +25,7 @@ export default function PartnerSellersView() {
   const {
     users,
     leads,
+    currentUser,
     openModal,
     approveSellerSale,
     getSellerCommissions,
@@ -33,6 +34,7 @@ export default function PartnerSellersView() {
     deleteUser
   } = useCRM();
 
+  const can = (action) => !currentUser?.permissions || currentUser.permissions.includes(action);
   const sellers = users.filter(u => u.role === 'vendedor');
   const pendingSales = leads.filter(l => l.sellerId && l.approvalStatus === 'pending');
   const nextPayout = getNextCommissionPayoutDate();
@@ -49,18 +51,22 @@ export default function PartnerSellersView() {
           <p className="view-subtitle">Aprove novas vendas, controle o saldo de comissões de 10% e realize os repasses oficiais no <strong>dia 10 de cada mês</strong>.</p>
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
-          <button
-            className="btn btn-gold"
-            onClick={() => openModal('transaction', { type: 'expense', category: 'Comissões de Vendedores' })}
-            style={{ fontWeight: 800 }}
-          >
-            <DollarSign style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-            <span>Pagar Comissão de Vendedor</span>
-          </button>
-          <button className="btn btn-primary" onClick={() => openModal('seller')}>
-            <PlusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-            <span>+ Novo Vendedor</span>
-          </button>
+          {can('create-finance') && (
+            <button
+              className="btn btn-gold"
+              onClick={() => openModal('transaction', { type: 'expense', category: 'Comissões de Vendedores' })}
+              style={{ fontWeight: 800 }}
+            >
+              <DollarSign style={{ width: '16px', height: '16px', marginRight: '4px' }} />
+              <span>Pagar Comissão de Vendedor</span>
+            </button>
+          )}
+          {can('create-users') && (
+            <button className="btn btn-primary" onClick={() => openModal('seller')}>
+              <PlusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
+              <span>+ Novo Vendedor</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -332,15 +338,17 @@ export default function PartnerSellersView() {
                     <FolderOpen style={{ width: '14px', height: '14px', marginRight: '4px' }} />
                     Dossiê
                   </button>
-                  <button
-                    className="btn btn-secondary sm"
-                    style={{ flex: hasPendingPayout ? 'initial' : 1, justifyContent: 'center' }}
-                    onClick={() => openModal('edit-user', seller)}
-                    title="Editar, Inativar ou Remover Vendedor"
-                  >
-                    <UserCheck style={{ width: '14px', height: '14px', marginRight: '4px' }} />
-                    Editar / Inativar
-                  </button>
+                  {can('edit-users') && (
+                    <button
+                      className="btn btn-secondary sm"
+                      style={{ flex: hasPendingPayout ? 'initial' : 1, justifyContent: 'center' }}
+                      onClick={() => openModal('edit-user', seller)}
+                      title="Editar, Inativar ou Remover Vendedor"
+                    >
+                      <UserCheck style={{ width: '14px', height: '14px', marginRight: '4px' }} />
+                      Editar / Inativar
+                    </button>
+                  )}
                 </div>
               </div>
             );

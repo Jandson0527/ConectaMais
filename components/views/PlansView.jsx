@@ -12,20 +12,23 @@ import {
 } from 'lucide-react';
 
 export default function PlansView() {
-  const { plans, openModal, formatCurrency } = useCRM();
+  const { plans, currentUser, openModal, formatCurrency } = useCRM();
+  const canCreateLeads = !currentUser?.permissions || currentUser.permissions.includes('create-leads');
 
   return (
     <section className="view-panel active" id="view-plans">
-      
+
       <div className="view-header">
         <div>
           <h1 className="view-title">Planos de TVs & Mídia Indoor</h1>
           <p className="view-subtitle">Conheça a grade de planos comerciais de veiculação na rede de telas Conecta Mais.</p>
         </div>
-        <button className="btn btn-primary" onClick={() => openModal('client')}>
-          <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
-          <span>+ Cadastrar Cliente no Plano</span>
-        </button>
+        {canCreateLeads && (
+          <button className="btn btn-primary" onClick={() => openModal('client')}>
+            <Plus style={{ width: '16px', height: '16px', marginRight: '6px' }} />
+            <span>+ Cadastrar Cliente no Plano</span>
+          </button>
+        )}
       </div>
 
       <div style={{
