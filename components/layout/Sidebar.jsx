@@ -18,7 +18,6 @@ import {
   Percent,
   ChevronsLeft,
   ChevronsRight,
-  ArrowLeftRight,
   LogOut,
   Moon,
   Sun
@@ -34,7 +33,7 @@ export default function Sidebar() {
     setIsSidebarCollapsed,
     theme,
     toggleTheme,
-    openModal,
+    logout,
     leads,
     meetings,
     screens,
@@ -61,7 +60,7 @@ export default function Sidebar() {
       
       {/* Header */}
       <div className="sidebar-header">
-        <a href="#" className="brand-logo" onClick={(e) => { e.preventDefault(); setCurrentView(isSeller() ? 'seller-dashboard' : 'dashboard'); }}>
+        <a href="#" className="brand-logo" onClick={(e) => { e.preventDefault(); handleNavClick(isSeller() ? 'seller-dashboard' : 'dashboard'); }}>
           <svg className="logo-icon-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="cmGradTop" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -71,17 +70,17 @@ export default function Sidebar() {
               </linearGradient>
               <linearGradient id="cmGradBottom" x1="0%" y1="100%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#ea580c" />
-                <stop offset="50%" stopColor="#f59e0b" />
-                <stop offset="100%" stopColor="#fbbf24" />
+                <stop offset="50%" stopColor="var(--accent-orange)" />
+                <stop offset="100%" stopColor="var(--accent-gold)" />
               </linearGradient>
               <linearGradient id="cmPlayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fbbf24" />
+                <stop offset="0%" stopColor="var(--accent-gold)" />
                 <stop offset="100%" stopColor="#ea580c" />
               </linearGradient>
             </defs>
             <path d="M 74 24 C 62 11 40 11 26 24 C 12 38 12 62 26 76 C 36 86 52 89 65 83 C 58 78 48 76 40 70 C 27 60 27 40 40 30 C 49 23 63 24 74 24 Z" fill="url(#cmGradTop)" />
             <path d="M 26 76 C 39 89 61 89 74 76 C 77 73 74 67 69 67 C 65 67 62 69 59 72 C 49 80 35 79 26 71 C 24 69 22 66 21 63 C 20 68 22 72 26 76 Z" fill="url(#cmGradBottom)" />
-            <path d="M 44 37 C 44 34.8 46.4 33.5 48.2 34.6 L 68.5 47.6 C 70.2 48.7 70.2 51.3 68.5 52.4 L 48.2 65.4 C 46.4 66.5 44 63 Z" fill="url(#cmPlayGrad)" />
+            <path d="M 44 37 C 44 34.8 46.4 33.5 48.2 34.6 L 68.5 47.6 C 70.2 48.7 70.2 51.3 68.5 52.4 L 48.2 65.4 Z" fill="url(#cmPlayGrad)" />
           </svg>
           <div className="logo-text">
             <span className="brand-name">conecta</span>
@@ -110,23 +109,6 @@ export default function Sidebar() {
           <span className="user-role-badge">
             {currentUser?.role === 'vendedor' ? 'Vendedor Comercial' : (currentUser?.role === 'admin' ? 'Sócio Diretor' : 'Sócia Executiva')}
           </span>
-        </div>
-        <div style={{ display: 'flex', gap: '4px' }}>
-          <button
-            className="btn-icon user-switch-trigger"
-            onClick={() => openModal('switch-user')}
-            title="Alternar Perfil"
-          >
-            <ArrowLeftRight style={{ width: '16px', height: '16px' }} />
-          </button>
-          <button
-            className="btn-icon"
-            onClick={() => openModal('login')}
-            title="Sair (Logout)"
-            style={{ color: '#f87171' }}
-          >
-            <LogOut style={{ width: '16px', height: '16px' }} />
-          </button>
         </div>
       </div>
 
@@ -207,7 +189,7 @@ export default function Sidebar() {
             >
               <MapPin style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Rede de Telas (Pontos)</span>
-              <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: '#00d2ff' }}>
+              <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: 'var(--primary-bright)' }}>
                 {screens.length} Pontos
               </span>
             </button>
@@ -234,7 +216,7 @@ export default function Sidebar() {
             >
               <UserCheck style={{ width: '18px', height: '18px' }} />
               <span className="nav-label">Vendedores & Equipe</span>
-              <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: '#00d2ff' }}>
+              <span className="nav-counter" style={{ background: 'rgba(0, 210, 255, 0.15)', color: 'var(--primary-bright)' }}>
                 Comissões
               </span>
             </button>
@@ -283,6 +265,10 @@ export default function Sidebar() {
           <button className="btn-theme-toggle" onClick={toggleTheme} title="Alternar Tema Claro/Escuro">
             {theme === 'dark' ? <Moon style={{ width: '16px', height: '16px' }} /> : <Sun style={{ width: '16px', height: '16px' }} />}
             <span className="theme-label">{theme === 'dark' ? 'Modo Escuro' : 'Modo Claro'}</span>
+          </button>
+          <button className="btn-theme-toggle btn-logout" onClick={logout} title="Sair do Sistema">
+            <LogOut style={{ width: '16px', height: '16px' }} />
+            <span className="theme-label">Sair</span>
           </button>
         </div>
       </div>

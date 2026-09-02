@@ -39,8 +39,8 @@ export default function SellerModal() {
       <div className="modal-dialog modal-md" style={{ maxWidth: '560px' }}>
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <UserPlus style={{ width: '22px', height: '22px', color: '#00d2ff' }} />
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+            <UserPlus style={{ width: '22px', height: '22px', color: 'var(--primary-bright)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               Cadastrar Novo Vendedor Comercial
             </h3>
           </div>
@@ -113,7 +113,7 @@ export default function SellerModal() {
               padding: '12px',
               marginTop: '4px'
             }}>
-              <strong style={{ color: '#00d2ff', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+              <strong style={{ color: 'var(--primary-bright)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
                 <Percent style={{ width: '14px', height: '14px' }} /> Regras de Acesso e Comissão:
               </strong>
               <ul style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0, paddingLeft: '18px', lineHeight: 1.5 }}>
@@ -131,7 +131,7 @@ export default function SellerModal() {
                   checked={active}
                   onChange={(e) => setActive(e.target.checked)}
                 />
-                <span style={{ fontSize: '0.85rem', color: '#ffffff' }}>Vendedor ativo para login e cadastro de vendas</span>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>Vendedor ativo para login e cadastro de vendas</span>
               </label>
             </div>
 

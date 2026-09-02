@@ -66,7 +66,7 @@ export default function DashboardView() {
           <p className="view-subtitle">Acompanhe métricas em tempo real de vendas, conversão de anunciantes, vencimentos e faturamento da Conecta Mais.</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button className="btn btn-primary" onClick={() => openModal('client')} style={{ boxShadow: '0 4px 14px rgba(0, 210, 255, 0.35)' }}>
+          <button className="btn btn-primary" onClick={() => openModal('client')}>
             <PlusCircle style={{ width: '16px', height: '16px', marginRight: '6px' }} />
             <span>+ Novo Cliente</span>
           </button>
@@ -92,11 +92,11 @@ export default function DashboardView() {
           gap: '10px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: '#00d2ff', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--primary-bright)', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Calendar style={{ width: '20px', height: '20px' }} />
             </div>
             <div>
-              <strong style={{ color: '#ffffff', fontSize: '0.95rem', display: 'block' }}>
+              <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem', display: 'block' }}>
                 Você tem {meetingsToday.length} reunião comercial agendada para hoje!
               </strong>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
@@ -112,12 +112,12 @@ export default function DashboardView() {
 
       {/* SEÇÃO PRINCIPAL DE ALERTAS DE VENCIMENTO DE CLIENTES */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(20, 29, 47, 0.95), rgba(15, 23, 42, 0.9))',
-        border: `1.5px solid ${dueAlerts.expired.length > 0 ? '#ef4444' : (dueAlerts.dueToday.length > 0 ? '#fbbf24' : 'rgba(0, 210, 255, 0.3)')}`,
+        background: 'var(--bg-card)',
+        border: `1.5px solid ${dueAlerts.expired.length > 0 ? 'var(--danger)' : (dueAlerts.dueToday.length > 0 ? 'var(--accent-gold)' : 'rgba(2, 132, 166, 0.3)')}`,
         borderRadius: '16px',
         padding: '1.5rem',
         marginBottom: '1.5rem',
-        boxShadow: dueAlerts.expired.length > 0 ? '0 8px 30px rgba(239, 68, 68, 0.15)' : '0 8px 24px rgba(0, 0, 0, 0.4)'
+        boxShadow: dueAlerts.expired.length > 0 ? '0 8px 30px rgba(239, 68, 68, 0.15)' : 'var(--shadow-sm)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -126,16 +126,16 @@ export default function DashboardView() {
               height: '42px',
               borderRadius: '10px',
               background: dueAlerts.expired.length > 0 ? 'rgba(239, 68, 68, 0.2)' : 'rgba(251, 191, 36, 0.2)',
-              color: dueAlerts.expired.length > 0 ? '#ef4444' : 'var(--accent-gold)',
+              color: dueAlerts.expired.length > 0 ? 'var(--danger)' : 'var(--accent-gold)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: `1px solid ${dueAlerts.expired.length > 0 ? '#ef4444' : 'var(--accent-gold)'}`
+              border: `1px solid ${dueAlerts.expired.length > 0 ? 'var(--danger)' : 'var(--accent-gold)'}`
             }}>
               <AlertCircle style={{ width: '22px', height: '22px' }} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                 🚨 Alertas de Vencimento de Clientes & Mensalidades
               </h3>
               <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
@@ -151,7 +151,7 @@ export default function DashboardView() {
               padding: '4px 10px',
               borderRadius: '20px',
               background: 'rgba(239, 68, 68, 0.18)',
-              color: '#f87171',
+              color: 'var(--danger)',
               border: '1px solid rgba(239, 68, 68, 0.4)'
             }}>
               🔴 {dueAlerts.expired.length} Vencidos
@@ -173,7 +173,7 @@ export default function DashboardView() {
               padding: '4px 10px',
               borderRadius: '20px',
               background: 'rgba(245, 158, 11, 0.18)',
-              color: '#fbbf24',
+              color: 'var(--accent-gold)',
               border: '1px solid rgba(245, 158, 11, 0.4)'
             }}>
               🟠 {dueAlerts.dueSoon.length} A Vencer (7d)
@@ -183,7 +183,7 @@ export default function DashboardView() {
 
         {/* Lista de Alertas Ativos */}
         {dueAlerts.totalAlerts === 0 ? (
-          <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(16, 185, 129, 0.08)', borderRadius: '10px', border: '1px solid rgba(16, 185, 129, 0.2)', color: '#10b981' }}>
+          <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(16, 185, 129, 0.08)', borderRadius: '10px', border: '1px solid rgba(16, 185, 129, 0.2)', color: 'var(--success)' }}>
             <CheckCircle style={{ width: '24px', height: '24px', margin: '0 auto 6px', display: 'block' }} />
             <strong>Todos os clientes estão com as mensalidades em dia!</strong> Nenhuma renovação pendente para os próximos 7 dias.
           </div>
@@ -213,7 +213,7 @@ export default function DashboardView() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      <strong style={{ fontSize: '0.95rem', color: '#ffffff', display: 'block' }}>
+                      <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)', display: 'block' }}>
                         {lead.company || lead.name}
                       </strong>
                       <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -225,7 +225,7 @@ export default function DashboardView() {
                       fontWeight: 800,
                       padding: '3px 8px',
                       borderRadius: '12px',
-                      background: '#ef4444',
+                      background: 'var(--danger)',
                       color: '#ffffff',
                       textTransform: 'uppercase'
                     }}>
@@ -233,10 +233,10 @@ export default function DashboardView() {
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(0, 0, 0, 0.2)', padding: '6px 10px', borderRadius: '6px' }}>
-                    <span>Plano: <strong style={{ color: '#00d2ff' }}>{plan.name}</strong></span>
-                    <span>Valor: <strong style={{ color: '#10b981' }}>{formatCurrency(lead.value)}</strong></span>
-                    <span>Vencimento: <strong style={{ color: '#f87171' }}>{dueInfo.formattedDueDate}</strong></span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'var(--bg-surface)', padding: '6px 10px', borderRadius: '6px' }}>
+                    <span>Plano: <strong style={{ color: 'var(--primary-bright)' }}>{plan.name}</strong></span>
+                    <span>Valor: <strong style={{ color: 'var(--success)' }}>{formatCurrency(lead.value)}</strong></span>
+                    <span>Vencimento: <strong style={{ color: 'var(--danger)' }}>{dueInfo.formattedDueDate}</strong></span>
                   </div>
 
                   <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
@@ -286,7 +286,7 @@ export default function DashboardView() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      <strong style={{ fontSize: '0.95rem', color: '#ffffff', display: 'block' }}>
+                      <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)', display: 'block' }}>
                         {lead.company || lead.name}
                       </strong>
                       <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -306,9 +306,9 @@ export default function DashboardView() {
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(0, 0, 0, 0.2)', padding: '6px 10px', borderRadius: '6px' }}>
-                    <span>Plano: <strong style={{ color: '#00d2ff' }}>{plan.name}</strong></span>
-                    <span>Valor: <strong style={{ color: '#10b981' }}>{formatCurrency(lead.value)}</strong></span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'var(--bg-surface)', padding: '6px 10px', borderRadius: '6px' }}>
+                    <span>Plano: <strong style={{ color: 'var(--primary-bright)' }}>{plan.name}</strong></span>
+                    <span>Valor: <strong style={{ color: 'var(--success)' }}>{formatCurrency(lead.value)}</strong></span>
                     <span>Vencimento: <strong style={{ color: 'var(--accent-gold)' }}>{dueInfo.formattedDueDate}</strong></span>
                   </div>
 
@@ -358,7 +358,7 @@ export default function DashboardView() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      <strong style={{ fontSize: '0.95rem', color: '#ffffff', display: 'block' }}>
+                      <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)', display: 'block' }}>
                         {lead.company || lead.name}
                       </strong>
                       <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -371,17 +371,17 @@ export default function DashboardView() {
                       padding: '3px 8px',
                       borderRadius: '12px',
                       background: 'rgba(245, 158, 11, 0.2)',
-                      color: '#fbbf24',
+                      color: 'var(--accent-gold)',
                       border: '1px solid rgba(245, 158, 11, 0.4)'
                     }}>
                       🟠 {dueInfo.text}
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(0, 0, 0, 0.2)', padding: '6px 10px', borderRadius: '6px' }}>
-                    <span>Plano: <strong style={{ color: '#00d2ff' }}>{plan.name}</strong></span>
-                    <span>Valor: <strong style={{ color: '#10b981' }}>{formatCurrency(lead.value)}</strong></span>
-                    <span>Vencimento: <strong style={{ color: '#fbbf24' }}>{dueInfo.formattedDueDate}</strong></span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'var(--bg-surface)', padding: '6px 10px', borderRadius: '6px' }}>
+                    <span>Plano: <strong style={{ color: 'var(--primary-bright)' }}>{plan.name}</strong></span>
+                    <span>Valor: <strong style={{ color: 'var(--success)' }}>{formatCurrency(lead.value)}</strong></span>
+                    <span>Vencimento: <strong style={{ color: 'var(--accent-gold)' }}>{dueInfo.formattedDueDate}</strong></span>
                   </div>
 
                   <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
@@ -407,7 +407,7 @@ export default function DashboardView() {
                     </button>
                     <button
                       className="btn btn-primary sm"
-                      style={{ flex: 1, justifyContent: 'center', fontSize: '0.78rem', background: '#f59e0b', borderColor: '#f59e0b', color: '#000', fontWeight: 700 }}
+                      style={{ flex: 1, justifyContent: 'center', fontSize: '0.78rem', background: 'var(--accent-orange)', borderColor: 'var(--accent-orange)', color: '#000', fontWeight: 700 }}
                       onClick={() => openModal('renewal', lead)}
                       title="Antecipar renovação do cliente"
                     >
@@ -426,8 +426,8 @@ export default function DashboardView() {
       {/* KPI Cards */}
       <div className="kpi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
         
-        <div className="kpi-card" style={{ '--accent-color': '#00d2ff' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(0, 210, 255, 0.12)', color: '#00d2ff' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--primary-bright)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--primary-bright)' }}>
             <Users style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -440,8 +440,8 @@ export default function DashboardView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#10b981' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(16, 185, 129, 0.12)', color: '#10b981' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--success)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--success)' }}>
             <TrendingUp style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -453,8 +453,8 @@ export default function DashboardView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#fbbf24' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(251, 191, 36, 0.12)', color: 'var(--accent-gold)' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--accent-gold)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--accent-gold)' }}>
             <Wallet style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -466,14 +466,14 @@ export default function DashboardView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#ef4444' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(239, 68, 68, 0.12)', color: '#ef4444' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--danger)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--danger)' }}>
             <AlertCircle style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
             <span className="kpi-label">Mensalidades Vencidas</span>
             <div className="kpi-value-row">
-              <span className="kpi-value" style={{ color: dueAlerts.expired.length > 0 ? '#ef4444' : '#10b981' }}>
+              <span className="kpi-value" style={{ color: dueAlerts.expired.length > 0 ? 'var(--danger)' : 'var(--success)' }}>
                 {dueAlerts.expired.length}
               </span>
               {dueAlerts.expired.length > 0 && <span className="kpi-badge negative">Atraso</span>}
@@ -483,7 +483,7 @@ export default function DashboardView() {
         </div>
 
         <div className="kpi-card" style={{ '--accent-color': '#a855f7' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(168, 85, 247, 0.12)', color: '#a855f7' }}>
+          <div className="kpi-icon-box" style={{ color: '#a855f7' }}>
             <Tv style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -503,7 +503,7 @@ export default function DashboardView() {
         {/* Clientes Recentes */}
         <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: '16px', padding: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#ffffff' }}>Últimos Clientes Cadastrados</h3>
+            <h3 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--text-primary)' }}>Últimos Clientes Cadastrados</h3>
             <button className="btn btn-secondary sm" onClick={() => setCurrentView('leads')}>
               Ver Todos ({leads.length}) <ChevronRight style={{ width: '14px', height: '14px' }} />
             </button>
@@ -532,7 +532,7 @@ export default function DashboardView() {
                   className="table-row-hover"
                 >
                   <div>
-                    <strong style={{ color: '#ffffff', fontSize: '0.92rem', display: 'block' }}>
+                    <strong style={{ color: 'var(--text-primary)', fontSize: '0.92rem', display: 'block' }}>
                       {lead.company || lead.name}
                     </strong>
                     <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -541,7 +541,7 @@ export default function DashboardView() {
                   </div>
                   <div style={{ textAlign: 'right', display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div>
-                      <strong style={{ color: '#10b981', fontSize: '0.95rem', display: 'block', fontFamily: 'var(--font-sans)' }}>
+                      <strong style={{ color: 'var(--success)', fontSize: '0.95rem', display: 'block', fontFamily: 'var(--font-sans)' }}>
                         {formatCurrency(lead.value)}
                       </strong>
                       <span style={{ fontSize: '0.72rem', color: dueInfo.color, fontWeight: 700 }}>
@@ -561,7 +561,7 @@ export default function DashboardView() {
         {/* Resumo da Rede de Telas */}
         <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#ffffff' }}>Rede de Telas</h3>
+            <h3 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--text-primary)' }}>Rede de Telas</h3>
             <button className="btn btn-secondary sm" onClick={() => setCurrentView('screens')}>
               Gerenciar <ChevronRight style={{ width: '14px', height: '14px' }} />
             </button>
@@ -571,10 +571,10 @@ export default function DashboardView() {
             {screens.map(screen => (
               <div key={screen.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', background: 'var(--bg-surface)', borderRadius: '8px', fontSize: '0.82rem' }}>
                 <div>
-                  <strong style={{ color: '#ffffff', display: 'block' }}>{screen.name}</strong>
+                  <strong style={{ color: 'var(--text-primary)', display: 'block' }}>{screen.name}</strong>
                   <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>{screen.neighborhood}</span>
                 </div>
-                <span style={{ color: '#00d2ff', fontWeight: 700 }}>
+                <span style={{ color: 'var(--primary-bright)', fontWeight: 700 }}>
                   📺 {screen.tvsCount} TV
                 </span>
               </div>

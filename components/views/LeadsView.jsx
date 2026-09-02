@@ -281,13 +281,13 @@ export default function LeadsView() {
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontWeight: 800,
-                            color: '#00d2ff',
+                            color: 'var(--primary-bright)',
                             fontSize: '0.85rem'
                           }}>
                             {(lead.name || 'C').substring(0, 2).toUpperCase()}
                           </div>
                           <div>
-                            <strong style={{ color: '#ffffff', display: 'block' }}>{lead.company || lead.name}</strong>
+                            <strong style={{ color: 'var(--text-primary)', display: 'block' }}>{lead.company || lead.name}</strong>
                             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{lead.companyAddress}</span>
                           </div>
                         </div>
@@ -296,7 +296,7 @@ export default function LeadsView() {
                       <td style={{ padding: '12px 16px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <div>
-                            <span style={{ color: '#ffffff', display: 'block', fontSize: '0.85rem' }}>{lead.name}</span>
+                            <span style={{ color: 'var(--text-primary)', display: 'block', fontSize: '0.85rem' }}>{lead.name}</span>
                             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{lead.phone}</span>
                           </div>
                           {cleanPhone && (
@@ -305,7 +305,7 @@ export default function LeadsView() {
                               className="btn-icon"
                               onClick={() => openModal('whatsapp-billing', lead)}
                               title="Enviar Cobrança / Mensagem Personalizada no WhatsApp"
-                              style={{ color: '#10b981', display: 'flex', alignItems: 'center' }}
+                              style={{ color: 'var(--success)', display: 'flex', alignItems: 'center' }}
                             >
                               <MessageCircle style={{ width: '16px', height: '16px' }} />
                             </button>
@@ -314,7 +314,7 @@ export default function LeadsView() {
                       </td>
 
                       <td style={{ padding: '12px 16px' }}>
-                        <span style={{ color: '#00d2ff', fontWeight: 600, display: 'block' }}>
+                        <span style={{ color: 'var(--primary-bright)', fontWeight: 600, display: 'block' }}>
                           {plan.name}
                         </span>
                         <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -323,7 +323,7 @@ export default function LeadsView() {
                       </td>
 
                       <td style={{ padding: '12px 16px' }}>
-                        <strong style={{ color: '#10b981', fontFamily: 'var(--font-sans)', display: 'block', fontSize: '0.95rem' }}>
+                        <strong style={{ color: 'var(--success)', fontFamily: 'var(--font-sans)', display: 'block', fontSize: '0.95rem' }}>
                           {formatCurrency(lead.value)}
                         </strong>
                         <span style={{
@@ -339,8 +339,8 @@ export default function LeadsView() {
                             ? 'rgba(139, 92, 246, 0.15)'
                             : (lead.paymentMethod === 'Boleto Bancário' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)'),
                           color: lead.paymentMethod === 'Cartão de Crédito'
-                            ? '#a78bfa'
-                            : (lead.paymentMethod === 'Boleto Bancário' ? '#fbbf24' : '#10b981'),
+                            ? 'var(--purple)'
+                            : (lead.paymentMethod === 'Boleto Bancário' ? 'var(--accent-gold)' : 'var(--success)'),
                           border: `1px solid ${lead.paymentMethod === 'Cartão de Crédito' ? 'rgba(139, 92, 246, 0.3)' : (lead.paymentMethod === 'Boleto Bancário' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.3)')}`
                         }}>
                           {lead.paymentMethod === 'Cartão de Crédito' && '💳 '}
@@ -354,7 +354,7 @@ export default function LeadsView() {
                       <td style={{ padding: '12px 16px' }}>
                         <div style={{ fontSize: '0.82rem' }}>
                           <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.72rem' }}>
-                            Pago: <strong style={{ color: '#ffffff' }}>{lead.paymentDate ? `${lead.paymentDate.split('-')[2]}/${lead.paymentDate.split('-')[1]}/${lead.paymentDate.split('-')[0]}` : '-'}</strong>
+                            Pago: <strong style={{ color: 'var(--text-primary)' }}>{lead.paymentDate ? `${lead.paymentDate.split('-')[2]}/${lead.paymentDate.split('-')[1]}/${lead.paymentDate.split('-')[0]}` : '-'}</strong>
                           </span>
                           <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.72rem' }}>
                             Vence: <strong style={{ color: dueInfo.color }}>{dueInfo.formattedDueDate}</strong>
@@ -394,7 +394,7 @@ export default function LeadsView() {
                         <div style={{ display: 'inline-flex', gap: '6px' }}>
                           <button
                             className="btn-icon"
-                            style={{ width: '30px', height: '30px', color: '#10b981' }}
+                            style={{ width: '30px', height: '30px', color: 'var(--success)' }}
                             onClick={() => openModal('renewal', lead)}
                             title="Renovar Mensalidade / Antecipar Contrato"
                           >
@@ -421,7 +421,7 @@ export default function LeadsView() {
                           {(!currentUser || currentUser?.permissions?.includes('delete-leads')) && (
                             <button
                               className="btn-icon"
-                              style={{ width: '30px', height: '30px', color: '#f87171' }}
+                              style={{ width: '30px', height: '30px', color: 'var(--danger)' }}
                               onClick={() => {
                                 if (confirm(`Deseja realmente excluir ${lead.company}?`)) deleteLead(lead.id);
                               }}

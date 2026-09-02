@@ -107,7 +107,7 @@ export default function SellerSalesView() {
                   return (
                     <tr key={sale.id} style={{ borderBottom: '1px solid var(--border-subtle)', fontSize: '0.85rem' }} className="table-row-hover">
                       <td style={{ padding: '12px 16px', cursor: 'pointer' }} onClick={() => openModal('lead-details', sale)}>
-                        <strong style={{ color: '#ffffff', display: 'block', fontSize: '0.92rem' }}>
+                        <strong style={{ color: 'var(--text-primary)', display: 'block', fontSize: '0.92rem' }}>
                           {sale.company || sale.name}
                         </strong>
                         <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -116,12 +116,12 @@ export default function SellerSalesView() {
                       </td>
 
                       <td style={{ padding: '12px 16px' }}>
-                        <span style={{ color: '#ffffff' }}>{sale.name}</span>
+                        <span style={{ color: 'var(--text-primary)' }}>{sale.name}</span>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{sale.phone}</div>
                       </td>
 
                       <td style={{ padding: '12px 16px' }}>
-                        <span style={{ color: '#00d2ff', fontWeight: 600 }}>{plan.name}</span>
+                        <span style={{ color: 'var(--primary-bright)', fontWeight: 600 }}>{plan.name}</span>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>📺 {sale.tvsCount || plan.tvs} TVs</div>
                       </td>
 
@@ -148,7 +148,7 @@ export default function SellerSalesView() {
                           {isApproved ? '✅ Aprovada' : (isDenied ? '❌ Negada' : '⏳ Aguardando Aprovação')}
                         </span>
                         {isDenied && sale.denialReason && (
-                          <div style={{ fontSize: '0.72rem', color: '#f87171', marginTop: '4px' }}>
+                          <div style={{ fontSize: '0.72rem', color: 'var(--danger)', marginTop: '4px' }}>
                             Motivo: {sale.denialReason}
                           </div>
                         )}

@@ -194,6 +194,24 @@ export const INITIAL_SEED_DATA = {
         'create-finance', 'edit-finance', 'delete-finance',
         'create-users', 'edit-users', 'delete-users'
       ]
+    },
+    {
+      id: 'usr-teste-admin',
+      name: 'Admin Teste',
+      email: 'teste@teste.com',
+      password: '123456',
+      role: 'admin',
+      roleName: 'Administrador (Ambiente Local)',
+      phone: '',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
+      active: true,
+      permissions: [
+        'dashboard', 'kanban', 'leads', 'screens', 'plans', 'finance', 'partner-sellers', 'calendar', 'access', 'reports',
+        'seller-dashboard', 'seller-sales', 'seller-hotleads', 'seller-commissions',
+        'create-leads', 'edit-leads', 'delete-leads',
+        'create-finance', 'edit-finance', 'delete-finance',
+        'create-users', 'edit-users', 'delete-users'
+      ]
     }
   ],
   screens: [],
@@ -210,7 +228,7 @@ export const INITIAL_SEED_DATA = {
 export function CRMProvider({ children }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
   const [currentView, setCurrentView] = useState('dashboard');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -268,14 +286,33 @@ export function CRMProvider({ children }) {
           }
         }
       }
-      const savedTheme = localStorage.getItem('cm_theme') || 'dark';
+      const savedTheme = localStorage.getItem('cm_theme') || 'light';
       setTheme(savedTheme);
       document.documentElement.setAttribute('data-theme', savedTheme);
+
+      if (typeof window !== 'undefined' && window.innerWidth <= 900) {
+        setIsSidebarCollapsed(true);
+      }
     } catch (e) {
       console.error('Error loading CRM state:', e);
     } finally {
       setIsLoaded(true);
     }
+  }, []);
+
+  // Recolhe o menu automaticamente ao cruzar para largura mobile (ex: redimensionar a janela)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let wasMobile = window.innerWidth <= 900;
+    const handleResize = () => {
+      const isMobile = window.innerWidth <= 900;
+      if (isMobile && !wasMobile) {
+        setIsSidebarCollapsed(true);
+      }
+      wasMobile = isMobile;
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Sync to LocalStorage

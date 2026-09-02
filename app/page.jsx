@@ -28,6 +28,12 @@ import SellerCommissionsView from '../components/views/seller/SellerCommissionsV
 // Auth View
 import LoginView from '../components/views/LoginView';
 
+function SidebarBackdrop() {
+  const { isSidebarCollapsed, setIsSidebarCollapsed } = useCRM();
+  if (isSidebarCollapsed) return null;
+  return <div className="sidebar-backdrop" onClick={() => setIsSidebarCollapsed(true)} />;
+}
+
 export default function Home() {
   const { currentView, isLoaded, currentUser } = useCRM();
 
@@ -38,10 +44,11 @@ export default function Home() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#070b14',
-        color: '#00d2ff',
-        fontSize: '1.2rem',
-        fontWeight: 700
+        background: 'var(--bg-app, #f5f7fa)',
+        color: 'var(--primary, #0284a6)',
+        fontSize: '1.1rem',
+        fontWeight: 700,
+        fontFamily: "'Plus Jakarta Sans', sans-serif"
       }}>
         Iniciando Conecta Mais...
       </div>
@@ -75,6 +82,7 @@ export default function Home() {
   return (
     <div className="app-layout">
       <Sidebar />
+      <SidebarBackdrop />
       <main className="main-content">
         <Topbar />
         <div className="content-body">

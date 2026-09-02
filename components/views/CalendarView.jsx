@@ -96,7 +96,7 @@ export default function CalendarView() {
                     padding: '3px 8px',
                     borderRadius: '12px',
                     background: isOnline ? 'rgba(0, 210, 255, 0.15)' : 'rgba(251, 191, 36, 0.15)',
-                    color: isOnline ? '#00d2ff' : 'var(--accent-gold)',
+                    color: isOnline ? 'var(--primary-bright)' : 'var(--accent-gold)',
                     border: `1px solid ${isOnline ? 'rgba(0, 210, 255, 0.3)' : 'rgba(251, 191, 36, 0.3)'}`
                   }}>
                     {isOnline ? '💻 Videochamada Meet' : '📍 Presencial no Local'}
@@ -107,7 +107,7 @@ export default function CalendarView() {
                   </span>
                 </div>
 
-                <h3 style={{ margin: 0, fontSize: '1.05rem', color: '#ffffff', fontWeight: 800 }}>
+                <h3 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                   {mtg.title}
                 </h3>
 
@@ -116,7 +116,7 @@ export default function CalendarView() {
                     <strong>Empresa:</strong> {mtg.companyName}
                     {mtg.contactPerson && <span style={{ color: 'var(--text-muted)' }}> ({mtg.contactPerson})</span>}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#00d2ff', fontWeight: 600 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--primary-bright)', fontWeight: 600 }}>
                     <CalendarIcon style={{ width: '14px', height: '14px' }} />
                     <span>{mtg.date} às {mtg.time}</span>
                   </div>
@@ -128,7 +128,7 @@ export default function CalendarView() {
                   )}
                   {partner && (
                     <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                      👤 Conduzido por: <strong style={{ color: '#ffffff' }}>{partner.name}</strong>
+                      👤 Conduzido por: <strong style={{ color: 'var(--text-primary)' }}>{partner.name}</strong>
                     </div>
                   )}
                 </div>
@@ -146,7 +146,7 @@ export default function CalendarView() {
                       target="_blank"
                       rel="noreferrer"
                       className="btn btn-secondary sm"
-                      style={{ color: '#00d2ff', borderColor: 'rgba(0, 210, 255, 0.4)' }}
+                      style={{ color: 'var(--primary-bright)', borderColor: 'rgba(0, 210, 255, 0.4)' }}
                     >
                       <Video style={{ width: '14px', height: '14px', marginRight: '4px' }} />
                       Acessar Meet
@@ -164,7 +164,7 @@ export default function CalendarView() {
                     </button>
                     <button
                       className="btn-icon"
-                      style={{ width: '28px', height: '28px', color: '#f87171' }}
+                      style={{ width: '28px', height: '28px', color: 'var(--danger)' }}
                       onClick={() => {
                         if (confirm(`Remover reunião "${mtg.title}"?`)) deleteMeeting(mtg.id);
                       }}

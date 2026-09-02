@@ -112,7 +112,7 @@ export default function FinanceView() {
           <button
             className="btn btn-secondary"
             onClick={() => openModal('transaction', { type: 'expense', category: 'Custo Fixo por TV' })}
-            style={{ color: '#f87171', borderColor: 'rgba(239, 68, 68, 0.3)' }}
+            style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.3)' }}
           >
             - Lançar Gasto / Despesa
           </button>
@@ -127,40 +127,40 @@ export default function FinanceView() {
 
       {/* KPI Cards Financeiros */}
       <div className="kpi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div className="kpi-card" style={{ '--accent-color': '#10b981' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(16, 185, 129, 0.12)', color: '#10b981' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--success)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--success)' }}>
             <ArrowUpRight style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
             <span className="kpi-label">Faturamento Total (Entradas)</span>
             <div className="kpi-value-row">
-              <span className="kpi-value" style={{ color: '#10b981' }}>{formatCurrency(totalIncome)}</span>
+              <span className="kpi-value" style={{ color: 'var(--success)' }}>{formatCurrency(totalIncome)}</span>
             </div>
             <span className="kpi-subtext">Recebimentos liquidados de contratos</span>
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#ef4444' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(239, 68, 68, 0.12)', color: '#ef4444' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--danger)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--danger)' }}>
             <ArrowDownLeft style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
             <span className="kpi-label">Despesas Totais (Saídas)</span>
             <div className="kpi-value-row">
-              <span className="kpi-value" style={{ color: '#ef4444' }}>{formatCurrency(totalExpense)}</span>
+              <span className="kpi-value" style={{ color: 'var(--danger)' }}>{formatCurrency(totalExpense)}</span>
             </div>
             <span className="kpi-subtext">Custos fixos + Comissões pagas ({formatCurrency(totalCommissionsPaid)})</span>
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#00d2ff' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(0, 210, 255, 0.12)', color: '#00d2ff' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--primary-bright)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--primary-bright)' }}>
             <Wallet style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
             <span className="kpi-label">Saldo Líquido em Caixa</span>
             <div className="kpi-value-row">
-              <span className="kpi-value" style={{ color: balance >= 0 ? '#10b981' : '#ef4444' }}>
+              <span className="kpi-value" style={{ color: balance >= 0 ? 'var(--success)' : 'var(--danger)' }}>
                 {formatCurrency(balance)}
               </span>
             </div>
@@ -201,7 +201,7 @@ export default function FinanceView() {
                 type="button"
                 className="btn btn-secondary sm"
                 onClick={resetFilters}
-                style={{ fontSize: '0.76rem', padding: '6px 10px', color: '#f87171' }}
+                style={{ fontSize: '0.76rem', padding: '6px 10px', color: 'var(--danger)' }}
                 title="Limpar todos os filtros"
               >
                 <RotateCcw style={{ width: '13px', height: '13px', marginRight: '4px' }} />
@@ -312,7 +312,7 @@ export default function FinanceView() {
                   <td colSpan={8} style={{ padding: '3.5rem 1rem', textAlign: 'center', color: 'var(--text-muted)' }}>
                     <div style={{ maxWidth: '400px', margin: '0 auto' }}>
                       <Wallet style={{ width: '38px', height: '38px', margin: '0 auto 10px', color: 'var(--text-muted)', opacity: 0.4 }} />
-                      <p style={{ margin: 0, fontWeight: 600, color: '#ffffff' }}>Nenhuma movimentação financeira encontrada.</p>
+                      <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)' }}>Nenhuma movimentação financeira encontrada.</p>
                       <p style={{ fontSize: '0.8rem', marginTop: '4px' }}>Tente alterar os filtros selecionados ou o termo de busca.</p>
                     </div>
                   </td>
@@ -333,7 +333,7 @@ export default function FinanceView() {
                         {tx.date ? (tx.date.includes('-') ? `${tx.date.split('-')[2]}/${tx.date.split('-')[1]}/${tx.date.split('-')[0]}` : tx.date) : '-'}
                       </td>
                       <td style={{ padding: '12px 14px' }}>
-                        <strong style={{ color: '#ffffff', display: 'block' }}>{tx.description}</strong>
+                        <strong style={{ color: 'var(--text-primary)', display: 'block' }}>{tx.description}</strong>
                         {tx.notes && <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>{tx.notes}</span>}
                       </td>
                       <td style={{ padding: '12px 14px' }}>
@@ -364,10 +364,10 @@ export default function FinanceView() {
                               ? 'rgba(245, 158, 11, 0.15)'
                               : 'rgba(16, 185, 129, 0.15)'),
                           color: pMethod === 'Cartão de Crédito'
-                            ? '#a78bfa'
+                            ? 'var(--purple)'
                             : (pMethod === 'Boleto Bancário'
-                              ? '#fbbf24'
-                              : '#10b981'),
+                              ? 'var(--accent-gold)'
+                              : 'var(--success)'),
                           border: `1px solid ${pMethod === 'Cartão de Crédito' ? 'rgba(139, 92, 246, 0.3)' : (pMethod === 'Boleto Bancário' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.3)')}`
                         }}>
                           {pMethod === 'Cartão de Crédito' && '💳'}
@@ -399,7 +399,7 @@ export default function FinanceView() {
                           <div style={{ color: 'var(--text-secondary)' }}>
                             <span>{partner?.name || 'Sistema'}</span>
                             {seller && (
-                              <span style={{ display: 'block', fontSize: '0.72rem', color: '#00d2ff' }}>
+                              <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--primary-bright)' }}>
                                 💼 Vendedor: {seller.name}
                               </span>
                             )}
@@ -410,7 +410,7 @@ export default function FinanceView() {
                       <td style={{
                         padding: '12px 14px',
                         fontWeight: 800,
-                        color: isIncome ? '#10b981' : '#f87171',
+                        color: isIncome ? 'var(--success)' : 'var(--danger)',
                         fontFamily: 'var(--font-sans)',
                         fontSize: '0.95rem'
                       }}>
@@ -426,7 +426,7 @@ export default function FinanceView() {
                           className="btn-icon"
                           onClick={() => deleteTransaction(tx.id)}
                           title="Excluir Lançamento"
-                          style={{ color: '#f87171' }}
+                          style={{ color: 'var(--danger)' }}
                         >
                           <Trash2 style={{ width: '15px', height: '15px' }} />
                         </button>

@@ -150,9 +150,9 @@ export default function TransactionModal() {
         
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Wallet style={{ width: '22px', height: '22px', color: type === 'income' ? '#10b981' : '#f87171' }} />
+            <Wallet style={{ width: '22px', height: '22px', color: type === 'income' ? 'var(--success)' : 'var(--danger)' }} />
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                 {type === 'income' ? 'Lançar Receita / Entrada' : 'Cadastrar Gasto & Pagamento de Comissão'}
               </h3>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
@@ -203,8 +203,8 @@ export default function TransactionModal() {
             {/* SEÇÃO ESPECÍFICA DE PAGAMENTO DE COMISSÃO DE VENDEDOR */}
             {type === 'expense' && category === 'Comissões de Vendedores' && (
               <div style={{
-                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
-                border: '1.5px solid rgba(251, 191, 36, 0.35)',
+                background: 'var(--bg-surface)',
+                border: '1.5px solid rgba(217, 119, 6, 0.35)',
                 borderRadius: '14px',
                 padding: '1.25rem',
                 display: 'flex',
@@ -239,8 +239,8 @@ export default function TransactionModal() {
                 {/* Resumo do Saldo do Vendedor Selecionado */}
                 {sellerCommData && selectedSeller && (
                   <div style={{
-                    background: 'rgba(0, 0, 0, 0.3)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border-subtle)',
                     borderRadius: '10px',
                     padding: '12px',
                     display: 'flex',
@@ -254,7 +254,7 @@ export default function TransactionModal() {
                         </span>
                         <strong style={{
                           fontSize: '1.4rem',
-                          color: sellerCommData.pendingCommission > 0 ? 'var(--accent-gold)' : '#10b981',
+                          color: sellerCommData.pendingCommission > 0 ? 'var(--accent-gold)' : 'var(--success)',
                           fontWeight: 900
                         }}>
                           {formatCurrency(sellerCommData.pendingCommission)}
@@ -277,7 +277,7 @@ export default function TransactionModal() {
                           padding: '4px 10px',
                           borderRadius: '10px',
                           background: 'rgba(16, 185, 129, 0.15)',
-                          color: '#10b981',
+                          color: 'var(--success)',
                           border: '1px solid rgba(16, 185, 129, 0.3)',
                           fontWeight: 700
                         }}>
@@ -286,7 +286,7 @@ export default function TransactionModal() {
                       )}
                     </div>
 
-                    <div style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: 1.4, borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '6px' }}>
+                    <div style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: 1.4, borderTop: '1px solid var(--border-subtle)', paddingTop: '6px' }}>
                       • <strong>Total Ganho na Rede:</strong> {formatCurrency(sellerCommData.totalEarnedCommission)} ({sellerCommData.approvedCount} vendas ativas, {sellerCommData.totalRenewalsCount} renovações)<br />
                       • <strong>Já Repassado Anteriormente:</strong> {formatCurrency(sellerCommData.totalPaidOut)}<br />
                       • <em>Novas comissões de 10% entrarão no saldo automaticamente sempre que um cliente dele fechar ou renovar a mensalidade!</em>
@@ -396,12 +396,12 @@ export default function TransactionModal() {
                 borderRadius: '10px',
                 padding: '10px 14px'
               }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.84rem', color: '#ffffff', margin: 0 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.84rem', color: 'var(--text-primary)', margin: 0 }}>
                   <input
                     type="checkbox"
                     checked={notifySellerWhatsApp}
                     onChange={(e) => setNotifySellerWhatsApp(e.target.checked)}
-                    style={{ accentColor: '#10b981', width: '17px', height: '17px' }}
+                    style={{ accentColor: 'var(--success)', width: '17px', height: '17px' }}
                   />
                   <span>
                     💬 <strong>Notificar Vendedor no WhatsApp:</strong> Abrir prévia de mensagem informando que a comissão do dia 10 foi paga!

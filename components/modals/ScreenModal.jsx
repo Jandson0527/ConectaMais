@@ -88,8 +88,8 @@ export default function ScreenModal() {
         
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <MapPin style={{ width: '22px', height: '22px', color: '#00d2ff' }} />
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+            <MapPin style={{ width: '22px', height: '22px', color: 'var(--primary-bright)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               {isEditing ? 'Editar Ponto de Tela' : 'Cadastrar Novo Ponto de Tela'}
             </h3>
           </div>

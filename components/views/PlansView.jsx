@@ -39,15 +39,15 @@ export default function PlansView() {
             <div
               key={plan.id}
               style={{
-                background: isTop ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))' : 'var(--bg-card)',
-                border: `1.5px solid ${isTop ? '#fbbf24' : 'var(--border-subtle)'}`,
+                background: isTop ? 'linear-gradient(180deg, rgba(217, 119, 6, 0.1) 0%, var(--bg-card) 45%)' : 'var(--bg-card)',
+                border: `1.5px solid ${isTop ? 'var(--accent-gold)' : 'var(--border-subtle)'}`,
                 borderRadius: '16px',
                 padding: '1.5rem',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '12px',
                 position: 'relative',
-                boxShadow: isTop ? '0 10px 30px rgba(251, 191, 36, 0.15)' : undefined
+                boxShadow: 'var(--shadow-sm)'
               }}
             >
               {isTop && (
@@ -70,7 +70,7 @@ export default function PlansView() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '1.5rem' }}>{plan.badge}</span>
                 <div>
-                  <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#ffffff', fontWeight: 800 }}>{plan.name}</h3>
+                  <h3 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--text-primary)', fontWeight: 800 }}>{plan.name}</h3>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{plan.tvs} {plan.tvs === 1 ? 'TV instalada' : 'TVs na rede'}</span>
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function PlansView() {
               <div style={{ margin: '8px 0' }}>
                 {plan.monthlyPrice && (
                   <div>
-                    <span style={{ fontSize: '1.6rem', fontWeight: 900, color: '#ffffff', fontFamily: 'var(--font-sans)' }}>
+                    <span style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--text-primary)', fontFamily: 'var(--font-sans)' }}>
                       {formatCurrency(plan.monthlyPrice)}
                     </span>
                     <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}> / mês</span>
@@ -91,7 +91,7 @@ export default function PlansView() {
                 )}
                 {plan.fixedPrice && (
                   <div>
-                    <span style={{ fontSize: '1.6rem', fontWeight: 900, color: '#ffffff', fontFamily: 'var(--font-sans)' }}>
+                    <span style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--text-primary)', fontFamily: 'var(--font-sans)' }}>
                       {formatCurrency(plan.fixedPrice)}
                     </span>
                     <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}> (campanha)</span>
@@ -105,15 +105,15 @@ export default function PlansView() {
 
               <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Check style={{ width: '14px', height: '14px', color: '#10b981' }} />
+                  <Check style={{ width: '14px', height: '14px', color: 'var(--success)' }} />
                   <span>{plan.tvs} Telas em estabelecimentos parceiros</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Check style={{ width: '14px', height: '14px', color: '#10b981' }} />
+                  <Check style={{ width: '14px', height: '14px', color: 'var(--success)' }} />
                   <span>{plan.changesPerMonth || 1} Alteração de anúncio / mês</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Check style={{ width: '14px', height: '14px', color: '#10b981' }} />
+                  <Check style={{ width: '14px', height: '14px', color: 'var(--success)' }} />
                   <span>Foto Estática ou Vídeo Motion Graphics</span>
                 </div>
               </div>

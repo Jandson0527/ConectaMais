@@ -40,8 +40,8 @@ export default function UserModal() {
       <div className="modal-dialog modal-md" style={{ maxWidth: '560px' }}>
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <ShieldCheck style={{ width: '22px', height: '22px', color: '#00d2ff' }} />
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+            <ShieldCheck style={{ width: '22px', height: '22px', color: 'var(--primary-bright)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               Cadastrar Novo Sócio / Gestor
             </h3>
           </div>
@@ -128,7 +128,7 @@ export default function UserModal() {
               fontSize: '0.8rem',
               color: 'var(--text-secondary)'
             }}>
-              <strong style={{ color: '#00d2ff', display: 'block', marginBottom: '4px' }}>Transparência dos Sócios:</strong>
+              <strong style={{ color: 'var(--primary-bright)', display: 'block', marginBottom: '4px' }}>Transparência dos Sócios:</strong>
               • Visualização de todos os clientes e contratos da rede.<br />
               • Acesso a faturamento, despesas e fluxo de caixa.<br />
               • Controle dos pontos de telas físicas e aprovação de vendedores.

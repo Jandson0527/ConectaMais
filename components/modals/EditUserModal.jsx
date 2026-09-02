@@ -85,8 +85,8 @@ export default function EditUserModal() {
       <div className="modal-dialog modal-lg" style={{ maxWidth: '800px' }}>
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <ShieldCheck style={{ width: '22px', height: '22px', color: '#00d2ff' }} />
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+            <ShieldCheck style={{ width: '22px', height: '22px', color: 'var(--primary-bright)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               Editar Usuário / Permissões
             </h3>
           </div>
@@ -100,7 +100,7 @@ export default function EditUserModal() {
             
             {/* Coluna 1: Dados do Usuário */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <h4 style={{ color: '#00d2ff', fontSize: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '8px' }}>
+              <h4 style={{ color: 'var(--primary-bright)', fontSize: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '8px' }}>
                 Dados Básicos
               </h4>
               
@@ -131,7 +131,7 @@ export default function EditUserModal() {
               <div className="form-group" style={{ marginTop: '10px' }}>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', background: 'var(--bg-surface)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-medium)' }}>
                   <input type="checkbox" checked={active} onChange={e => setActive(e.target.checked)} disabled={user.id === 'usr-1'} />
-                  <span style={{ fontSize: '0.9rem', color: active ? '#10b981' : '#ef4444', fontWeight: 700 }}>
+                  <span style={{ fontSize: '0.9rem', color: active ? 'var(--success)' : 'var(--danger)', fontWeight: 700 }}>
                     <Power style={{ width: 14, height: 14, display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
                     {active ? 'Usuário Ativo (Pode fazer login)' : 'Usuário Inativo (Login Bloqueado)'}
                   </span>
@@ -139,7 +139,7 @@ export default function EditUserModal() {
               </div>
 
               {user.id !== 'usr-1' && (
-                <button type="button" className="btn sm" style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', marginTop: 'auto' }} onClick={handleDelete}>
+                <button type="button" className="btn sm" style={{ background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', border: '1px solid rgba(239, 68, 68, 0.3)', marginTop: 'auto' }} onClick={handleDelete}>
                   <Trash2 style={{ width: 14, height: 14, marginRight: 6 }} /> Excluir Usuário Permanentemente
                 </button>
               )}
@@ -149,28 +149,28 @@ export default function EditUserModal() {
             <div style={{ flex: 1.5, display: 'flex', flexDirection: 'column', gap: '16px' }}>
               
               <div>
-                <h4 style={{ color: '#00d2ff', fontSize: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '8px', marginBottom: '10px' }}>
+                <h4 style={{ color: 'var(--primary-bright)', fontSize: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '8px', marginBottom: '10px' }}>
                   Permissões de Telas (Views)
                 </h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                   {viewPermissions.map(view => (
                     <label key={view.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 10px', background: 'var(--bg-input)', border: '1px solid var(--border-subtle)', borderRadius: '6px', cursor: 'pointer' }}>
                       <input type="checkbox" checked={permissions.includes(view.id)} onChange={() => togglePermission(view.id)} disabled={user.id === 'usr-1'} />
-                      <span style={{ fontSize: '0.8rem', color: '#ffffff' }}>{view.label}</span>
+                      <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>{view.label}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
               <div>
-                <h4 style={{ color: '#fbbf24', fontSize: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '8px', marginBottom: '10px' }}>
+                <h4 style={{ color: 'var(--accent-gold)', fontSize: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '8px', marginBottom: '10px' }}>
                   Permissões de Ações (Avançado)
                 </h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                   {actionPermissions.map(action => (
                     <label key={action.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 10px', background: 'var(--bg-input)', border: '1px solid var(--border-subtle)', borderRadius: '6px', cursor: 'pointer' }}>
                       <input type="checkbox" checked={permissions.includes(action.id)} onChange={() => togglePermission(action.id)} disabled={user.id === 'usr-1'} />
-                      <span style={{ fontSize: '0.8rem', color: '#ffffff' }}>{action.label}</span>
+                      <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>{action.label}</span>
                     </label>
                   ))}
                 </div>

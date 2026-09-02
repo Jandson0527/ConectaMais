@@ -23,14 +23,14 @@ export default function ToastContainer() {
       {toasts.map(toast => {
         let bg = 'rgba(15, 23, 42, 0.95)';
         let border = 'rgba(0, 210, 255, 0.3)';
-        let icon = <Info style={{ width: '18px', height: '18px', color: '#00d2ff', flexShrink: 0 }} />;
+        let icon = <Info style={{ width: '18px', height: '18px', color: 'var(--primary-bright)', flexShrink: 0 }} />;
 
         if (toast.type === 'success') {
           border = 'rgba(16, 185, 129, 0.5)';
-          icon = <CheckCircle2 style={{ width: '18px', height: '18px', color: '#10b981', flexShrink: 0 }} />;
+          icon = <CheckCircle2 style={{ width: '18px', height: '18px', color: 'var(--success)', flexShrink: 0 }} />;
         } else if (toast.type === 'danger' || toast.type === 'error') {
           border = 'rgba(239, 68, 68, 0.5)';
-          icon = <AlertCircle style={{ width: '18px', height: '18px', color: '#ef4444', flexShrink: 0 }} />;
+          icon = <AlertCircle style={{ width: '18px', height: '18px', color: 'var(--danger)', flexShrink: 0 }} />;
         }
 
         return (

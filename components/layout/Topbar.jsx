@@ -86,7 +86,7 @@ export default function Topbar() {
           <button
             className="btn btn-secondary"
             onClick={() => openModal('transaction', 'expense')}
-            style={{ borderColor: 'rgba(239, 68, 68, 0.3)', color: '#f87171' }}
+            style={{ borderColor: 'rgba(239, 68, 68, 0.3)', color: 'var(--danger)' }}
             title="Cadastrar Gastos da Empresa"
           >
             <MinusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
@@ -165,7 +165,7 @@ export default function Topbar() {
               <div className="notification-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h4 style={{ margin: 0, fontSize: '0.9rem' }}>Notificações & Lembretes</h4>
                 {unreadNotifs.length > 0 && (
-                  <button className="btn-link" onClick={markNotificationsAsRead} style={{ fontSize: '0.75rem', background: 'none', border: 'none', color: '#00d2ff', cursor: 'pointer' }}>
+                  <button className="btn-link" onClick={markNotificationsAsRead} style={{ fontSize: '0.75rem', background: 'none', border: 'none', color: 'var(--primary-bright)', cursor: 'pointer' }}>
                     Limpar
                   </button>
                 )}
@@ -187,7 +187,7 @@ export default function Topbar() {
                         fontSize: '0.82rem'
                       }}
                     >
-                      <strong style={{ color: '#ffffff', display: 'block', marginBottom: '2px' }}>{n.title}</strong>
+                      <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '2px' }}>{n.title}</strong>
                       <p style={{ margin: 0, color: 'var(--text-secondary)', lineHeight: 1.35 }}>{n.message}</p>
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
                         {new Date(n.createdAt).toLocaleDateString('pt-BR')}

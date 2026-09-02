@@ -139,8 +139,8 @@ export default function MeetingModal() {
         
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <CalendarPlus style={{ width: '22px', height: '22px', color: '#00d2ff' }} />
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+            <CalendarPlus style={{ width: '22px', height: '22px', color: 'var(--primary-bright)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               {isEditing ? 'Editar Reunião Comercial' : 'Agendar Nova Reunião Comercial'}
             </h3>
           </div>
@@ -322,9 +322,9 @@ export default function MeetingModal() {
                         fontSize: '0.75rem',
                         fontWeight: 600,
                         cursor: 'pointer',
-                        background: isPart ? 'rgba(0, 210, 255, 0.2)' : 'rgba(255, 255, 255, 0.05)',
-                        border: `1px solid ${isPart ? '#00d2ff' : 'rgba(255, 255, 255, 0.1)'}`,
-                        color: isPart ? '#00d2ff' : 'var(--text-secondary)'
+                        background: isPart ? 'rgba(0, 210, 255, 0.2)' : 'var(--bg-surface)',
+                        border: `1px solid ${isPart ? 'var(--primary-bright)' : 'var(--border-medium)'}`,
+                        color: isPart ? 'var(--primary-bright)' : 'var(--text-secondary)'
                       }}
                     >
                       {isPart ? '✓ ' : '+ '} {u.name}

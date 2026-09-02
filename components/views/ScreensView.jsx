@@ -54,10 +54,10 @@ export default function ScreensView() {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
-                  <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#ffffff', fontWeight: 800 }}>
+                  <h3 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                     {screen.name}
                   </h3>
-                  <span style={{ fontSize: '0.8rem', color: '#00d2ff', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--primary-bright)', fontWeight: 600 }}>
                     {screen.segment}
                   </span>
                 </div>
@@ -67,7 +67,7 @@ export default function ScreensView() {
                   padding: '3px 8px',
                   borderRadius: '12px',
                   background: isActive ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                  color: isActive ? '#10b981' : '#fbbf24',
+                  color: isActive ? 'var(--success)' : 'var(--accent-gold)',
                   border: `1px solid ${isActive ? 'rgba(16, 185, 129, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`
                 }}>
                   {isActive ? '● Ativa' : '● Manutenção'}
@@ -84,7 +84,7 @@ export default function ScreensView() {
                   <span>Público Estimado: <strong>{screen.audienceEst}</strong></span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Tv style={{ width: '15px', height: '15px', color: '#00d2ff', flexShrink: 0 }} />
+                  <Tv style={{ width: '15px', height: '15px', color: 'var(--primary-bright)', flexShrink: 0 }} />
                   <span>Telas no Local: <strong>{screen.tvsCount} TV (Full HD)</strong></span>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function ScreensView() {
                 </button>
                 <button
                   className="btn btn-secondary sm"
-                  style={{ color: '#f87171', borderColor: 'rgba(239, 68, 68, 0.3)' }}
+                  style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.3)' }}
                   onClick={() => {
                     if (confirm(`Excluir ponto ${screen.name}?`)) deleteScreen(screen.id);
                   }}

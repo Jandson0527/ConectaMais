@@ -78,7 +78,7 @@ export default function HotLeadModal() {
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Flame style={{ width: '22px', height: '22px', color: 'var(--accent-gold)' }} />
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               {isEditing ? 'Editar Cliente em Potencial' : 'Cadastrar Cliente em Potencial / Quente'}
             </h3>
           </div>

@@ -275,12 +275,12 @@ export default function ClientModal() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#00d2ff'
+              color: 'var(--primary-bright)'
             }}>
               <UserPlus style={{ width: '22px', height: '22px' }} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#ffffff', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                 {isEditing ? 'Editar Dados do Cliente' : 'Cadastrar Novo Cliente & Anunciante'}
               </h3>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px' }}>
@@ -310,8 +310,8 @@ export default function ClientModal() {
             
             {/* Banner Informativo */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6))',
-              border: '1px solid rgba(0, 210, 255, 0.25)',
+              background: 'var(--bg-surface)',
+              border: '1px solid rgba(2, 132, 166, 0.25)',
               borderRadius: '12px',
               padding: '12px 16px',
               display: 'flex',
@@ -321,7 +321,7 @@ export default function ClientModal() {
               gap: '10px'
             }}>
               <div>
-                <strong style={{ color: '#00d2ff', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <strong style={{ color: 'var(--primary)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Tv style={{ width: '16px', height: '16px' }} />
                   {isSeller() ? 'Registro de Venda do Vendedor Comercial' : 'Cadastro Geral de Anunciante (Sócios)'}
                 </strong>
@@ -341,7 +341,7 @@ export default function ClientModal() {
                 <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)', textTransform: 'uppercase', fontWeight: 700, display: 'block' }}>
                   {isSeller() ? 'Sua Comissão (10%)' : 'Faturamento Total'}
                 </span>
-                <strong style={{ fontSize: '1rem', color: '#ffffff', fontFamily: 'var(--font-sans)' }}>
+                <strong style={{ fontSize: '1rem', color: 'var(--text-primary)', fontFamily: 'var(--font-sans)' }}>
                   {isSeller() ? formatCurrency(sellerCommission) : formatCurrency(value)}
                 </strong>
               </div>
@@ -349,7 +349,7 @@ export default function ClientModal() {
 
             {/* SEÇÃO 1: INFORMAÇÕES DO CLIENTE & CONTATO */}
             <div>
-              <h4 style={{ fontSize: '0.9rem', color: '#00d2ff', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <h4 style={{ fontSize: '0.9rem', color: 'var(--primary-bright)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <User style={{ width: '16px', height: '16px' }} />
                 1. Dados de Identificação & Contato
               </h4>
@@ -512,10 +512,10 @@ export default function ClientModal() {
               </div>
 
               {/* CAMPOS DE DATA DE PAGAMENTO E DATA DE VENCIMENTO */}
-              <div className="form-grid-3" style={{ marginTop: '0.75rem', background: 'rgba(30, 41, 59, 0.4)', padding: '12px', borderRadius: '10px', border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+              <div className="form-grid-3" style={{ marginTop: '0.75rem', background: 'var(--bg-surface)', padding: '12px', borderRadius: '10px', border: '1px solid rgba(251, 191, 36, 0.25)' }}>
                 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="clientPaymentDate" style={{ color: '#00d2ff', fontWeight: 700 }}>
+                  <label className="form-label" htmlFor="clientPaymentDate" style={{ color: 'var(--primary-bright)', fontWeight: 700 }}>
                     📅 Data do Pagamento / Início *
                   </label>
                   <input
@@ -526,7 +526,7 @@ export default function ClientModal() {
                     onChange={(e) => handlePaymentDateChange(e.target.value)}
                     required
                   />
-                  <small style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                  <small style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
                     Data em que o cliente pagou / ativou
                   </small>
                 </div>
@@ -562,7 +562,7 @@ export default function ClientModal() {
                     onChange={(e) => setValue(e.target.value)}
                     required
                   />
-                  <small style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 600 }}>
+                  <small style={{ fontSize: '0.75rem', color: 'var(--success)', fontWeight: 600 }}>
                     Total: {formatCurrency(value)}
                   </small>
                 </div>
@@ -571,7 +571,7 @@ export default function ClientModal() {
 
               <div className="form-grid-2" style={{ marginTop: '0.75rem' }}>
                 <div className="form-group">
-                  <label className="form-label" htmlFor="clientPaymentMethod" style={{ fontWeight: 700, color: '#ffffff' }}>
+                  <label className="form-label" htmlFor="clientPaymentMethod" style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
                     💳 Forma de Pagamento *
                   </label>
                   <select
@@ -622,7 +622,7 @@ export default function ClientModal() {
                   flexDirection: 'column',
                   gap: '8px'
                 }}>
-                  <strong style={{ color: '#a78bfa', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <strong style={{ color: 'var(--purple)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     💳 Configuração do Cartão de Crédito
                   </strong>
                   <div className="form-grid-2">
@@ -689,7 +689,7 @@ export default function ClientModal() {
             <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '8px' }}>
                 <div>
-                  <h4 style={{ margin: 0, fontSize: '0.9rem', color: '#00d2ff', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <h4 style={{ margin: 0, fontSize: '0.9rem', color: 'var(--primary-bright)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <MapPin style={{ width: '16px', height: '16px' }} />
                     3. Pontos de Telas / Locais Contratados *
                   </h4>
@@ -700,7 +700,7 @@ export default function ClientModal() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span className="screens-quota-badge" style={{
                     background: selectedScreenIds.length === tvsCount ? 'rgba(16, 185, 129, 0.2)' : 'rgba(0, 210, 255, 0.15)',
-                    color: selectedScreenIds.length === tvsCount ? '#10b981' : '#00d2ff',
+                    color: selectedScreenIds.length === tvsCount ? 'var(--success)' : 'var(--primary-bright)',
                     border: '1px solid currentColor',
                     padding: '3px 10px',
                     borderRadius: '12px',
@@ -738,7 +738,7 @@ export default function ClientModal() {
                         padding: '12px',
                         borderRadius: '10px',
                         background: isChecked ? 'rgba(0, 210, 255, 0.12)' : 'rgba(15, 23, 42, 0.6)',
-                        border: `1.5px solid ${isChecked ? '#00d2ff' : 'rgba(255, 255, 255, 0.1)'}`,
+                        border: `1.5px solid ${isChecked ? 'var(--primary-bright)' : 'rgba(255, 255, 255, 0.1)'}`,
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
                         display: 'flex',
@@ -748,15 +748,15 @@ export default function ClientModal() {
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <strong style={{ fontSize: '0.88rem', color: isChecked ? '#00d2ff' : '#ffffff' }}>
+                        <strong style={{ fontSize: '0.88rem', color: isChecked ? 'var(--primary-bright)' : '#ffffff' }}>
                           {screen.name}
                         </strong>
                         <div style={{
                           width: '18px',
                           height: '18px',
                           borderRadius: '4px',
-                          border: `1.5px solid ${isChecked ? '#00d2ff' : '#64748b'}`,
-                          background: isChecked ? '#00d2ff' : 'transparent',
+                          border: `1.5px solid ${isChecked ? 'var(--primary-bright)' : 'var(--text-muted)'}`,
+                          background: isChecked ? 'var(--primary-bright)' : 'transparent',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -765,14 +765,14 @@ export default function ClientModal() {
                           {isChecked && <Check style={{ width: '13px', height: '13px', strokeWidth: 3 }} />}
                         </div>
                       </div>
-                      <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                      <span style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.5)' }}>
                         {screen.segment} • {screen.neighborhood}
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '4px', fontSize: '0.72rem' }}>
                         <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>
                           👥 {screen.audienceEst}
                         </span>
-                        <span style={{ color: '#00d2ff', fontWeight: 700 }}>
+                        <span style={{ color: 'var(--primary-bright)', fontWeight: 700 }}>
                           📺 {screen.tvsCount} TV
                         </span>
                       </div>

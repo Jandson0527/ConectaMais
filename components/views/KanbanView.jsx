@@ -17,13 +17,13 @@ import {
 } from 'lucide-react';
 
 const STAGES = [
-  { id: 'novo', title: 'Novo Lead', color: '#94a3b8' },
-  { id: 'qualificacao', title: 'Qualificação', color: '#00d2ff' },
+  { id: 'novo', title: 'Novo Lead', color: 'var(--text-muted)' },
+  { id: 'qualificacao', title: 'Qualificação', color: 'var(--primary-bright)' },
   { id: 'reuniao', title: 'Reunião Agendada', color: '#0077b6' },
-  { id: 'proposta', title: 'Proposta Apresentada', color: '#a78bfa' },
-  { id: 'negociacao', title: 'Em Negociação', color: '#fbbf24' },
-  { id: 'ganho', title: 'Ganho (Fechado) 🎉', color: '#10b981' },
-  { id: 'perdido', title: 'Perdido', color: '#ef4444' }
+  { id: 'proposta', title: 'Proposta Apresentada', color: 'var(--purple)' },
+  { id: 'negociacao', title: 'Em Negociação', color: 'var(--accent-gold)' },
+  { id: 'ganho', title: 'Ganho (Fechado) 🎉', color: 'var(--success)' },
+  { id: 'perdido', title: 'Perdido', color: 'var(--danger)' }
 ];
 
 export default function KanbanView() {
@@ -150,16 +150,16 @@ export default function KanbanView() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                background: 'rgba(15, 23, 42, 0.4)'
+                background: 'var(--bg-surface)'
               }}>
                 <div>
-                  <strong style={{ fontSize: '0.9rem', color: '#ffffff' }}>{stage.title}</strong>
+                  <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>{stage.title}</strong>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>
                     {formatCurrency(stageTotalValue)}
                   </span>
                 </div>
                 <span style={{
-                  background: 'rgba(255, 255, 255, 0.08)',
+                  background: 'var(--bg-card)',
                   color: stage.color,
                   padding: '2px 8px',
                   borderRadius: '10px',
@@ -208,10 +208,10 @@ export default function KanbanView() {
                         onClick={() => openModal('lead-details', lead)}
                       >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                          <strong style={{ fontSize: '0.92rem', color: '#ffffff' }}>{lead.company || lead.name}</strong>
+                          <strong style={{ fontSize: '0.92rem', color: 'var(--text-primary)' }}>{lead.company || lead.name}</strong>
                           <span style={{
                             fontSize: '0.7rem',
-                            color: lead.priority === 'urgente' ? '#ef4444' : '#00d2ff',
+                            color: lead.priority === 'urgente' ? 'var(--danger)' : 'var(--primary-bright)',
                             fontWeight: 700,
                             textTransform: 'uppercase'
                           }}>
@@ -224,10 +224,10 @@ export default function KanbanView() {
                         </span>
 
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '2px' }}>
-                          <span style={{ fontSize: '0.75rem', color: '#00d2ff', background: 'rgba(0, 210, 255, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--primary-bright)', background: 'rgba(0, 210, 255, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>
                             📺 {plan.name} ({lead.tvsCount || 1} TVs)
                           </span>
-                          <strong style={{ fontSize: '0.9rem', color: '#10b981', fontFamily: 'var(--font-sans)' }}>
+                          <strong style={{ fontSize: '0.9rem', color: 'var(--success)', fontFamily: 'var(--font-sans)' }}>
                             {formatCurrency(lead.value)}
                           </strong>
                         </div>

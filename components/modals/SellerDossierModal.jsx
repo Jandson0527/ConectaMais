@@ -43,9 +43,9 @@ export default function SellerDossierModal() {
         
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <FolderOpen style={{ width: '22px', height: '22px', color: '#00d2ff' }} />
+            <FolderOpen style={{ width: '22px', height: '22px', color: 'var(--primary-bright)' }} />
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                 Dossiê Completo & Repasse de Comissões do Vendedor
               </h3>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
@@ -62,8 +62,8 @@ export default function SellerDossierModal() {
           
           {/* Hero Banner do Vendedor */}
           <div className="seller-dossier-hero" style={{
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
-            border: hasPendingPayout ? '1.5px solid rgba(251, 191, 36, 0.4)' : '1px solid rgba(0, 210, 255, 0.3)',
+            background: 'var(--bg-card)',
+            border: hasPendingPayout ? '1.5px solid rgba(251, 191, 36, 0.4)' : '1px solid rgba(2, 132, 166, 0.3)',
             borderRadius: '14px',
             padding: '1.25rem',
             display: 'flex',
@@ -73,10 +73,10 @@ export default function SellerDossierModal() {
             gap: '16px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <img src={seller.avatar} alt={seller.name} style={{ width: '64px', height: '64px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #00d2ff' }} />
+              <img src={seller.avatar} alt={seller.name} style={{ width: '64px', height: '64px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--primary-bright)' }} />
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <h3 style={{ margin: 0, fontSize: '1.3rem', color: '#ffffff' }}>{seller.name}</h3>
+                  <h3 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--text-primary)' }}>{seller.name}</h3>
                   <span className={`badge-approval ${hasPendingPayout ? 'pending' : 'approved'}`}>
                     {hasPendingPayout ? '⏳ Saldo a Pagar' : '✅ Comissões Quitadas'}
                   </span>
@@ -117,7 +117,7 @@ export default function SellerDossierModal() {
             
             <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '1rem' }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Saldo Atual a Pagar</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: hasPendingPayout ? 'var(--accent-gold)' : '#10b981', marginTop: '4px' }}>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: hasPendingPayout ? 'var(--accent-gold)' : 'var(--success)', marginTop: '4px' }}>
                 {formatCurrency(commData.pendingCommission)}
               </div>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
@@ -127,7 +127,7 @@ export default function SellerDossierModal() {
 
             <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '1rem' }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Total Já Repassado</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#10b981', marginTop: '4px' }}>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--success)', marginTop: '4px' }}>
                 {formatCurrency(commData.totalPaidOut)}
               </div>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>{commData.payoutsHistory.length} repasses efetuados</span>
@@ -135,7 +135,7 @@ export default function SellerDossierModal() {
 
             <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '1rem' }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Renda Recorrente Estimada (MRR)</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#00d2ff', marginTop: '4px' }}>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--primary-bright)', marginTop: '4px' }}>
                 {formatCurrency(commData.portfolioMonthlyRecurring)} / mês
               </div>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>De {commData.activeClientsCount} clientes ativos</span>
@@ -143,7 +143,7 @@ export default function SellerDossierModal() {
 
             <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '1rem' }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Total Histórico Ganho</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#a78bfa', marginTop: '4px' }}>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--purple)', marginTop: '4px' }}>
                 {formatCurrency(commData.totalEarnedCommission)}
               </div>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>{commData.totalRenewalsCount} ciclos renovados</span>
@@ -154,7 +154,7 @@ export default function SellerDossierModal() {
           {/* Histórico de Repasses */}
           {commData.payoutsHistory.length > 0 && (
             <div>
-              <h4 style={{ fontSize: '0.95rem', color: '#10b981', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <h4 style={{ fontSize: '0.95rem', color: 'var(--success)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <ArrowDownCircle style={{ width: '16px', height: '16px' }} />
                 Histórico de Repasses Realizados ({commData.payoutsHistory.length})
               </h4>
@@ -175,7 +175,7 @@ export default function SellerDossierModal() {
                         <td style={{ padding: '8px 12px' }}>
                           {p.date ? (p.date.includes('-') ? `${p.date.split('-')[2]}/${p.date.split('-')[1]}/${p.date.split('-')[0]}` : p.date) : '-'}
                         </td>
-                        <td style={{ padding: '8px 12px', color: '#10b981', fontWeight: 800 }}>
+                        <td style={{ padding: '8px 12px', color: 'var(--success)', fontWeight: 800 }}>
                           {formatCurrency(p.amount)}
                         </td>
                         <td style={{ padding: '8px 12px' }}>{p.paymentMethod || 'Pix'}</td>
@@ -191,8 +191,8 @@ export default function SellerDossierModal() {
 
           {/* Extrato Detalhado de Comissões */}
           <div>
-            <h4 style={{ fontSize: '0.95rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <ShoppingBag style={{ width: '16px', height: '16px', color: '#00d2ff' }} />
+            <h4 style={{ fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <ShoppingBag style={{ width: '16px', height: '16px', color: 'var(--primary-bright)' }} />
               Extrato de Vendas & Ciclos de Renovação ({commData.commissionLedger.length})
             </h4>
             
@@ -223,13 +223,13 @@ export default function SellerDossierModal() {
                             padding: '2px 7px',
                             borderRadius: '10px',
                             background: item.type === 'recurring_renewal' ? 'rgba(0, 210, 255, 0.15)' : 'rgba(251, 191, 36, 0.15)',
-                            color: item.type === 'recurring_renewal' ? '#00d2ff' : 'var(--accent-gold)'
+                            color: item.type === 'recurring_renewal' ? 'var(--primary-bright)' : 'var(--accent-gold)'
                           }}>
                             {item.typeLabel}
                           </span>
                         </td>
                         <td style={{ padding: '10px 14px' }}>
-                          <strong style={{ color: '#ffffff', display: 'block' }}>{item.company}</strong>
+                          <strong style={{ color: 'var(--text-primary)', display: 'block' }}>{item.company}</strong>
                           <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{item.companyAddress}</span>
                         </td>
                         <td style={{ padding: '10px 14px', color: 'var(--text-secondary)' }}>
@@ -238,7 +238,7 @@ export default function SellerDossierModal() {
                         <td style={{ padding: '10px 14px', fontWeight: 700 }}>
                           {formatCurrency(item.saleValue)}
                         </td>
-                        <td style={{ padding: '10px 14px', color: '#00d2ff', fontWeight: 600 }}>
+                        <td style={{ padding: '10px 14px', color: 'var(--primary-bright)', fontWeight: 600 }}>
                           10%
                         </td>
                         <td style={{ padding: '10px 14px', color: 'var(--accent-gold)', fontWeight: 800 }}>
@@ -266,7 +266,7 @@ export default function SellerDossierModal() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '10px' }}>
                 {sellerHotLeads.map(h => (
                   <div key={h.id} style={{ padding: '12px', background: 'var(--bg-surface)', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
-                    <strong style={{ color: '#ffffff', display: 'block', fontSize: '0.9rem' }}>{h.company || h.name}</strong>
+                    <strong style={{ color: 'var(--text-primary)', display: 'block', fontSize: '0.9rem' }}>{h.company || h.name}</strong>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{h.phone} • {h.planName}</span>
                     <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
                       <strong>Motivo:</strong> {h.reasonNotClosed}

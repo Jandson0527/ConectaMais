@@ -34,8 +34,8 @@ export default function DenySaleModal() {
       <div className="modal-dialog modal-sm" style={{ maxWidth: '460px' }}>
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <XCircle style={{ width: '20px', height: '20px', color: '#ef4444' }} />
-            <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#ffffff', fontWeight: 800 }}>
+            <XCircle style={{ width: '20px', height: '20px', color: 'var(--danger)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               Recusar / Negar Venda
             </h3>
           </div>
@@ -47,7 +47,7 @@ export default function DenySaleModal() {
         <form onSubmit={handleSubmit}>
           <div className="modal-body" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>
-              Cliente: <strong style={{ color: '#ffffff' }}>{sale.company || sale.name}</strong>
+              Cliente: <strong style={{ color: 'var(--text-primary)' }}>{sale.company || sale.name}</strong>
             </p>
 
             <div className="form-group">
@@ -69,7 +69,7 @@ export default function DenySaleModal() {
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ background: '#ef4444', borderColor: '#dc2626' }}
+              style={{ background: 'var(--danger)', borderColor: '#dc2626' }}
             >
               <X style={{ width: '16px', height: '16px', marginRight: '4px' }} />
               <span>Confirmar Recusa</span>

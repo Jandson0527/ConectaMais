@@ -76,12 +76,12 @@ export default function LeadDetailsModal() {
 
   const getStageBadgeColor = (stg) => {
     switch (stg) {
-      case 'ganho': return { bg: 'rgba(16, 185, 129, 0.2)', color: '#10b981', border: '#10b981' };
-      case 'perdido': return { bg: 'rgba(239, 68, 68, 0.2)', color: '#ef4444', border: '#ef4444' };
-      case 'negociacao': return { bg: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', border: '#fbbf24' };
-      case 'proposta': return { bg: 'rgba(139, 92, 246, 0.2)', color: '#a78bfa', border: '#a78bfa' };
-      case 'reuniao': return { bg: 'rgba(0, 210, 255, 0.2)', color: '#00d2ff', border: '#00d2ff' };
-      default: return { bg: 'rgba(148, 163, 184, 0.2)', color: '#94a3b8', border: '#94a3b8' };
+      case 'ganho': return { bg: 'rgba(16, 185, 129, 0.2)', color: 'var(--success)', border: 'var(--success)' };
+      case 'perdido': return { bg: 'rgba(239, 68, 68, 0.2)', color: 'var(--danger)', border: 'var(--danger)' };
+      case 'negociacao': return { bg: 'rgba(245, 158, 11, 0.2)', color: 'var(--accent-gold)', border: 'var(--accent-gold)' };
+      case 'proposta': return { bg: 'rgba(139, 92, 246, 0.2)', color: 'var(--purple)', border: 'var(--purple)' };
+      case 'reuniao': return { bg: 'rgba(0, 210, 255, 0.2)', color: 'var(--primary-bright)', border: 'var(--primary-bright)' };
+      default: return { bg: 'rgba(148, 163, 184, 0.2)', color: 'var(--text-muted)', border: 'var(--text-muted)' };
     }
   };
 
@@ -92,13 +92,13 @@ export default function LeadDetailsModal() {
       <div className="modal-dialog modal-xl" style={{ maxWidth: '1000px', maxHeight: '92vh', display: 'flex', flexDirection: 'column' }}>
         
         {/* Header */}
-        <div className="modal-header" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+        <div className="modal-header" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{
               width: '48px',
               height: '48px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #00d2ff, #0077b6)',
+              background: 'linear-gradient(135deg, var(--primary-bright), #0077b6)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -109,7 +109,7 @@ export default function LeadDetailsModal() {
               {(lead.name || 'C').substring(0, 2).toUpperCase()}
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.3rem', color: '#ffffff', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                 {lead.company || lead.name}
               </h3>
               <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
@@ -131,7 +131,7 @@ export default function LeadDetailsModal() {
               onClick={() => {
                 if (confirm(`Deseja realmente excluir ${lead.company}?`)) deleteLead(lead.id);
               }}
-              style={{ color: '#f87171', borderColor: 'rgba(239, 68, 68, 0.3)' }}
+              style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.3)' }}
               title="Excluir Lead"
             >
               <Trash2 style={{ width: '14px', height: '14px' }} />
@@ -150,15 +150,15 @@ export default function LeadDetailsModal() {
             
             {/* Quick Actions Card */}
             <div style={{
-              background: 'rgba(15, 23, 42, 0.7)',
-              border: '1px solid rgba(0, 210, 255, 0.25)',
+              background: 'var(--bg-surface)',
+              border: '1px solid rgba(2, 132, 166, 0.25)',
               borderRadius: '12px',
               padding: '1.25rem',
               display: 'flex',
               flexDirection: 'column',
               gap: '10px'
             }}>
-              <h4 style={{ fontSize: '0.85rem', color: '#00d2ff', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
+              <h4 style={{ fontSize: '0.85rem', color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
                 Ações Rápidas de Contato
               </h4>
               <button
@@ -181,11 +181,11 @@ export default function LeadDetailsModal() {
               
               <div style={{
                 fontSize: '0.74rem',
-                color: '#00d2ff',
-                background: 'rgba(0, 210, 255, 0.08)',
+                color: 'var(--primary)',
+                background: 'rgba(2, 132, 166, 0.1)',
                 padding: '6px 8px',
                 borderRadius: '8px',
-                border: '1px solid rgba(0, 210, 255, 0.2)',
+                border: '1px solid rgba(2, 132, 166, 0.22)',
                 lineHeight: 1.4
               }}>
                 💡 <strong>Renovação Antecipada:</strong> Você pode renovar a qualquer momento. Os dias já pagos são preservados e somados ao novo ciclo!
@@ -246,7 +246,7 @@ export default function LeadDetailsModal() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Data de Pagamento:</span>
-                <strong style={{ fontSize: '0.88rem', color: '#ffffff' }}>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--text-primary)' }}>
                   {lead.paymentDate ? `${lead.paymentDate.split('-')[2]}/${lead.paymentDate.split('-')[1]}/${lead.paymentDate.split('-')[0]}` : '-'}
                 </strong>
               </div>
@@ -267,10 +267,10 @@ export default function LeadDetailsModal() {
                       ? 'rgba(245, 158, 11, 0.15)'
                       : 'rgba(16, 185, 129, 0.15)'),
                   color: lead.paymentMethod === 'Cartão de Crédito'
-                    ? '#a78bfa'
+                    ? 'var(--purple)'
                     : (lead.paymentMethod === 'Boleto Bancário'
-                      ? '#fbbf24'
-                      : '#10b981'),
+                      ? 'var(--accent-gold)'
+                      : 'var(--success)'),
                   border: `1px solid ${lead.paymentMethod === 'Cartão de Crédito' ? 'rgba(139, 92, 246, 0.3)' : (lead.paymentMethod === 'Boleto Bancário' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.3)')}`,
                   padding: '2px 8px',
                   borderRadius: '10px',
@@ -323,12 +323,12 @@ export default function LeadDetailsModal() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Plano:</span>
-                <strong style={{ fontSize: '0.88rem', color: '#00d2ff' }}>{plan.name}</strong>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--primary-bright)' }}>{plan.name}</strong>
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Valor do Contrato:</span>
-                <strong style={{ fontSize: '1.05rem', color: '#10b981', fontFamily: 'var(--font-sans)' }}>
+                <strong style={{ fontSize: '1.05rem', color: 'var(--success)', fontFamily: 'var(--font-sans)' }}>
                   {formatCurrency(lead.value)}
                 </strong>
               </div>
@@ -342,7 +342,7 @@ export default function LeadDetailsModal() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Telefone:</span>
-                <span style={{ fontSize: '0.85rem', color: '#ffffff' }}>{lead.phone}</span>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>{lead.phone}</span>
               </div>
 
               <div>
@@ -366,7 +366,7 @@ export default function LeadDetailsModal() {
 
               {/* Telas Contratadas */}
               <div style={{ borderTop: '1px dashed var(--border-subtle)', paddingTop: '10px' }}>
-                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#00d2ff', display: 'block', marginBottom: '6px' }}>
+                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--primary-bright)', display: 'block', marginBottom: '6px' }}>
                   📍 Telas Físicas Contratadas ({selectedScreensList.length}):
                 </span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -415,7 +415,7 @@ export default function LeadDetailsModal() {
               borderRadius: '12px',
               padding: '1.25rem'
             }}>
-              <h4 style={{ fontSize: '0.9rem', color: '#ffffff', marginBottom: '0.75rem' }}>
+              <h4 style={{ fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
                 Registrar Atividade / Histórico de Contato
               </h4>
               <form onSubmit={handleActivitySubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -465,8 +465,8 @@ export default function LeadDetailsModal() {
               padding: '1.25rem',
               flex: 1
             }}>
-              <h4 style={{ fontSize: '0.9rem', color: '#ffffff', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Clock style={{ width: '16px', height: '16px', color: '#00d2ff' }} />
+              <h4 style={{ fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Clock style={{ width: '16px', height: '16px', color: 'var(--primary-bright)' }} />
                 Linha do Tempo & Histórico Comercial ({leadActivities.length})
               </h4>
 
@@ -485,12 +485,12 @@ export default function LeadDetailsModal() {
                         padding: '10px',
                         background: 'rgba(0, 0, 0, 0.2)',
                         borderRadius: '8px',
-                        borderLeft: '3px solid #00d2ff'
+                        borderLeft: '3px solid var(--primary-bright)'
                       }}
                     >
                       <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <strong style={{ fontSize: '0.88rem', color: '#ffffff' }}>{act.title}</strong>
+                          <strong style={{ fontSize: '0.88rem', color: 'var(--text-primary)' }}>{act.title}</strong>
                           <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
                             {new Date(act.createdAt).toLocaleDateString('pt-BR')} às {new Date(act.createdAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                           </span>

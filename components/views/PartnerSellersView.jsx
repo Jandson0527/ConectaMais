@@ -66,7 +66,7 @@ export default function PartnerSellersView() {
 
       {/* Banner de Ciclo de Repasse no Dia 10 */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95))',
+        background: 'var(--bg-card)',
         border: '1.5px solid rgba(251, 191, 36, 0.4)',
         borderRadius: '16px',
         padding: '1.25rem 1.5rem',
@@ -76,7 +76,7 @@ export default function PartnerSellersView() {
         justifyContent: 'space-between',
         flexWrap: 'wrap',
         gap: '1rem',
-        boxShadow: '0 4px 20px rgba(251, 191, 36, 0.08)'
+        boxShadow: 'var(--shadow-sm)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <div style={{
@@ -96,7 +96,7 @@ export default function PartnerSellersView() {
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <strong style={{ fontSize: '1.1rem', color: '#ffffff' }}>
+              <strong style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>
                 Ciclo Oficial de Repasse: Todo Dia 10 de Cada Mês
               </strong>
               <span className="badge-approval approved" style={{ fontSize: '0.72rem' }}>
@@ -110,14 +110,14 @@ export default function PartnerSellersView() {
         </div>
 
         <div style={{
-          background: 'rgba(0, 0, 0, 0.3)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
           borderRadius: '10px',
           padding: '8px 14px',
           textAlign: 'right'
         }}>
           <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block' }}>Fila Total a Repassar no Dia 10</span>
-          <strong style={{ fontSize: '1.25rem', color: totalPendingCommissions > 0 ? 'var(--accent-gold)' : '#10b981', fontWeight: 900 }}>
+          <strong style={{ fontSize: '1.25rem', color: totalPendingCommissions > 0 ? 'var(--accent-gold)' : 'var(--success)', fontWeight: 900 }}>
             {formatCurrency(totalPendingCommissions)}
           </strong>
         </div>
@@ -133,8 +133,8 @@ export default function PartnerSellersView() {
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Clock style={{ width: '18px', height: '18px', color: '#fbbf24' }} />
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Clock style={{ width: '18px', height: '18px', color: 'var(--accent-gold)' }} />
               Vendas Aguardando Validação dos Sócios
             </h3>
             <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -146,7 +146,7 @@ export default function PartnerSellersView() {
             padding: '4px 10px',
             borderRadius: '12px',
             background: pendingSales.length > 0 ? 'rgba(251, 191, 36, 0.15)' : 'rgba(16, 185, 129, 0.15)',
-            color: pendingSales.length > 0 ? '#fbbf24' : '#10b981',
+            color: pendingSales.length > 0 ? 'var(--accent-gold)' : 'var(--success)',
             border: `1px solid ${pendingSales.length > 0 ? 'rgba(251, 191, 36, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
             fontWeight: 700
           }}>
@@ -168,7 +168,7 @@ export default function PartnerSellersView() {
                 <div key={sale.id} className="approval-card">
                   <div className="approval-card-top">
                     <div>
-                      <strong style={{ fontSize: '0.95rem', color: '#ffffff' }}>{sale.company || sale.name}</strong>
+                      <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>{sale.company || sale.name}</strong>
                       <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                         {sale.companyAddress}
                       </div>
@@ -196,7 +196,7 @@ export default function PartnerSellersView() {
                     </button>
                     <button
                       className="btn btn-secondary sm"
-                      style={{ color: '#f87171', borderColor: 'rgba(239, 68, 68, 0.3)' }}
+                      style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.3)' }}
                       onClick={() => openModal('deny-sale', sale)}
                     >
                       <XCircle style={{ width: '14px', height: '14px', marginRight: '4px' }} />
@@ -212,8 +212,8 @@ export default function PartnerSellersView() {
 
       {/* Lista de Vendedores Cadastrados */}
       <div>
-        <h3 style={{ fontSize: '1.1rem', color: '#ffffff', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <UserCheck style={{ width: '20px', height: '20px', color: '#00d2ff' }} />
+        <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <UserCheck style={{ width: '20px', height: '20px', color: 'var(--primary-bright)' }} />
           Vendedores Cadastrados & Repasses do Dia 10 ({sellers.length})
         </h3>
 
@@ -233,24 +233,24 @@ export default function PartnerSellersView() {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '12px',
-                  boxShadow: hasPendingPayout ? '0 4px 20px rgba(251, 191, 36, 0.08)' : 'none'
+                  boxShadow: 'none'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <img
                     src={seller.avatar}
                     alt={seller.name}
-                    style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #00d2ff' }}
+                    style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--primary-bright)' }}
                   />
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <h4 style={{ margin: 0, fontSize: '1.05rem', color: '#ffffff' }}>{seller.name}</h4>
+                      <h4 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--text-primary)' }}>{seller.name}</h4>
                       <span style={{
                         fontSize: '0.72rem',
                         padding: '2px 8px',
                         borderRadius: '10px',
                         background: hasPendingPayout ? 'rgba(251, 191, 36, 0.15)' : 'rgba(16, 185, 129, 0.15)',
-                        color: hasPendingPayout ? 'var(--accent-gold)' : '#10b981',
+                        color: hasPendingPayout ? 'var(--accent-gold)' : 'var(--success)',
                         border: `1px solid ${hasPendingPayout ? 'rgba(251, 191, 36, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
                         fontWeight: 700
                       }}>
@@ -273,7 +273,7 @@ export default function PartnerSellersView() {
                   <div>
                     <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.72rem' }}>Saldo a Repassar (Dia 10)</span>
                     <strong style={{
-                      color: hasPendingPayout ? 'var(--accent-gold)' : '#10b981',
+                      color: hasPendingPayout ? 'var(--accent-gold)' : 'var(--success)',
                       fontSize: '1.15rem',
                       display: 'block'
                     }}>
@@ -282,7 +282,7 @@ export default function PartnerSellersView() {
                   </div>
                   <div>
                     <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.72rem' }}>Renda Recorrente (MRR)</span>
-                    <strong style={{ color: '#00d2ff', fontSize: '1.05rem', display: 'block' }}>
+                    <strong style={{ color: 'var(--primary-bright)', fontSize: '1.05rem', display: 'block' }}>
                       {formatCurrency(commData.portfolioMonthlyRecurring)} / mês
                     </strong>
                   </div>

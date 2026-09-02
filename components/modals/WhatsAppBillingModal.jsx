@@ -169,8 +169,8 @@ export default function WhatsAppBillingModal() {
               width: '42px',
               height: '42px',
               borderRadius: '10px',
-              background: 'linear-gradient(135deg, #10b981, #059669)',
-              color: '#ffffff',
+              background: 'linear-gradient(135deg, var(--success), #059669)',
+              color: 'var(--text-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -179,7 +179,7 @@ export default function WhatsAppBillingModal() {
               <MessageCircle style={{ width: '22px', height: '22px' }} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#ffffff', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                 {isSellerTarget ? 'Notificar Vendedor no WhatsApp' : 'Enviar Cobrança & Mensagem WhatsApp'}
               </h3>
               <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
@@ -197,7 +197,7 @@ export default function WhatsAppBillingModal() {
           
           {/* Seletor de Modelo de Mensagem */}
           <div>
-            <label className="form-label" style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', color: '#00d2ff' }}>
+            <label className="form-label" style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--primary-bright)' }}>
               <Sparkles style={{ width: '15px', height: '15px' }} />
               Selecione o Modelo de Mensagem Personalizada:
             </label>
@@ -217,7 +217,7 @@ export default function WhatsAppBillingModal() {
                   type="button"
                   className={`btn sm ${templateType === 'due_today' ? 'btn-primary' : 'btn-secondary'}`}
                   onClick={() => setTemplateType('due_today')}
-                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'due_today' ? '#fbbf24' : undefined, color: templateType === 'due_today' ? '#000' : undefined }}
+                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'due_today' ? 'var(--accent-gold)' : undefined, color: templateType === 'due_today' ? '#000' : undefined }}
                 >
                   🟡 Vencendo Hoje
                 </button>
@@ -226,7 +226,7 @@ export default function WhatsAppBillingModal() {
                   type="button"
                   className={`btn sm ${templateType === 'expired' ? 'btn-primary' : 'btn-secondary'}`}
                   onClick={() => setTemplateType('expired')}
-                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'expired' ? '#ef4444' : undefined, color: templateType === 'expired' ? '#fff' : undefined }}
+                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'expired' ? 'var(--danger)' : undefined, color: templateType === 'expired' ? '#fff' : undefined }}
                 >
                   🔴 Cobrança (Vencido)
                 </button>
@@ -235,7 +235,7 @@ export default function WhatsAppBillingModal() {
                   type="button"
                   className={`btn sm ${templateType === 'renewal_confirmed' ? 'btn-primary' : 'btn-secondary'}`}
                   onClick={() => setTemplateType('renewal_confirmed')}
-                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'renewal_confirmed' ? '#10b981' : undefined, color: templateType === 'renewal_confirmed' ? '#fff' : undefined }}
+                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'renewal_confirmed' ? 'var(--success)' : undefined, color: templateType === 'renewal_confirmed' ? '#fff' : undefined }}
                 >
                   🎉 Pagamento Confirmado
                 </button>
@@ -264,7 +264,7 @@ export default function WhatsAppBillingModal() {
                   type="button"
                   className={`btn sm ${templateType === 'commission_paid' ? 'btn-primary' : 'btn-secondary'}`}
                   onClick={() => setTemplateType('commission_paid')}
-                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'commission_paid' ? '#10b981' : undefined }}
+                  style={{ justifyContent: 'center', fontSize: '0.78rem', fontWeight: 700, background: templateType === 'commission_paid' ? 'var(--success)' : undefined }}
                 >
                   💸 Comissão Paga (Dia 10)
                 </button>
@@ -365,7 +365,7 @@ export default function WhatsAppBillingModal() {
           >
             {copied ? (
               <>
-                <Check style={{ width: '15px', height: '15px', marginRight: '6px', color: '#10b981' }} />
+                <Check style={{ width: '15px', height: '15px', marginRight: '6px', color: 'var(--success)' }} />
                 Mensagem Copiada!
               </>
             ) : (

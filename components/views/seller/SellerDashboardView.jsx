@@ -42,7 +42,7 @@ export default function SellerDashboardView() {
       <div className="view-header">
         <div>
           <h1 className="view-title">Meu Painel de Vendas</h1>
-          <p className="view-subtitle">Bem-vindo, <strong style={{ color: '#00d2ff' }}>{currentUser?.name}</strong>! Suas comissões de 10% caem todo <strong>dia 10 de cada mês</strong>.</p>
+          <p className="view-subtitle">Bem-vindo, <strong style={{ color: 'var(--primary-bright)' }}>{currentUser?.name}</strong>! Suas comissões de 10% caem todo <strong>dia 10 de cada mês</strong>.</p>
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
           <button className="btn btn-gold" onClick={() => openModal('hot-lead')}>
@@ -58,8 +58,8 @@ export default function SellerDashboardView() {
 
       {/* Banner de Boas-Vindas & Regra de Comissão Recorrente no Dia 10 */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
-        border: '1px solid rgba(0, 210, 255, 0.35)',
+        background: 'var(--bg-card)',
+        border: '1px solid rgba(2, 132, 166, 0.35)',
         borderRadius: '16px',
         padding: '1.5rem',
         marginBottom: '1.5rem',
@@ -68,14 +68,14 @@ export default function SellerDashboardView() {
         justifyContent: 'space-between',
         flexWrap: 'wrap',
         gap: '1.25rem',
-        boxShadow: '0 4px 20px rgba(0, 210, 255, 0.12)'
+        boxShadow: 'var(--shadow-sm)'
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
             <span className="badge-approval approved" style={{ fontSize: '0.72rem' }}>
               ⭐ Vendedor Comercial Conecta Mais
             </span>
-            <span className="commission-tag" style={{ background: 'rgba(0, 210, 255, 0.15)', color: '#00d2ff', borderColor: 'rgba(0, 210, 255, 0.3)' }}>
+            <span className="commission-tag" style={{ background: 'rgba(0, 210, 255, 0.15)', color: 'var(--primary-bright)', borderColor: 'rgba(0, 210, 255, 0.3)' }}>
               <RefreshCw style={{ width: '12px', height: '12px' }} /> 10% Recorrente
             </span>
             <span style={{
@@ -90,7 +90,7 @@ export default function SellerDashboardView() {
               📅 Pagamento Todo Dia 10 ({payoutInfo.formattedDate})
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', margin: '4px 0' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: '4px 0' }}>
             Construa sua Renda Passiva na Conecta Mais! 🚀
           </h2>
           <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0 }}>
@@ -108,14 +108,14 @@ export default function SellerDashboardView() {
       {/* KPI Cards do Vendedor */}
       <div className="kpi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
         
-        <div className="kpi-card" style={{ '--accent-color': commData.pendingCommission > 0 ? '#fbbf24' : '#10b981' }}>
-          <div className="kpi-icon-box" style={{ background: commData.pendingCommission > 0 ? 'rgba(251, 191, 36, 0.15)' : 'rgba(16, 185, 129, 0.15)', color: commData.pendingCommission > 0 ? 'var(--accent-gold)' : '#10b981' }}>
+        <div className="kpi-card" style={{ '--accent-color': commData.pendingCommission > 0 ? 'var(--accent-gold)' : 'var(--success)' }}>
+          <div className="kpi-icon-box" style={{ color: commData.pendingCommission > 0 ? 'var(--accent-gold)' : 'var(--success)' }}>
             <DollarSign style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
             <span className="kpi-label">Saldo p/ Repasse (Dia 10)</span>
             <div className="kpi-value-row">
-              <span className="kpi-value" style={{ color: commData.pendingCommission > 0 ? 'var(--accent-gold)' : '#10b981' }}>
+              <span className="kpi-value" style={{ color: commData.pendingCommission > 0 ? 'var(--accent-gold)' : 'var(--success)' }}>
                 {formatCurrency(commData.pendingCommission)}
               </span>
             </div>
@@ -123,14 +123,14 @@ export default function SellerDashboardView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#00d2ff' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(0, 210, 255, 0.12)', color: '#00d2ff' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--primary-bright)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--primary-bright)' }}>
             <TrendingUp style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
             <span className="kpi-label">Renda Mensal Recorrente (MRR)</span>
             <div className="kpi-value-row">
-              <span className="kpi-value" style={{ color: '#00d2ff' }}>
+              <span className="kpi-value" style={{ color: 'var(--primary-bright)' }}>
                 {formatCurrency(commData.portfolioMonthlyRecurring)}
               </span>
               <span className="kpi-badge positive">/ mês</span>
@@ -139,14 +139,14 @@ export default function SellerDashboardView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#10b981' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(16, 185, 129, 0.12)', color: '#10b981' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--success)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--success)' }}>
             <CheckCircle style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
             <span className="kpi-label">Total Já Pago pelos Sócios</span>
             <div className="kpi-value-row">
-              <span className="kpi-value" style={{ color: '#10b981' }}>
+              <span className="kpi-value" style={{ color: 'var(--success)' }}>
                 {formatCurrency(commData.totalPaidOut)}
               </span>
             </div>
@@ -154,8 +154,8 @@ export default function SellerDashboardView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#f59e0b' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(245, 158, 11, 0.12)', color: '#f59e0b' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--accent-orange)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--accent-orange)' }}>
             <Flame style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -176,7 +176,7 @@ export default function SellerDashboardView() {
         <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: '16px', padding: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#ffffff' }}>Minhas Vendas & Carteira Recorrente</h3>
+              <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Minhas Vendas & Carteira Recorrente</h3>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Clientes ativos geram 10% todo mês na renovação</span>
             </div>
             <button className="btn btn-secondary sm" onClick={() => setCurrentView('seller-sales')}>
@@ -206,7 +206,7 @@ export default function SellerDashboardView() {
                   >
                     <div className="approval-card-top">
                       <div>
-                        <strong style={{ fontSize: '0.92rem', color: '#ffffff' }}>{sale.company || sale.name}</strong>
+                        <strong style={{ fontSize: '0.92rem', color: 'var(--text-primary)' }}>{sale.company || sale.name}</strong>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                           {plan.name} • {sale.companyAddress}
                         </div>
@@ -223,7 +223,7 @@ export default function SellerDashboardView() {
                     </div>
                     {sale.dueDate && (
                       <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                        📅 Próxima Renovação: <strong style={{ color: '#00d2ff' }}>{sale.dueDate.split('-')[2]}/{sale.dueDate.split('-')[1]}/{sale.dueDate.split('-')[0]}</strong>
+                        📅 Próxima Renovação: <strong style={{ color: 'var(--primary-bright)' }}>{sale.dueDate.split('-')[2]}/{sale.dueDate.split('-')[1]}/{sale.dueDate.split('-')[0]}</strong>
                         {sale.renewalsCount ? ` • 🔄 ${sale.renewalsCount} renovações feitas` : ''}
                       </div>
                     )}
@@ -253,7 +253,7 @@ export default function SellerDashboardView() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {sellerHotLeads.slice(0, 3).map(h => (
                 <div key={h.id} style={{ padding: '10px', background: 'var(--bg-surface)', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
-                  <strong style={{ fontSize: '0.88rem', color: '#ffffff', display: 'block' }}>{h.company || h.name}</strong>
+                  <strong style={{ fontSize: '0.88rem', color: 'var(--text-primary)', display: 'block' }}>{h.company || h.name}</strong>
                   <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', marginTop: '3px' }}>
                     <strong>Motivo:</strong> {h.reasonNotClosed}
                   </div>

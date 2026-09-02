@@ -79,7 +79,7 @@ export default function SellerHotLeadsView() {
                   )}
                   {lead.planName && (
                     <div className="hotlead-info-item">
-                      <span>📺 Interesse: <strong style={{ color: '#00d2ff' }}>{lead.planName}</strong></span>
+                      <span>📺 Interesse: <strong style={{ color: 'var(--primary-bright)' }}>{lead.planName}</strong></span>
                     </div>
                   )}
                   {lead.notes && (
@@ -121,7 +121,7 @@ export default function SellerHotLeadsView() {
                     </button>
                     <button
                       className="btn-icon"
-                      style={{ width: '28px', height: '28px', color: '#f87171' }}
+                      style={{ width: '28px', height: '28px', color: 'var(--danger)' }}
                       onClick={() => {
                         if (confirm(`Remover cliente quente ${lead.company}?`)) deleteHotLead(lead.id);
                       }}

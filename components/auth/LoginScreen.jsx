@@ -49,17 +49,17 @@ export default function LoginScreen() {
                 </linearGradient>
                 <linearGradient id="loginGradBottom" x1="0%" y1="100%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#ea580c" />
-                  <stop offset="50%" stopColor="#f59e0b" />
-                  <stop offset="100%" stopColor="#fbbf24" />
+                  <stop offset="50%" stopColor="var(--accent-orange)" />
+                  <stop offset="100%" stopColor="var(--accent-gold)" />
                 </linearGradient>
                 <linearGradient id="loginPlayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#fbbf24" />
+                  <stop offset="0%" stopColor="var(--accent-gold)" />
                   <stop offset="100%" stopColor="#ea580c" />
                 </linearGradient>
               </defs>
               <path d="M 74 24 C 62 11 40 11 26 24 C 12 38 12 62 26 76 C 36 86 52 89 65 83 C 58 78 48 76 40 70 C 27 60 27 40 40 30 C 49 23 63 24 74 24 Z" fill="url(#loginGradTop)" />
               <path d="M 26 76 C 39 89 61 89 74 76 C 77 73 74 67 69 67 C 65 67 62 69 59 72 C 49 80 35 79 26 71 C 24 69 22 66 21 63 C 20 68 22 72 26 76 Z" fill="url(#loginGradBottom)" />
-              <path d="M 44 37 C 44 34.8 46.4 33.5 48.2 34.6 L 68.5 47.6 C 70.2 48.7 70.2 51.3 68.5 52.4 L 48.2 65.4 C 46.4 66.5 44 63 Z" fill="url(#loginPlayGrad)" />
+              <path d="M 44 37 C 44 34.8 46.4 33.5 48.2 34.6 L 68.5 47.6 C 70.2 48.7 70.2 51.3 68.5 52.4 L 48.2 65.4 Z" fill="url(#loginPlayGrad)" />
             </svg>
             <div>
               <span className="login-brand-name">conecta</span>
@@ -125,7 +125,7 @@ export default function LoginScreen() {
               />
               <span>Lembrar meu acesso</span>
             </label>
-            <span style={{ color: '#64748b', fontSize: '0.75rem' }}>Senha demo: <strong>conecta123</strong></span>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>Senha demo: <strong>conecta123</strong></span>
           </div>
 
           <button type="submit" className="btn-login-submit">

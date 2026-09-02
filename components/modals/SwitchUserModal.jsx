@@ -22,8 +22,8 @@ export default function SwitchUserModal() {
         
         <div className="modal-header">
           <div className="modal-title-group" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Users style={{ width: '20px', height: '20px', color: '#00d2ff' }} />
-            <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#ffffff', fontWeight: 800 }}>
+            <Users style={{ width: '20px', height: '20px', color: 'var(--primary-bright)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--text-primary)', fontWeight: 800 }}>
               Alternar Usuário Ativo
             </h3>
           </div>
@@ -51,7 +51,7 @@ export default function SwitchUserModal() {
                     padding: '10px 14px',
                     borderRadius: '10px',
                     background: isSelected ? 'rgba(0, 210, 255, 0.15)' : 'var(--bg-surface)',
-                    border: `1.5px solid ${isSelected ? '#00d2ff' : 'var(--border-subtle)'}`,
+                    border: `1.5px solid ${isSelected ? 'var(--primary-bright)' : 'var(--border-subtle)'}`,
                     cursor: 'pointer',
                     transition: 'all 0.2s ease'
                   }}
@@ -63,14 +63,14 @@ export default function SwitchUserModal() {
                       style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }}
                     />
                     <div>
-                      <strong style={{ fontSize: '0.9rem', color: '#ffffff', display: 'block' }}>{u.name}</strong>
+                      <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)', display: 'block' }}>{u.name}</strong>
                       <span style={{ fontSize: '0.75rem', color: u.role === 'vendedor' ? 'var(--accent-gold)' : 'var(--text-muted)' }}>
                         {u.roleName || (u.role === 'vendedor' ? 'Vendedor Comercial (10%)' : 'Sócio')}
                       </span>
                     </div>
                   </div>
                   {isSelected && (
-                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: '#00d2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000' }}>
+                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'var(--primary-bright)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000' }}>
                       <Check style={{ width: '13px', height: '13px', strokeWidth: 3 }} />
                     </div>
                   )}

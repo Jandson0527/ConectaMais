@@ -38,8 +38,8 @@ export default function ReportsView() {
       </div>
 
       <div className="kpi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div className="kpi-card" style={{ '--accent-color': '#00d2ff' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(0, 210, 255, 0.12)', color: '#00d2ff' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--primary-bright)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--primary-bright)' }}>
             <TrendingUp style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -52,8 +52,8 @@ export default function ReportsView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#10b981' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(16, 185, 129, 0.12)', color: '#10b981' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--success)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--success)' }}>
             <DollarSign style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -65,8 +65,8 @@ export default function ReportsView() {
           </div>
         </div>
 
-        <div className="kpi-card" style={{ '--accent-color': '#fbbf24' }}>
-          <div className="kpi-icon-box" style={{ background: 'rgba(251, 191, 36, 0.12)', color: 'var(--accent-gold)' }}>
+        <div className="kpi-card" style={{ '--accent-color': 'var(--accent-gold)' }}>
+          <div className="kpi-icon-box" style={{ color: 'var(--accent-gold)' }}>
             <Tv style={{ width: '22px', height: '22px' }} />
           </div>
           <div className="kpi-info">
@@ -83,7 +83,7 @@ export default function ReportsView() {
 
       {/* Tabela de Planos Mais Vendidos */}
       <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: '16px', padding: '1.5rem' }}>
-        <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#ffffff', marginBottom: '1rem' }}>
+        <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>
           Desempenho Comercial por Plano de TV
         </h3>
 
@@ -102,19 +102,19 @@ export default function ReportsView() {
                 const perc = totalRevenue > 0 ? ((p.rev / totalRevenue) * 100).toFixed(0) : 0;
                 return (
                   <tr key={p.name} style={{ borderBottom: '1px solid var(--border-subtle)', fontSize: '0.85rem' }}>
-                    <td style={{ padding: '10px 14px', fontWeight: 700, color: '#ffffff' }}>
+                    <td style={{ padding: '10px 14px', fontWeight: 700, color: 'var(--text-primary)' }}>
                       {p.name}
                     </td>
                     <td style={{ padding: '10px 14px', color: 'var(--text-secondary)' }}>
                       {p.count} clientes
                     </td>
-                    <td style={{ padding: '10px 14px', fontWeight: 700, color: '#10b981', fontFamily: 'var(--font-sans)' }}>
+                    <td style={{ padding: '10px 14px', fontWeight: 700, color: 'var(--success)', fontFamily: 'var(--font-sans)' }}>
                       {formatCurrency(p.rev)}
                     </td>
                     <td style={{ padding: '10px 14px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ flex: 1, background: 'rgba(255, 255, 255, 0.1)', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
-                          <div style={{ width: `${perc}%`, background: '#00d2ff', height: '100%' }}></div>
+                        <div style={{ flex: 1, background: 'var(--border-subtle)', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
+                          <div style={{ width: `${perc}%`, background: 'var(--primary-bright)', height: '100%' }}></div>
                         </div>
                         <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{perc}%</span>
                       </div>

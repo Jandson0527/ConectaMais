@@ -102,7 +102,7 @@ export default function RenewalModal() {
               width: '40px',
               height: '40px',
               borderRadius: '10px',
-              background: 'linear-gradient(135deg, #10b981, #059669)',
+              background: 'linear-gradient(135deg, var(--success), #059669)',
               color: '#ffffff',
               display: 'flex',
               alignItems: 'center',
@@ -111,7 +111,7 @@ export default function RenewalModal() {
               <RefreshCw style={{ width: '20px', height: '20px' }} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>
                 {isCurrentDueInFuture ? 'Antecipar Renovação de Contrato' : 'Renovar Mensalidade'}
               </h3>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
@@ -129,8 +129,8 @@ export default function RenewalModal() {
             
             {/* Card Comparativo de Vencimento Atual vs Novo Vencimento Estendido */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
-              border: isAdvance ? '1.5px solid rgba(0, 210, 255, 0.4)' : '1.5px solid rgba(16, 185, 129, 0.4)',
+              background: 'var(--bg-surface)',
+              border: isAdvance ? '1.5px solid rgba(2, 132, 166, 0.4)' : '1.5px solid rgba(5, 150, 105, 0.4)',
               borderRadius: '14px',
               padding: '1.25rem',
               display: 'flex',
@@ -144,7 +144,7 @@ export default function RenewalModal() {
                   padding: '3px 8px',
                   borderRadius: '10px',
                   background: isAdvance ? 'rgba(0, 210, 255, 0.15)' : 'rgba(16, 185, 129, 0.15)',
-                  color: isAdvance ? '#00d2ff' : '#10b981',
+                  color: isAdvance ? 'var(--primary-bright)' : 'var(--success)',
                   border: `1px solid ${isAdvance ? 'rgba(0, 210, 255, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`
                 }}>
                   {isAdvance ? '⚡ Renovação Antecipada (Dias Preservados)' : '🔄 Renovação Regular'}
@@ -154,20 +154,20 @@ export default function RenewalModal() {
                 </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: '12px', textAlign: 'center', background: 'rgba(0, 0, 0, 0.25)', padding: '12px', borderRadius: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: '12px', textAlign: 'center', background: 'var(--bg-card)', padding: '12px', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
                 <div>
                   <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block' }}>Vencimento Atual</span>
-                  <strong style={{ fontSize: '1.05rem', color: '#ffffff' }}>{formattedCurrentDueDate}</strong>
+                  <strong style={{ fontSize: '1.05rem', color: 'var(--text-primary)' }}>{formattedCurrentDueDate}</strong>
                 </div>
-                <div style={{ color: '#00d2ff', fontSize: '1.2rem', fontWeight: 900 }}>➔</div>
+                <div style={{ color: 'var(--primary-bright)', fontSize: '1.2rem', fontWeight: 900 }}>➔</div>
                 <div>
-                  <span style={{ fontSize: '0.72rem', color: '#10b981', display: 'block', fontWeight: 700 }}>Novo Vencimento Estendido</span>
-                  <strong style={{ fontSize: '1.25rem', color: '#10b981', fontWeight: 900 }}>{formattedProjectedDueDate}</strong>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--success)', display: 'block', fontWeight: 700 }}>Novo Vencimento Estendido</span>
+                  <strong style={{ fontSize: '1.25rem', color: 'var(--success)', fontWeight: 900 }}>{formattedProjectedDueDate}</strong>
                 </div>
               </div>
 
               {isAdvance && (
-                <span style={{ fontSize: '0.75rem', color: '#00d2ff', lineHeight: 1.4 }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--primary-bright)', lineHeight: 1.4 }}>
                   💡 O cliente está antecipando o pagamento. O novo ciclo (+1 mês) foi somado a partir da data de vencimento atual ({formattedCurrentDueDate}), sem perder nenhum dia já pago!
                 </span>
               )}
@@ -278,12 +278,12 @@ export default function RenewalModal() {
               borderRadius: '10px',
               padding: '10px 14px'
             }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.84rem', color: '#ffffff', margin: 0 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.84rem', color: 'var(--text-primary)', margin: 0 }}>
                 <input
                   type="checkbox"
                   checked={notifyWhatsApp}
                   onChange={(e) => setNotifyWhatsApp(e.target.checked)}
-                  style={{ accentColor: '#10b981', width: '17px', height: '17px' }}
+                  style={{ accentColor: 'var(--success)', width: '17px', height: '17px' }}
                 />
                 <span>
                   💬 <strong>Enviar Confirmação no WhatsApp:</strong> Abrir prévia de mensagem para o cliente confirmando que a mensalidade foi renovada!
