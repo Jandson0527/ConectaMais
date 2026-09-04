@@ -17,6 +17,8 @@ import RenewalModal from './RenewalModal';
 import WhatsAppBillingModal from './WhatsAppBillingModal';
 import LoginScreen from '../auth/LoginScreen';
 import EditUserModal from './EditUserModal';
+import GoalModal from './GoalModal';
+import TaskModal from './TaskModal';
 
 export default function ModalDispatcher() {
   const { activeModal } = useCRM();
@@ -69,6 +71,12 @@ export default function ModalDispatcher() {
   }
   if (type === 'permissions' || type === 'edit-user') {
     return <EditUserModal />;
+  }
+  if (type === 'goal') {
+    return <GoalModal />;
+  }
+  if (type === 'task' || type === 'edit-task') {
+    return <TaskModal />;
   }
 
   return null;

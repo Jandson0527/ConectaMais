@@ -33,7 +33,10 @@ export default function Topbar() {
     importJSON,
     resetDemoData,
     isSidebarCollapsed,
-    setIsSidebarCollapsed
+    setIsSidebarCollapsed,
+    tasks,
+    toggleTaskCompletion,
+    isPartner
   } = useCRM();
 
   const canCreateFinance = !currentUser?.permissions || currentUser.permissions.includes('create-finance');
@@ -41,9 +44,11 @@ export default function Topbar() {
 
   const [isDataDropdownOpen, setIsDataDropdownOpen] = useState(false);
   const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
+  const [isTasksDropdownOpen, setIsTasksDropdownOpen] = useState(false);
   const fileInputRef = useRef(null);
 
   const unreadNotifs = notifications.filter(n => !n.read);
+  const pendingTasks = tasks ? tasks.filter(t => !t.completed) : [];
 
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
@@ -123,7 +128,7 @@ export default function Topbar() {
         <div className="dropdown-container" style={{ position: 'relative' }}>
           <button
             className="btn-icon"
-            onClick={() => { setIsDataDropdownOpen(!isDataDropdownOpen); setIsNotifDropdownOpen(false); }}
+            onClick={() => { setIsDataDropdownOpen(!isDataDropdownOpen); setIsNotifDropdownOpen(false); setIsTasksDropdownOpen(false); }}
             title="Dados & Backup"
           >
             <HardDriveDownload style={{ width: '18px', height: '18px' }} />
@@ -169,7 +174,7 @@ export default function Topbar() {
         <div className="notification-wrapper" style={{ position: 'relative' }}>
           <button
             className="btn-icon has-badge"
-            onClick={() => { setIsNotifDropdownOpen(!isNotifDropdownOpen); setIsDataDropdownOpen(false); }}
+            onClick={() => { setIsNotifDropdownOpen(!isNotifDropdownOpen); setIsDataDropdownOpen(false); setIsTasksDropdownOpen(false); }}
             title="Notificações"
           >
             <Bell style={{ width: '18px', height: '18px' }} />
@@ -208,6 +213,86 @@ export default function Topbar() {
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
                         {new Date(n.createdAt).toLocaleDateString('pt-BR')}
                       </span>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Gerenciador de Tarefas / Checklist */}
+        <div className="notification-wrapper" style={{ position: 'relative' }}>
+          <button
+            className="btn-icon has-badge"
+            onClick={() => { setIsTasksDropdownOpen(!isTasksDropdownOpen); setIsNotifDropdownOpen(false); setIsDataDropdownOpen(false); }}
+            title="Minhas Tarefas"
+          >
+            <CheckCircle style={{ width: '18px', height: '18px' }} />
+            {pendingTasks.length > 0 && <span className="notification-dot" style={{ background: 'var(--accent-gold)' }}></span>}
+          </button>
+
+          {isTasksDropdownOpen && (
+            <div className="notification-dropdown active" style={{ display: 'flex', flexDirection: 'column', right: 0, top: '48px', position: 'absolute', zIndex: 1000, width: '340px' }}>
+              <div className="notification-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h4 style={{ margin: 0, fontSize: '0.9rem' }}>Tarefas & Lembretes</h4>
+                <button className="btn-link" onClick={() => { setIsTasksDropdownOpen(false); openModal('task'); }} style={{ fontSize: '0.75rem', background: 'none', border: 'none', color: 'var(--primary-bright)', cursor: 'pointer', fontWeight: 600 }}>
+                  + Nova Tarefa
+                </button>
+              </div>
+              <div className="notification-list" style={{ maxHeight: '350px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', padding: '8px' }}>
+                {!tasks || tasks.length === 0 ? (
+                  <div style={{ padding: '1.5rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
+                    Nenhuma tarefa no momento.
+                  </div>
+                ) : (
+                  tasks.map(t => (
+                    <div
+                      key={t.id}
+                      style={{
+                        padding: '10px',
+                        background: t.completed ? 'transparent' : 'var(--bg-surface)',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border-subtle)',
+                        fontSize: '0.82rem',
+                        display: 'flex',
+                        gap: '10px',
+                        opacity: t.completed ? 0.6 : 1
+                      }}
+                    >
+                      <input 
+                        type="checkbox" 
+                        checked={t.completed} 
+                        onChange={(e) => toggleTaskCompletion(t.id, e.target.checked)}
+                        style={{ marginTop: '3px', cursor: 'pointer' }}
+                      />
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <strong style={{ color: t.completed ? 'var(--text-muted)' : 'var(--text-primary)', textDecoration: t.completed ? 'line-through' : 'none' }}>
+                            {t.title}
+                          </strong>
+                          {isPartner() && (
+                            <button 
+                              onClick={() => { setIsTasksDropdownOpen(false); openModal('edit-task', t); }}
+                              style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '0.7rem' }}
+                            >
+                              Editar
+                            </button>
+                          )}
+                        </div>
+                        {t.description && <p style={{ margin: '4px 0', color: 'var(--text-secondary)', lineHeight: 1.35 }}>{t.description}</p>}
+                        
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
+                          <span style={{ fontSize: '0.7rem', color: 'var(--danger)', fontWeight: 500 }}>
+                            {t.dueDate && `Vencimento: ${new Date(t.dueDate).toLocaleDateString('pt-BR')}`}
+                          </span>
+                          {t.completed && (
+                            <span style={{ fontSize: '0.7rem', color: 'var(--success)' }}>
+                              Feito ✓
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   ))
                 )}

@@ -221,7 +221,9 @@ export const INITIAL_SEED_DATA = {
   transactions: [],
   meetings: [],
   activities: [],
-  notifications: []
+  notifications: [],
+  goals: [],
+  tasks: []
 };
 
 
@@ -246,6 +248,8 @@ export function CRMProvider({ children }) {
   const [meetings, setMeetings] = useState(INITIAL_SEED_DATA.meetings);
   const [activities, setActivities] = useState(INITIAL_SEED_DATA.activities);
   const [notifications, setNotifications] = useState(INITIAL_SEED_DATA.notifications);
+  const [goals, setGoals] = useState(INITIAL_SEED_DATA.goals);
+  const [tasks, setTasks] = useState(INITIAL_SEED_DATA.tasks);
 
   // O estado local do app usa camelCase; o schema do Supabase usa snake_case.
   // Essas duas funções fazem a ponte só no momento de sincronizar, sem afetar o resto do app.
@@ -319,6 +323,8 @@ export function CRMProvider({ children }) {
         if (parsed.meetings) setMeetings(parsed.meetings);
         if (parsed.activities) setActivities(parsed.activities);
         if (parsed.notifications) setNotifications(parsed.notifications);
+        if (parsed.goals) setGoals(parsed.goals);
+        if (parsed.tasks) setTasks(parsed.tasks);
         if (parsed.currentUserId) {
           const u = (parsed.users || INITIAL_SEED_DATA.users).find(x => x.id === parsed.currentUserId);
           if (u) {
@@ -381,13 +387,15 @@ export function CRMProvider({ children }) {
         meetings,
         activities,
         notifications,
+        goals,
+        tasks,
         currentUserId: currentUser?.id
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch (e) {
       console.error('Error saving CRM state:', e);
     }
-  }, [isLoaded, users, screens, leads, hotLeads, transactions, sellerPayouts, meetings, activities, notifications, currentUser]);
+  }, [isLoaded, users, screens, leads, hotLeads, transactions, sellerPayouts, meetings, activities, notifications, goals, tasks, currentUser]);
 
   // Theme Toggle
   const toggleTheme = useCallback(() => {
@@ -1352,6 +1360,78 @@ export function CRMProvider({ children }) {
     };
   }, [leads, sellerPayouts]);
 
+  // ==================== CRUD: METAS ====================
+  const addGoal = useCallback((goalData) => {
+    const newGoal = {
+      id: `goal-${Date.now()}`,
+      title: goalData.title,
+      targetValue: Number(goalData.targetValue) || 0,
+      type: goalData.type || 'company', // company, individual
+      sellerId: goalData.sellerId || null,
+      month: goalData.month || new Date().getMonth() + 1,
+      year: goalData.year || new Date().getFullYear(),
+      createdAt: new Date().toISOString()
+    };
+    setGoals(prev => [newGoal, ...prev]);
+    showToast(`Meta "${newGoal.title}" criada com sucesso!`, 'success');
+    closeModal();
+  }, [showToast, closeModal]);
+
+  const updateGoal = useCallback((goalId, data) => {
+    setGoals(prev => prev.map(g => g.id === goalId ? { ...g, ...data } : g));
+    showToast('Meta atualizada com sucesso!', 'success');
+    closeModal();
+  }, [showToast, closeModal]);
+
+  const deleteGoal = useCallback((goalId) => {
+    setGoals(prev => prev.filter(g => g.id !== goalId));
+    showToast('Meta excluída.', 'info');
+    closeModal();
+  }, [showToast, closeModal]);
+
+  // ==================== CRUD: TAREFAS ====================
+  const addTask = useCallback((taskData) => {
+    const newTask = {
+      id: `task-${Date.now()}`,
+      title: taskData.title,
+      description: taskData.description || '',
+      dueDate: taskData.dueDate || new Date().toISOString().split('T')[0],
+      assignedTo: taskData.assignedTo || 'all', // 'all' ou ID do usuario
+      createdBy: currentUser?.id,
+      completed: false,
+      completedAt: null,
+      completedBy: null,
+      createdAt: new Date().toISOString()
+    };
+    setTasks(prev => [newTask, ...prev]);
+    showToast('Tarefa criada com sucesso!', 'success');
+    closeModal();
+  }, [currentUser, showToast, closeModal]);
+
+  const updateTask = useCallback((taskId, data) => {
+    setTasks(prev => prev.map(t => t.id === taskId ? { ...t, ...data } : t));
+  }, []);
+
+  const toggleTaskCompletion = useCallback((taskId, isCompleted) => {
+    setTasks(prev => prev.map(t => {
+      if (t.id === taskId) {
+        if (isCompleted && !t.completed) {
+          try { confetti({ particleCount: 50, spread: 40 }); } catch (_) {}
+          showToast('Tarefa concluída! Parabéns!', 'success');
+          return { ...t, completed: true, completedAt: new Date().toISOString(), completedBy: currentUser?.id };
+        } else if (!isCompleted) {
+          return { ...t, completed: false, completedAt: null, completedBy: null };
+        }
+      }
+      return t;
+    }));
+  }, [currentUser, showToast]);
+
+  const deleteTask = useCallback((taskId) => {
+    setTasks(prev => prev.filter(t => t.id !== taskId));
+    showToast('Tarefa removida.', 'info');
+  }, [showToast]);
+
   // General Metrics
   const getMetrics = useCallback(() => {
     const totalLeads = leads.length;
@@ -1407,6 +1487,10 @@ export function CRMProvider({ children }) {
     meetings: currentUser?.role === 'vendedor' ? meetings.filter(m => m.hostId === currentUser.id || m.sellerId === currentUser.id) : meetings,
     activities,
     notifications,
+    goals,
+    tasks: currentUser?.role === 'vendedor' 
+      ? tasks.filter(t => t.assignedTo === 'all' || t.assignedTo === currentUser.id || t.createdBy === currentUser.id)
+      : tasks,
     // Auth & roles
     isSeller,
     isPartner,
@@ -1440,6 +1524,14 @@ export function CRMProvider({ children }) {
     addSeller,
     addActivity,
     markNotificationsAsRead,
+    // Goals & Tasks
+    addGoal,
+    updateGoal,
+    deleteGoal,
+    addTask,
+    updateTask,
+    toggleTaskCompletion,
+    deleteTask,
     // Due Date & Alerts Helpers
     getLeadDueStatus,
     getDueAlerts,

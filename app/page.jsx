@@ -6,6 +6,7 @@ import Sidebar from '../components/layout/Sidebar';
 import Topbar from '../components/layout/Topbar';
 import ModalDispatcher from '../components/modals/ModalDispatcher';
 import ToastContainer from '../components/common/ToastContainer';
+import GoalBanner from '../components/common/GoalBanner';
 
 // Partner Views
 import DashboardView from '../components/views/DashboardView';
@@ -103,6 +104,7 @@ export default function Home() {
       <SidebarBackdrop />
       <main className="main-content">
         <Topbar />
+        <GoalBanner />
         <div className="content-body">
           {renderView()}
         </div>
