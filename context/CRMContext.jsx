@@ -722,17 +722,39 @@ export function CRMProvider({ children }) {
   }, [showToast, closeModal, syncToSupabase]);
 
   const updateLeadStage = useCallback((leadId, newStage) => {
+    let approvedLead = null;
     setLeads(prev => prev.map(l => {
       if (l.id === leadId) {
         if (newStage === 'ganho' && l.stage !== 'ganho') {
           try { confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } }); } catch (_) {}
+          approvedLead = { ...l, stage: newStage, paymentDate: l.paymentDate || new Date().toISOString().split('T')[0] };
+          return approvedLead;
         }
         return { ...l, stage: newStage };
       }
       return l;
     }));
+
+    if (approvedLead) {
+      // Registrar no financeiro e atualizar as metas automaticamente
+      const incomeTx = {
+        id: `tx-${Date.now()}`,
+        type: 'income',
+        description: `Venda Aprovada (Funil): ${approvedLead.company} (${approvedLead.name})`,
+        amount: Number(approvedLead.value) || 0,
+        category: 'Planos Recorrentes',
+        paymentMethod: approvedLead.paymentMethod || 'Pix',
+        date: approvedLead.paymentDate || new Date().toISOString().split('T')[0],
+        dueDate: approvedLead.dueDate || new Date().toISOString().split('T')[0],
+        status: 'paid',
+        partnerId: currentUser?.id || 'usr-1',
+        notes: `Aprovado movendo para Ganho no Funil. Vendedor: ${users.find(u=>u.id===approvedLead.sellerId)?.name || 'Vendedor'}`
+      };
+      setTransactions(prev => [incomeTx, ...prev]);
+    }
+
     showToast(`Etapa atualizada para "${newStage.toUpperCase()}"`, 'success');
-  }, [showToast]);
+  }, [currentUser, users, showToast]);
 
   // Renovar Mensalidade / Contrato do Cliente (Suporte a Renovação Antecipada, Boleto, Cartão e Comissão Recorrente)
   const renewLeadContract = useCallback((leadId, newPaymentDate = new Date().toISOString().split('T')[0], newPaymentMethod = null, customValue = null) => {
