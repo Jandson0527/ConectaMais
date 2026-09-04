@@ -15,7 +15,8 @@ import {
   CheckCircle,
   Calendar,
   DollarSign,
-  Menu
+  Menu,
+  LogOut
 } from 'lucide-react';
 
 export default function Topbar() {
@@ -94,7 +95,7 @@ export default function Topbar() {
             title="Cadastrar Gastos da Empresa"
           >
             <MinusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-            <span>+ Novo Gasto</span>
+            <span className="hide-mobile">+ Novo Gasto</span>
           </button>
         )}
 
@@ -105,9 +106,18 @@ export default function Topbar() {
             title="Cadastrar Novo Cliente / Anunciante"
           >
             <PlusCircle style={{ width: '16px', height: '16px', marginRight: '4px' }} />
-            <span>{isSeller() ? '+ Nova Venda' : '+ Novo Cliente'}</span>
+            <span className="hide-mobile">{isSeller() ? '+ Nova Venda' : '+ Novo Cliente'}</span>
           </button>
         )}
+
+        <button
+          className="btn-icon"
+          onClick={() => openModal('login')}
+          title="Sair (Logout)"
+          style={{ color: '#f87171' }}
+        >
+          <LogOut style={{ width: '18px', height: '18px' }} />
+        </button>
 
         {/* Exportar / Importar Dados */}
         <div className="dropdown-container" style={{ position: 'relative' }}>
