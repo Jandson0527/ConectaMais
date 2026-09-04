@@ -1395,21 +1395,24 @@ export function CRMProvider({ children }) {
       createdAt: new Date().toISOString()
     };
     setGoals(prev => [newGoal, ...prev]);
+    syncToSupabase('goals', 'insert', newGoal);
     showToast(`Meta "${newGoal.title}" criada com sucesso!`, 'success');
     closeModal();
-  }, [showToast, closeModal]);
+  }, [showToast, closeModal, syncToSupabase]);
 
   const updateGoal = useCallback((goalId, data) => {
     setGoals(prev => prev.map(g => g.id === goalId ? { ...g, ...data } : g));
+    syncToSupabase('goals', 'update', { id: goalId, ...data });
     showToast('Meta atualizada com sucesso!', 'success');
     closeModal();
-  }, [showToast, closeModal]);
+  }, [showToast, closeModal, syncToSupabase]);
 
   const deleteGoal = useCallback((goalId) => {
     setGoals(prev => prev.filter(g => g.id !== goalId));
+    syncToSupabase('goals', 'delete', goalId);
     showToast('Meta excluída.', 'info');
     closeModal();
-  }, [showToast, closeModal]);
+  }, [showToast, closeModal, syncToSupabase]);
 
   // ==================== CRUD: TAREFAS ====================
   const addTask = useCallback((taskData) => {
@@ -1426,13 +1429,15 @@ export function CRMProvider({ children }) {
       createdAt: new Date().toISOString()
     };
     setTasks(prev => [newTask, ...prev]);
+    syncToSupabase('tasks', 'insert', newTask);
     showToast('Tarefa criada com sucesso!', 'success');
     closeModal();
-  }, [currentUser, showToast, closeModal]);
+  }, [currentUser, showToast, closeModal, syncToSupabase]);
 
   const updateTask = useCallback((taskId, data) => {
     setTasks(prev => prev.map(t => t.id === taskId ? { ...t, ...data } : t));
-  }, []);
+    syncToSupabase('tasks', 'update', { id: taskId, ...data });
+  }, [syncToSupabase]);
 
   const toggleTaskCompletion = useCallback((taskId, isCompleted) => {
     setTasks(prev => prev.map(t => {
@@ -1440,19 +1445,24 @@ export function CRMProvider({ children }) {
         if (isCompleted && !t.completed) {
           try { confetti({ particleCount: 50, spread: 40 }); } catch (_) {}
           showToast('Tarefa concluída! Parabéns!', 'success');
-          return { ...t, completed: true, completedAt: new Date().toISOString(), completedBy: currentUser?.id };
+          const completedTask = { ...t, completed: true, completedAt: new Date().toISOString(), completedBy: currentUser?.id };
+          syncToSupabase('tasks', 'update', completedTask);
+          return completedTask;
         } else if (!isCompleted) {
-          return { ...t, completed: false, completedAt: null, completedBy: null };
+          const undoneTask = { ...t, completed: false, completedAt: null, completedBy: null };
+          syncToSupabase('tasks', 'update', undoneTask);
+          return undoneTask;
         }
       }
       return t;
     }));
-  }, [currentUser, showToast]);
+  }, [currentUser, showToast, syncToSupabase]);
 
   const deleteTask = useCallback((taskId) => {
     setTasks(prev => prev.filter(t => t.id !== taskId));
+    syncToSupabase('tasks', 'delete', taskId);
     showToast('Tarefa removida.', 'info');
-  }, [showToast]);
+  }, [showToast, syncToSupabase]);
 
   // General Metrics
   const getMetrics = useCallback(() => {
