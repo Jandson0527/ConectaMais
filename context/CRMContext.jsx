@@ -270,6 +270,40 @@ export function CRMProvider({ children }) {
     }
   }, []);
 
+  const fromSupabasePayload = (obj) => {
+    const reverseOverrides = { user_name: 'user' };
+    const out = {};
+    for (const [key, value] of Object.entries(obj)) {
+      const camelKey = reverseOverrides[key] || key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+      out[camelKey] = value;
+    }
+    return out;
+  };
+
+  const fetchUsersFromSupabase = useCallback(async () => {
+    try {
+      const { data, error } = await supabase.from('users').select('*');
+      if (error) throw error;
+      if (data && data.length > 0) {
+        const mappedUsers = data.map(fromSupabasePayload);
+        // Garantir que os arrays JSON (como permissions) cheguem corretamente
+        const formattedUsers = mappedUsers.map(u => ({
+          ...u,
+          permissions: typeof u.permissions === 'string' ? JSON.parse(u.permissions) : u.permissions
+        }));
+        
+        setUsers(prevUsers => {
+          // Mesclar para não perder usuários locais não sincronizados, mas dar prioridade ao DB
+          const userMap = new Map(prevUsers.map(u => [u.id, u]));
+          formattedUsers.forEach(u => userMap.set(u.id, u));
+          return Array.from(userMap.values());
+        });
+      }
+    } catch (e) {
+      console.error('Erro ao buscar usuários do Supabase:', e);
+    }
+  }, []);
+
   // Load from LocalStorage
   useEffect(() => {
     try {
@@ -312,6 +346,11 @@ export function CRMProvider({ children }) {
       setIsLoaded(true);
     }
   }, []);
+
+  // Fetch real data from Supabase
+  useEffect(() => {
+    fetchUsersFromSupabase();
+  }, [fetchUsersFromSupabase]);
 
   // Recolhe o menu automaticamente ao cruzar para largura mobile (ex: redimensionar a janela)
   useEffect(() => {
